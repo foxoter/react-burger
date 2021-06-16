@@ -1,0 +1,25 @@
+.container {
+  max-width: 1082px;
+  margin: 0 auto;
+}
+
+.list {
+  position: relative;
+  height: 56px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.list > li:last-child {
+  margin-left: auto;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
