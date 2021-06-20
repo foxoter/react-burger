@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { Component } from 'react';
+import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import headerItemStyles from './header-item.styles.module.css'
 import headerItemTypes from '../../types/header-item-types';

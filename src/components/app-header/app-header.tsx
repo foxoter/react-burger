@@ -4,7 +4,7 @@ import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import appHeaderStyles from './app-header.styles.module.css';
 
 import HeaderItem from '../header-item/header-item';
-import menuItems from "../../utils/menu-titles-data";
+import { menuItems } from "../../utils/menu-titles-data";
 
 class AppHeader extends Component {
 	state = {
@@ -18,7 +18,7 @@ class AppHeader extends Component {
 	render() {
 		return (
 			<header className={`${appHeaderStyles.container} p-4`}>
-				<nav>
+				<nav className={appHeaderStyles.navigation}>
 					<ul className={appHeaderStyles.list}>
 						<li className={appHeaderStyles.logo}>
 							<Logo />
