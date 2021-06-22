@@ -10,9 +10,9 @@ const MainContainer: FC<MainContainerTypes> = ({ title, children }) => {
 			<h2 className={uiKitStyles}>
 				{title}
 			</h2>
-			<div className={mainContainerStyles.container}>
+			<section className={mainContainerStyles.container}>
 				{children}
-			</div>
+			</section>
 		</main>
 	)
 }

@@ -7,4 +7,5 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   grid-row-gap: 40px;
+  grid-column-gap: 24px;
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import burgerIngredientsStyles from './burger-ingredients.styles.module.css';
-import BurgersDataTypes from '../../types/burgers-data-types';
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
 
 import burgersData from '../../utils/burgers-data';
@@ -24,19 +23,17 @@ class BurgerIngredients extends Component<Props> {
 	}
 	render() {
 		return (
-			<section>
+			<div>
 				{this.renderTabs()}
-				<div>
-					{this.renderIngredientsSection('bun', burgersData)}
-					{this.renderIngredientsSection('sauce', burgersData)}
-					{this.renderIngredientsSection('main', burgersData)}
-				</div>
-			</section>
+				{this.renderIngredientsSection('bun')}
+				{this.renderIngredientsSection('sauce')}
+				{this.renderIngredientsSection('main')}
+			</div>
 		)
 	}
 
-	renderIngredientsSection(ingredient: string, data: BurgersDataTypes[]) {
-		const filteredData = data.filter(item => {
+	renderIngredientsSection(ingredient: string) {
+		const filteredData = burgersData.filter(item => {
 			return item.type === ingredient
 		})
 		const items = filteredData.map(ingredient => {
@@ -48,7 +45,7 @@ class BurgerIngredients extends Component<Props> {
 		return (
 			<div>
 				<h3 className="text text_type_main-medium mb-6">{subtitle}</h3>
-				<div className={`${burgerIngredientsStyles.items} mb-10`}>{items}</div>
+				<div className={`${burgerIngredientsStyles.items} mb-10 pl-4 pr-4`}>{items}</div>
 			</div>
 		)
 	}
