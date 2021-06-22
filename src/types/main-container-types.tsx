@@ -1,5 +1,5 @@
-type mainContainerTypes = {
+type MainContainerTypes = {
 	title: string
 }
 
-export default mainContainerTypes;
+export default MainContainerTypes;

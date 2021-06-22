@@ -210,3 +210,5 @@ const burgersData = [
         "__v": 0
     }
 ]
+
+export default burgersData;

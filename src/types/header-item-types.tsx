@@ -1,7 +1,7 @@
-type headerItemTypes = {
+type HeaderItemTypes = {
 	title: string
 	isActive: boolean
 	onClick: (a: string) => void
 }
 
-export default headerItemTypes;
+export default HeaderItemTypes;

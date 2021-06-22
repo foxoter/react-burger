@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import headerItemStyles from './header-item.styles.module.css'
-import headerItemTypes from '../../types/header-item-types';
+import HeaderItemTypes from '../../types/header-item-types';
 
-class HeaderItem extends Component<headerItemTypes> {
+class HeaderItem extends Component<HeaderItemTypes> {
 	handleClick = (text: string) => {
 		this.props.onClick(text);
 	}
