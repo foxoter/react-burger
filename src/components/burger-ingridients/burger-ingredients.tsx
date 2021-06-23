@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import burgerIngredientsStyles from './burger-ingredients.styles.module.css';
-import BurgerIngredient from '../burger-ingredient/burger-ingredient';
+import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
 import burgersData from '../../utils/burgers-data';
-
-type Props = {}
+import BurgersDataTypes from '../../types/burgers-data-types';
 
 const SUBTITLES: {[key:string]: string} = {
 	"bun": "Булки",
@@ -14,13 +13,19 @@ const SUBTITLES: {[key:string]: string} = {
 	"sauce": "Соусы"
 }
 
+type Props = {
+	onPickItem: (item: BurgersDataTypes) => void
+}
+
 class BurgerIngredients extends Component<Props> {
 	state = {
-		current: 'Булки'
+		currentTab: 'Булки'
 	}
-	setCurrent(value: string) {
-		this.setState({ current: value })
+
+	setCurrentTab(value: string) {
+		this.setState({ currentTab: value })
 	}
+
 	render() {
 		return (
 			<div>
@@ -38,10 +43,11 @@ class BurgerIngredients extends Component<Props> {
 		})
 		const items = filteredData.map(ingredient => {
 			return (
-				<BurgerIngredient key={ingredient._id} data={ingredient} />
+				<BurgerIngredientsItem key={ingredient._id} data={ingredient} onPurchase={this.props.onPickItem}/>
 			)
 		})
 		const subtitle = SUBTITLES[ingredient]
+
 		return (
 			<div>
 				<h3 className="text text_type_main-medium mb-6">{subtitle}</h3>
@@ -51,16 +57,17 @@ class BurgerIngredients extends Component<Props> {
 	}
 
 	renderTabs() {
-		const { current } = this.state
+		const { currentTab } = this.state
+
 		return (
 			<div className={`${burgerIngredientsStyles.tabs} mb-10`}>
-				<Tab value="Булки" active={current === 'Булки'} onClick={() => this.setCurrent('Булки')} >
+				<Tab value="Булки" active={currentTab === 'Булки'} onClick={() => this.setCurrentTab('Булки')} >
 					Булки
 				</Tab>
-				<Tab value="Соусы" active={current === 'Соусы'} onClick={() => this.setCurrent('Соусы')} >
+				<Tab value="Соусы" active={currentTab === 'Соусы'} onClick={() => this.setCurrentTab('Соусы')} >
 					Соусы
 				</Tab>
-				<Tab value="Начинки" active={current === 'Начинки'} onClick={() => this.setCurrent('Начинки')} >
+				<Tab value="Начинки" active={currentTab === 'Начинки'} onClick={() => this.setCurrentTab('Начинки')} >
 					Начинки
 				</Tab>
 			</div>

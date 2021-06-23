@@ -12,7 +12,7 @@ class AppHeader extends Component {
 	}
 
 	onSectionClick = (value: string) => {
-		this.setState({activeSection: value});
+		this.setState({ activeSection: value });
 	}
 
 	render() {
