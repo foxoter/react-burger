@@ -3,19 +3,15 @@ import React, { Component } from 'react';
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 
 import burgerConstructorStyles from './burger-constructor.styles.module.css';
-import BurgersDataTypes from '../../types/burgers-data-types';
+import BurgerConstructorTypes from '../../types/burger-constructor-types';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-type Props = {
-	pickedItems: BurgersDataTypes[]
-}
-
-class BurgerConstructor extends Component<Props> {
+class BurgerConstructor extends Component<BurgerConstructorTypes> {
 	state = {
 		orderTotal: 0
 	}
 
-	componentDidUpdate(prevProps: Props) {
+	componentDidUpdate(prevProps: BurgerConstructorTypes) {
 		if (prevProps !== this.props) {
 			const { pickedItems } = this.props
 			if (pickedItems) {
@@ -36,16 +32,18 @@ class BurgerConstructor extends Component<Props> {
 		})
 
 		return (
-			<div className={`${burgerConstructorStyles.container} pl-4 pr-4`}>
+			<div className={`${burgerConstructorStyles.container}`}>
 				{bun &&
         	<BurgerConstructorItem data={bun} headItem />
 				}
-				{otherItems && otherElements}
+				{otherItems &&
+					<div className={burgerConstructorStyles.items}>{otherElements}</div>
+				}
 				{bun &&
         	<BurgerConstructorItem data={bun} tailItem />
 				}
 				{pickedItems.length > 0 &&
-					<div className={burgerConstructorStyles.price}>
+					<div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>
 						<p className="text text_type_digits-medium">{orderTotal}</p>
 						<CurrencyIcon type="primary" />
 						<Button type="primary" size="large">
@@ -58,4 +56,4 @@ class BurgerConstructor extends Component<Props> {
 	}
 }
 
-export default BurgerConstructor
+export default BurgerConstructor;

@@ -2,6 +2,24 @@
   display: flex;
 }
 
+.sections {
+  max-height: 65vh;
+  overflow-y: auto;
+}
+
+.sections::-webkit-scrollbar {
+  width: 12px;
+}
+
+.sections::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.sections::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #2F2F37;
+}
+
 .items {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

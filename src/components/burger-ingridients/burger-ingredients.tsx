@@ -5,7 +5,7 @@ import burgerIngredientsStyles from './burger-ingredients.styles.module.css';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
 import burgersData from '../../utils/burgers-data';
-import BurgersDataTypes from '../../types/burgers-data-types';
+import BurgerIngredientsTypes from '../../types/burger-ingredients-types';
 
 const SUBTITLES: {[key:string]: string} = {
 	"bun": "Булки",
@@ -13,11 +13,7 @@ const SUBTITLES: {[key:string]: string} = {
 	"sauce": "Соусы"
 }
 
-type Props = {
-	onPickItem: (item: BurgersDataTypes) => void
-}
-
-class BurgerIngredients extends Component<Props> {
+class BurgerIngredients extends Component<BurgerIngredientsTypes> {
 	state = {
 		currentTab: 'Булки'
 	}
@@ -30,9 +26,11 @@ class BurgerIngredients extends Component<Props> {
 		return (
 			<div>
 				{this.renderTabs()}
-				{this.renderIngredientsSection('bun')}
-				{this.renderIngredientsSection('sauce')}
-				{this.renderIngredientsSection('main')}
+				<div className={burgerIngredientsStyles.sections}>
+					{this.renderIngredientsSection('bun')}
+					{this.renderIngredientsSection('sauce')}
+					{this.renderIngredientsSection('main')}
+				</div>
 			</div>
 		)
 	}
@@ -75,4 +73,4 @@ class BurgerIngredients extends Component<Props> {
 	}
 }
 
-export default BurgerIngredients
+export default BurgerIngredients;

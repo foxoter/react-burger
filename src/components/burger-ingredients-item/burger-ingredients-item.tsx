@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import BurgerIngredientsItemTypes from '../../types/burger-ingredients-item-types';
 import BurgersDataTypes from '../../types/burgers-data-types';
 import burgerIngredientStyles from './burger-ingredients-item.styles.module.css';
 
-type Props = {
-	data: BurgersDataTypes
-	onPurchase: (item: BurgersDataTypes) => void
-}
-
-class BurgerIngredientsItem extends Component<Props> {
+class BurgerIngredientsItem extends Component<BurgerIngredientsItemTypes> {
 	state = {
 		orderCount: 0
 	}
