@@ -3,3 +3,17 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item > div {
+  flex-grow: 1;
+}
+
+.item img + span {
+  flex-grow: 1;
+}

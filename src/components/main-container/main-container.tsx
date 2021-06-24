@@ -12,8 +12,15 @@ class MainContainer extends Component<MainContainerTypes> {
 		constructorItems: []
 	}
 	addItem = (item: BurgersDataTypes) => {
-		const updatedItems = [...this.state.constructorItems, item]
-		this.setState({ constructorItems: updatedItems})
+		if (item.type === 'bun') {
+			const { constructorItems } = this.state;
+			const filteredItems = constructorItems.filter((item: BurgersDataTypes) => item.type !== 'bun');
+			const updatedItems = [...filteredItems, item];
+			this.setState({ constructorItems: updatedItems});
+		} else {
+			const updatedItems = [...this.state.constructorItems, item];
+			this.setState({ constructorItems: updatedItems});
+		}
 	}
 	render() {
 		const { constructorItems } = this.state

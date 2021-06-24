@@ -1,2 +1,25 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 40px;
+}
+
+.price > p {
+  margin-right: 10px;
+}
+
+.price > svg {
+  width: 36px;
+  height: 36px;
+}
+
+.price > button {
+  margin-left: 40px;
 }

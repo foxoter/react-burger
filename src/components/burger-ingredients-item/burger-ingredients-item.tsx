@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import BurgersDataTypes from '../../types/burgers-data-types';
 import burgerIngredientStyles from './burger-ingredients-item.styles.module.css';
@@ -25,7 +25,7 @@ class BurgerIngredientsItem extends Component<Props> {
 			<div className={`${burgerIngredientStyles.container} pl-4 pr-4`} onClick={() => this.handlePurchase(this.props.data)}>
 				{orderCount > 0 &&
 					<div className={burgerIngredientStyles.counter}>
-						<p className='text text_type_digits-default'>{orderCount}</p>
+						<Counter count={orderCount} size='default' />
 					</div>
 				}
 				<img src={image} alt={name} className='mb-1'/>

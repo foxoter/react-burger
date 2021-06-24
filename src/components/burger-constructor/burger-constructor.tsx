@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 
-// import burgerConstructorStyles from './burger-constructor.styles.module.css';
+import burgerConstructorStyles from './burger-constructor.styles.module.css';
 import BurgersDataTypes from '../../types/burgers-data-types';
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 type Props = {
 	pickedItems: BurgersDataTypes[]
@@ -19,40 +20,40 @@ class BurgerConstructor extends Component<Props> {
 			const { pickedItems } = this.props
 			if (pickedItems) {
 				const orderValue = pickedItems.reduce((sum, current) => sum += current.price, 0);
-				this.setOrderTotal('inc', orderValue);
+				this.setState({ orderTotal: orderValue });
 			}
-		}
-	}
-
-	setOrderTotal = (operation: string, value: number) => {
-		if (operation === 'inc') {
-			this.setState({ orderTotal: this.state.orderTotal + value })
-		} else {
-			this.setState({ orderTotal: this.state.orderTotal - value })
 		}
 	}
 
 	render() {
 		const { pickedItems } = this.props
 		const { orderTotal } = this.state
-		const buns = pickedItems.filter(item => item.type === 'bun');
+		const bun = pickedItems.find(item => item.type === 'bun');
 		const otherItems = pickedItems.filter(item => item.type !== 'bun');
 
-		const bunsElements = buns.map((bun, index) => {
-			return <BurgerConstructorItem data={bun} key={index}/>
-		})
 		const otherElements = otherItems.map((ingredient, index) => {
 			return <BurgerConstructorItem data={ingredient} key={index} />
 		})
 
 		return (
-			<section className={`pl-4 pr-4`}>
-				{buns && bunsElements}
-				{otherItems && otherElements}
-				{orderTotal > 0 &&
-					<p>{orderTotal}</p>
+			<div className={`${burgerConstructorStyles.container} pl-4 pr-4`}>
+				{bun &&
+        	<BurgerConstructorItem data={bun} headItem />
 				}
-			</section>
+				{otherItems && otherElements}
+				{bun &&
+        	<BurgerConstructorItem data={bun} tailItem />
+				}
+				{pickedItems.length > 0 &&
+					<div className={burgerConstructorStyles.price}>
+						<p className="text text_type_digits-medium">{orderTotal}</p>
+						<CurrencyIcon type="primary" />
+						<Button type="primary" size="large">
+								Оформить заказ
+						</Button>
+					</div>
+				}
+			</div>
 		);
 	}
 }

@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
-import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
 import BurgersDataTypes from '../../types/burgers-data-types';
 import burgerConstructorItemStyles from './burger-constructor-item.styles.module.css'
 
 type Props = {
 	data: BurgersDataTypes
+	headItem?: boolean
+	tailItem?: boolean
 }
 
 class BurgerConstructorItem extends Component<Props> {
 	render() {
-		const { image_mobile, name } = this.props.data
+		const { data: { image, name, price }, headItem, tailItem } = this.props;
+		const type = headItem ? "top" : tailItem ? "bottom" : undefined;
+		const title = headItem ? `${name} (верх)` : tailItem ? `${name} (низ)` : name;
 		return (
-			<div className={burgerConstructorItemStyles.container}>
-				<DragIcon type="primary" />
-				<img src={image_mobile} alt={name} />
-				{this.props.data.name}
+			<div className={burgerConstructorItemStyles.item}>
+				<DragIcon type='primary' />
+				<ConstructorElement
+					type={type}
+					isLocked={headItem || tailItem}
+					text={title}
+					price={price}
+					thumbnail={image}
+				/>
 			</div>
 		)
 	}
