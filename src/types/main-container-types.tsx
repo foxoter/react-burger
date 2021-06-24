@@ -1,5 +1,5 @@
 type MainContainerTypes = {
-	title: string
+  title: string
 }
 
 export default MainContainerTypes;
