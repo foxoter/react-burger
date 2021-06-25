@@ -4,10 +4,13 @@ import BurgerIngredients from '../burger-ingridients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
 import mainContainerStyles from './main-container.styles.module.css'
-import MainContainerTypes from '../../types/main-container-types';
 import BurgersDataTypes from '../../types/burgers-data-types';
 
-class MainContainer extends Component<MainContainerTypes> {
+type Props = {
+  title: string
+}
+
+class MainContainer extends Component<Props> {
   state = {
     constructorItems: []
   }

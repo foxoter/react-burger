@@ -62,17 +62,23 @@ class BurgerIngredients extends Component<Props> {
     const {currentTab} = this.state
 
     return (
-      <div className={`${burgerIngredientsStyles.tabs} mb-10`}>
-        <Tab value="Булки" active={currentTab === 'Булки'} onClick={() => this.setCurrentTab('Булки')}>
-          Булки
-        </Tab>
-        <Tab value="Соусы" active={currentTab === 'Соусы'} onClick={() => this.setCurrentTab('Соусы')}>
-          Соусы
-        </Tab>
-        <Tab value="Начинки" active={currentTab === 'Начинки'} onClick={() => this.setCurrentTab('Начинки')}>
-          Начинки
-        </Tab>
-      </div>
+      <ul className={`${burgerIngredientsStyles.tabs} mb-10`}>
+        <li>
+          <Tab value="Булки" active={currentTab === 'Булки'} onClick={() => this.setCurrentTab('Булки')}>
+            Булки
+          </Tab>
+        </li>
+        <li>
+          <Tab value="Соусы" active={currentTab === 'Соусы'} onClick={() => this.setCurrentTab('Соусы')}>
+            Соусы
+          </Tab>
+        </li>
+        <li>
+          <Tab value="Начинки" active={currentTab === 'Начинки'} onClick={() => this.setCurrentTab('Начинки')}>
+            Начинки
+          </Tab>
+        </li>
+      </ul>
     )
   }
 }
