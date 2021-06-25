@@ -1,0 +1,19 @@
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.43;
+  font-weight: normal;
+  color: #8585AD;
+}
+
+.text_active {
+  color: white;
+}
