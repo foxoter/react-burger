@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 
-import BurgerIngredientsItemTypes from '../../types/burger-ingredients-item-types';
 import BurgersDataTypes from '../../types/burgers-data-types';
 import burgerIngredientStyles from './burger-ingredients-item.styles.module.css';
 
-class BurgerIngredientsItem extends Component<BurgerIngredientsItemTypes> {
+type Props = {
+  data: BurgersDataTypes
+  onPurchase: (item: BurgersDataTypes) => void
+}
+
+class BurgerIngredientsItem extends Component<Props> {
   state = {
     orderCount: 0
   }
+
   handlePurchase = (data: BurgersDataTypes) => {
     const count = this.state.orderCount + 1;
     this.setState({orderCount: count})

@@ -3,15 +3,20 @@ import React, {Component} from 'react';
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 
 import burgerConstructorStyles from './burger-constructor.styles.module.css';
-import BurgerConstructorTypes from '../../types/burger-constructor-types';
 import {CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
 
-class BurgerConstructor extends Component<BurgerConstructorTypes> {
+import BurgersDataTypes from '../../types/burgers-data-types';
+
+type Props = {
+  pickedItems: BurgersDataTypes[]
+}
+
+class BurgerConstructor extends Component<Props> {
   state = {
     orderTotal: 0
   }
 
-  componentDidUpdate(prevProps: BurgerConstructorTypes) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps !== this.props) {
       const {pickedItems} = this.props
       if (pickedItems) {

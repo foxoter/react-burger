@@ -5,7 +5,7 @@ import burgerIngredientsStyles from './burger-ingredients.styles.module.css';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
 import burgersData from '../../utils/burgers-data';
-import BurgerIngredientsTypes from '../../types/burger-ingredients-types';
+import BurgersDataTypes from '../../types/burgers-data-types';
 
 const SUBTITLES: { [key: string]: string } = {
   "bun": "Булки",
@@ -13,7 +13,11 @@ const SUBTITLES: { [key: string]: string } = {
   "sauce": "Соусы"
 }
 
-class BurgerIngredients extends Component<BurgerIngredientsTypes> {
+type Props = {
+  onPickItem: (item: BurgersDataTypes) => void
+}
+
+class BurgerIngredients extends Component<Props> {
   state = {
     currentTab: 'Булки'
   }
