@@ -5,18 +5,13 @@ import headerItemStyles from './header-item.styles.module.css'
 
 type Props = {
   title: string
-  isActive: boolean
-  onClick: (a: string) => void
+  isActive?: boolean
+  onClick?: (a: string) => void
 }
 
 class HeaderItem extends Component<Props> {
-  handleClick = (text: string) => {
-    this.props.onClick(text);
-  }
-
   render() {
-    const {title, isActive} = this.props;
-    const textActive = isActive ? headerItemStyles.text_active : ''
+    const {title} = this.props;
     const uiKitStyles = {
       listItem: 'pl-5 pr-5',
       text: 'ml-2 text text_type_main-medium',
@@ -25,10 +20,9 @@ class HeaderItem extends Component<Props> {
     return (
       <li
         className={`${headerItemStyles.item} ${uiKitStyles.listItem}`}
-        onClick={() => this.handleClick(title)}
       >
         {this.renderIcon()}
-        <p className={`${uiKitStyles.text} ${headerItemStyles.text} ${textActive}`}>
+        <p className={`${uiKitStyles.text} ${headerItemStyles.text}`}>
           {title}
         </p>
       </li>
