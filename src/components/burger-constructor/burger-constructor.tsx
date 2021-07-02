@@ -48,7 +48,7 @@ function BurgerConstructor(props: Props) {
         </div>
       }
     </div>
-    );
+  );
 }
 
 export default BurgerConstructor;
