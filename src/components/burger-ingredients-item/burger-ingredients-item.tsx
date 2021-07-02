@@ -6,25 +6,25 @@ import burgerIngredientStyles from './burger-ingredients-item.styles.module.css'
 
 type Props = {
   data: BurgersDataTypes
-  onPurchase: (item: BurgersDataTypes) => void
+  onPurchase: (ingredient: BurgersDataTypes) => void
 }
 
 function BurgerIngredientsItem(props: Props) {
   const [orderCount, setOrderCount] = useState(0);
-  const { image, name, price } = props.data
+  const { data, data: { image, name, price } } = props
 
-  const handlePurchase = (data: BurgersDataTypes) => {
+  const handlePurchase = (ingredient: BurgersDataTypes) => {
     setOrderCount(orderCount + 1);
-    props.onPurchase(data);
+    props.onPurchase(ingredient);
   }
 
   return (
     <div className={`${burgerIngredientStyles.container} pl-4 pr-4`}
-         onClick={() => handlePurchase(props.data)}>
+         onClick={() => handlePurchase(data)}>
       {orderCount > 0 &&
-      <div className={burgerIngredientStyles.counter}>
-          <Counter count={orderCount} size='default'/>
-      </div>
+        <div className={burgerIngredientStyles.counter}>
+            <Counter count={orderCount} size='default'/>
+        </div>
       }
       <img src={image} alt={name} className='mb-1'/>
       <div className={`${burgerIngredientStyles.price} mb-1`}>
@@ -34,8 +34,6 @@ function BurgerIngredientsItem(props: Props) {
       <p className={`${burgerIngredientStyles.title} text text_type_main-medium`}>{name}</p>
     </div>
   );
-
-
 }
 
 export default BurgerIngredientsItem;
