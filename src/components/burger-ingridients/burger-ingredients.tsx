@@ -20,21 +20,27 @@ type Props = {
 function BurgerIngredients(props: Props) {
   const [currentTab, setCurrentTab] = useState('Булки');
 
+  const switchTab = (tab: string) => {
+    setCurrentTab(tab);
+    const el = document.getElementById(tab);
+    if (el) el.scrollIntoView({ behavior: 'smooth'});
+  }
+
   const renderTabs = () => {
     return (
       <ul className={`${burgerIngredientsStyles.tabs} mb-10`}>
         <li>
-          <Tab value="Булки" active={currentTab === 'Булки'} onClick={() => setCurrentTab('Булки')}>
+          <Tab value="Булки" active={currentTab === 'Булки'} onClick={() => switchTab('Булки')}>
             Булки
           </Tab>
         </li>
         <li>
-          <Tab value="Соусы" active={currentTab === 'Соусы'} onClick={() => setCurrentTab('Соусы')}>
+          <Tab value="Соусы" active={currentTab === 'Соусы'} onClick={() => switchTab('Соусы')}>
             Соусы
           </Tab>
         </li>
         <li>
-          <Tab value="Начинки" active={currentTab === 'Начинки'} onClick={() => setCurrentTab('Начинки')}>
+          <Tab value="Начинки" active={currentTab === 'Начинки'} onClick={() => switchTab('Начинки')}>
             Начинки
           </Tab>
         </li>
@@ -54,7 +60,7 @@ function BurgerIngredients(props: Props) {
     const sectionTitle = SUBTITLES[ingredient]
 
     return (
-      <div>
+      <div id={sectionTitle}>
         <h3 className="text text_type_main-medium mb-6">{sectionTitle}</h3>
         <div className={`${burgerIngredientsStyles.items} mb-10 pl-4 pr-4`}>{elements}</div>
       </div>
