@@ -31,4 +31,4 @@ function BurgerConstructorItem(props: Props) {
   )
 }
 
-export default BurgerConstructorItem;
+export default React.memo(BurgerConstructorItem);

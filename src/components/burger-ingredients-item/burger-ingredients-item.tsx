@@ -29,6 +29,7 @@ function BurgerIngredientsItem(props: Props) {
       <img src={image} alt={name} className='mb-1'/>
       <div className={`${burgerIngredientStyles.price} mb-1`}>
         <p className='mr-2 text text_type_digits-default'>{price}</p>
+        <p>{Math.random()}</p>
         <CurrencyIcon type="primary"/>
       </div>
       <p className={`${burgerIngredientStyles.title} text text_type_main-medium`}>{name}</p>
@@ -36,4 +37,4 @@ function BurgerIngredientsItem(props: Props) {
   );
 }
 
-export default BurgerIngredientsItem;
+export default React.memo(BurgerIngredientsItem);

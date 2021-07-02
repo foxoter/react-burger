@@ -67,7 +67,6 @@ function BurgerIngredients(props: Props) {
     )
   }
 
-
   return (
     <div>
       {renderTabs()}
