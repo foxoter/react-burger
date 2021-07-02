@@ -11,7 +11,7 @@ type Props = {
 }
 
 function BurgerConstructorItem(props: Props) {
-  const { data: { image, name, price}, headItem, tailItem } = props;
+  const { data: { image, name, price }, headItem, tailItem } = props;
   const type = headItem ? "top" : tailItem ? "bottom" : undefined;
   const title = headItem ? `${name} (верх)` : tailItem ? `${name} (низ)` : name;
   const dragIcon = !(headItem || tailItem);

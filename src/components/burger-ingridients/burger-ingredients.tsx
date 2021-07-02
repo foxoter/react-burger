@@ -23,7 +23,7 @@ class BurgerIngredients extends Component<Props> {
   }
 
   setCurrentTab(value: string) {
-    this.setState({currentTab: value})
+    this.setState({ currentTab: value })
   }
 
   render() {
@@ -59,7 +59,7 @@ class BurgerIngredients extends Component<Props> {
   }
 
   renderTabs() {
-    const {currentTab} = this.state
+    const { currentTab } = this.state
 
     return (
       <ul className={`${burgerIngredientsStyles.tabs} mb-10`}>

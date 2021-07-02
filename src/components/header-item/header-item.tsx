@@ -9,8 +9,8 @@ type Props = {
   onClick?: (a: string) => void
 }
 
-function HeaderItem (props: Props) {
-  const {title, isActive} = props;
+function HeaderItem(props: Props) {
+  const { title, isActive } = props;
   const uiKitStyles = {
     listItem: 'pl-5 pr-5',
     text: 'ml-2 text text_type_main-medium',
