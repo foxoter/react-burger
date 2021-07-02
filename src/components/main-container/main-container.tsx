@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 
 import BurgerIngredients from '../burger-ingridients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
@@ -10,36 +10,28 @@ type Props = {
   title: string
 }
 
-class MainContainer extends Component<Props> {
-  state = {
-    constructorItems: []
-  }
-  addItem = (item: BurgersDataTypes) => {
+function MainContainer(props: Props) {
+  const [constructorItems, setConstructorItems] = useState<BurgersDataTypes[]>([]);
+  const addItem = (item: BurgersDataTypes) => {
     if (item.type === 'bun') {
-      const { constructorItems } = this.state;
       const filteredItems = constructorItems.filter((item: BurgersDataTypes) => item.type !== 'bun');
-      const updatedItems = [...filteredItems, item];
-      this.setState({ constructorItems: updatedItems });
+      setConstructorItems([...filteredItems, item]);
     } else {
-      const updatedItems = [...this.state.constructorItems, item];
-      this.setState({ constructorItems: updatedItems });
+      setConstructorItems([...constructorItems, item]);
     }
   }
 
-  render() {
-    const { constructorItems } = this.state
-    return (
-      <main className={mainContainerStyles.main}>
-        <h2 className="pt-10 mb-5 text text_type_main-large">
-          {this.props.title}
-        </h2>
-        <section className={mainContainerStyles.container}>
-          <BurgerIngredients onPickItem={this.addItem}/>
-          <BurgerConstructor pickedItems={constructorItems}/>
-        </section>
-      </main>
-    )
-  }
+  return (
+    <main className={mainContainerStyles.main}>
+      <h2 className="pt-10 mb-5 text text_type_main-large">
+        {props.title}
+      </h2>
+      <section className={mainContainerStyles.container}>
+        <BurgerIngredients onPickItem={addItem}/>
+        <BurgerConstructor pickedItems={constructorItems}/>
+      </section>
+    </main>
+  )
 }
 
 export default MainContainer
