@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
-import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { useState } from 'react';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import burgerIngredientsStyles from './burger-ingredients.styles.module.css';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
-import burgersData from '../../utils/burgers-data';
 import BurgersDataTypes from '../../types/burgers-data-types';
 
 const SUBTITLES: { [key: string]: string } = {
@@ -15,6 +14,7 @@ const SUBTITLES: { [key: string]: string } = {
 
 type Props = {
   onPickItem: (item: BurgersDataTypes) => void
+  data: BurgersDataTypes[]
 }
 
 function BurgerIngredients(props: Props) {
@@ -23,7 +23,7 @@ function BurgerIngredients(props: Props) {
   const switchTab = (tab: string) => {
     setCurrentTab(tab);
     const el = document.getElementById(tab);
-    if (el) el.scrollIntoView({ behavior: 'smooth'});
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
   const renderTabs = () => {
@@ -49,7 +49,7 @@ function BurgerIngredients(props: Props) {
   }
 
   const renderIngredientsSection = (ingredient: string) => {
-    const sectionData = burgersData.filter(item => {
+    const sectionData = props.data.filter(item => {
       return item.type === ingredient
     })
     const elements = sectionData.map(ingredient => {

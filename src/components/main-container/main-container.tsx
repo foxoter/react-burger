@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import BurgerIngredients from '../burger-ingridients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
@@ -8,10 +8,13 @@ import BurgersDataTypes from '../../types/burgers-data-types';
 
 type Props = {
   title: string
+  ingredients: BurgersDataTypes[]
 }
 
 function MainContainer(props: Props) {
   const [constructorItems, setConstructorItems] = useState<BurgersDataTypes[]>([]);
+  const { ingredients } = props
+
   const addItem = (item: BurgersDataTypes) => {
     if (item.type === 'bun') {
       const filteredItems = constructorItems.filter((item: BurgersDataTypes) => item.type !== 'bun');
@@ -27,7 +30,7 @@ function MainContainer(props: Props) {
         {props.title}
       </h2>
       <section className={mainContainerStyles.container}>
-        <BurgerIngredients onPickItem={addItem}/>
+        <BurgerIngredients data={ingredients} onPickItem={addItem}/>
         <BurgerConstructor pickedItems={constructorItems}/>
       </section>
     </main>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import burgerConstructorItemStyles from './burger-constructor-item.styles.module.css';
 import BurgersDataTypes from '../../types/burgers-data-types';

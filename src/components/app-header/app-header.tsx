@@ -1,10 +1,10 @@
 import React from 'react';
-import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
+import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import appHeaderStyles from './app-header.styles.module.css';
 
 import HeaderItem from '../header-item/header-item';
-import {menuItems} from "../../utils/menu-titles-data";
+import { menuItems } from "../../utils/menu-titles-data";
 
 function AppHeader(): JSX.Element {
   const renderMenuItems = () => {
@@ -32,4 +32,4 @@ function AppHeader(): JSX.Element {
   )
 }
 
-export default AppHeader;
+export default React.memo(AppHeader);

@@ -1,0 +1,53 @@
+.container {
+  width: 720px;
+  border-radius: 40px;
+  background-color: #1c1c21;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.heading {
+  margin-right: auto;
+}
+
+.order {
+  margin: 16px auto 32px;
+}
+
+.check {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 0 auto 60px;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.43;
+  font-weight: normal;
+}
+
+.details {
+  max-width: 520px;
+  margin: 0 auto 50px;
+}
+
+.image {
+  display: block;
+  width: 480px;
+  height: 240px;
+  margin: 0 auto 16px;
+}
+
+.nutrients {
+  display: flex;
+  justify-content: space-between;
+}
+
+h1, p {
+  text-align: center;
+}
