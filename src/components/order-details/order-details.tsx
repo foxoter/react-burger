@@ -1,29 +1,27 @@
 import React from 'react';
 
-import ModalOverlay from '../modal-overlay/modal-overlay';
-import Modal from '../modal/modal';
-import BurgersDataTypes from '../../types/burgers-data-types';
+import orderDetailsStyles from './oder-details.styles.module.css';
+import checkIconPath from '../../images/check.svg';
 
-const tempData = {
-  "_id": "60666c42cc7b410027a1a9b1",
-  "name": "Краторная булка N-200i",
-  "type": "bun",
-  "proteins": 80,
-  "fat": 24,
-  "carbohydrates": 53,
-  "calories": 420,
-  "price": 1255,
-  "image": "https://code.s3.yandex.net/react/code/bun-02.png",
-  "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-  "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-  "__v": 0
+type Props = {
+  orderId: number | string
 }
 
-function OrderDetails() {
+function OrderDetails(props: Props) {
+  const { orderId } = props
+
   return (
-    <ModalOverlay>
-      <Modal ingredient={tempData} />
-    </ModalOverlay>
+    <div>
+      <h1 className={`${orderDetailsStyles.order} text text_type_digits-large`}>{orderId}</h1>
+      <p className="text text_type_main-medium mb-15">идентификатор заказа</p>
+      <img src={checkIconPath} alt="check-icon" className={orderDetailsStyles.check} />
+      <p className={`text text_type_main-medium ${orderDetailsStyles.text} mb-2`}>ваш заказ начали готовить</p>
+      <p
+        className={`text text_type_main-medium ${orderDetailsStyles.text} text_color_inactive`}
+      >
+        Дождитесь готовности на орбитальной станции
+      </p>
+    </div>
   )
 }
 

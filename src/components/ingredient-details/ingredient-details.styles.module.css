@@ -1,0 +1,26 @@
+.details {
+  max-width: 520px;
+  margin: 0 auto 50px;
+}
+
+.image {
+  display: block;
+  width: 480px;
+  height: 240px;
+  margin: 0 auto 16px;
+}
+
+.nutrients {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.43;
+  font-weight: normal;
+}
+
+h1, p {
+  text-align: center;
+}
