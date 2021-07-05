@@ -12,7 +12,7 @@ function AppHeader(): JSX.Element {
       return (
         <HeaderItem
           key={idx}
-          title={item}
+          title={item.title}
         />
       )
     });

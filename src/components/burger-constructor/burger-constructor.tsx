@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import OrderDetails from '../order-details/order-details';
@@ -14,7 +14,6 @@ type Props = {
 }
 
 function BurgerConstructor(props: Props) {
-  const [orderTotal, setOrderTotal] = useState(0);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   const { pickedItems } = props;
@@ -24,25 +23,11 @@ function BurgerConstructor(props: Props) {
     return <BurgerConstructorItem data={ingredient} key={index}/>
   })
 
-  useEffect(() => {
+  const orderTotalValue = useMemo(() => {
     if (pickedItems.length) {
-      const orderValue = pickedItems.reduce((sum, current) => sum += current.price, 0);
-      setOrderTotal(orderValue);
+      return pickedItems.reduce((sum, current) => sum += current.price, 0);
     }
   }, [pickedItems]);
-
-  useEffect(() => {
-    document.addEventListener('keydown', escapeClose);
-    return () => {
-      document.removeEventListener('keydown', escapeClose);
-    }
-  },[])
-
-  const escapeClose = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      setIsDetailsOpen(false);
-    }
-  }
 
   const closeOrder = () => {
     setIsDetailsOpen(false);
@@ -70,7 +55,7 @@ function BurgerConstructor(props: Props) {
       }
       {pickedItems.length > 0 &&
         <div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>
-            <p className="text text_type_digits-medium">{orderTotal}</p>
+            <p className="text text_type_digits-medium">{orderTotalValue}</p>
             <CurrencyIcon type="primary"/>
             <Button type="primary" size="large" onClick={openOrder}>
                 Оформить заказ

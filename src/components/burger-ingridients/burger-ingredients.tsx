@@ -30,19 +30,6 @@ function BurgerIngredients(props: Props) {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  useEffect(() => {
-    document.addEventListener('keydown', escapeClose);
-    return () => {
-      document.removeEventListener('keydown', escapeClose);
-    }
-  },[])
-
-  const escapeClose = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      setIsDetailsOpen(false);
-    }
-  }
-
   const closeDetails = () => {
     setIsDetailsOpen(false);
   }
@@ -66,11 +53,6 @@ function BurgerIngredients(props: Props) {
 
     return (
       <div id={sectionTitle}>
-        {isDetailsOpen &&
-          <Modal handleClose={closeDetails} withHeading>
-            <IngredientDetails ingredient={detailedIngredient} />
-          </Modal>
-        }
         <h3 className="text text_type_main-medium mb-6">{sectionTitle}</h3>
         <div className={`${burgerIngredientsStyles.items} mb-10 pl-4 pr-4`}>{elements}</div>
       </div>
@@ -101,6 +83,11 @@ function BurgerIngredients(props: Props) {
 
   return (
     <div>
+      {isDetailsOpen &&
+        <Modal handleClose={closeDetails} heading={'Детали ингредиента'}>
+            <IngredientDetails ingredient={detailedIngredient} />
+        </Modal>
+      }
       {renderTabs()}
       <div className={burgerIngredientsStyles.sections}>
         {renderIngredientsSection('bun')}

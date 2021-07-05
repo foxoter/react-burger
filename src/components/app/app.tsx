@@ -3,25 +3,19 @@ import appStyles from './app.styles.module.css'
 
 import AppHeader from '../app-header/app-header';
 import MainContainer from '../main-container/main-container';
-
 import { mainTitle } from '../../utils/menu-titles-data';
 
-import { API_URL } from '../../constants/apiConfig';
+import { getProductsData } from '../../helpers/api';
 
 function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const getProductsData = async () => {
-      try {
-        const res = await fetch(API_URL);
-        const data = await res.json();
+    getProductsData()
+      .then(data => {
         setData(data.data);
-      } catch (e) {
-        console.log(e)
-      }
-    }
-    getProductsData();
+      })
+      .catch(err => console.log(err));
   }, [])
 
   return (

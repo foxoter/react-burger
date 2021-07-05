@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 
 import modalOverlayStyles from './modal-overlay.styles.module.css';
 
@@ -8,13 +8,9 @@ type Props = {
 }
 
 function ModalOverlay(props: Props) {
-  const modalsRoot = document.getElementById('app');
   const { onClose } = props;
 
-  return modalsRoot ? ReactDOM.createPortal(
-    (
-      <div className={modalOverlayStyles.container} onClick={onClose} />
-    ), modalsRoot) : null;
+  return (<div className={modalOverlayStyles.container} onClick={onClose} />);
 }
 
 export default ModalOverlay;
