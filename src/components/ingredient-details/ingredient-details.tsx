@@ -1,8 +1,8 @@
 import React from 'react';
 
-import ingredientDetailsStyles from './ingredient-details.styles.module.css';
+import ingredientDetailsStyles from './ingredient-details.module.css';
 import BurgersDataTypes from '../../types/burgers-data-types';
-import modalStyles from '../modal/modal.styles.module.css';
+import modalStyles from '../modal/modal.module.css';
 
 type Props = {
   ingredient?: BurgersDataTypes | null
@@ -44,4 +44,4 @@ const IngredientDetails = (props: Props) => {
   )
 }
 
-export default IngredientDetails;
+export default React.memo(IngredientDetails);

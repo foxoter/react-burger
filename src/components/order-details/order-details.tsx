@@ -1,6 +1,6 @@
 import React from 'react';
 
-import orderDetailsStyles from './oder-details.styles.module.css';
+import orderDetailsStyles from './oder-details.module.css';
 import checkIconPath from '../../images/check.svg';
 
 type Props = {
@@ -25,4 +25,4 @@ function OrderDetails(props: Props) {
   )
 }
 
-export default OrderDetails;
+export default React.memo(OrderDetails);

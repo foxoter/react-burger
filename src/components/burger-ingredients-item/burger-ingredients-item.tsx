@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import BurgersDataTypes from '../../types/burgers-data-types';
-import burgerIngredientStyles from './burger-ingredients-item.styles.module.css';
+import burgerIngredientStyles from './burger-ingredients-item.module.css';
 
 type Props = {
   data: BurgersDataTypes

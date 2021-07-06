@@ -1,6 +1,8 @@
+import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+
 export const menuItems = [
-    { title: 'Конструктор', icon: "BurgerIcon" },
-    { title: 'Лента заказов', icon: "ListIcon" },
-    { title: 'Личный кабинет', icon: "ProfileIcon" }
+    { title: 'Конструктор', Icon: BurgerIcon },
+    { title: 'Лента заказов', Icon: ListIcon },
+    { title: 'Личный кабинет', Icon: ProfileIcon }
 ];
 export const mainTitle = 'Соберите бургер';

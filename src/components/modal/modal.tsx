@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 
-import modalStyles from './modal.styles.module.css';
+import modalStyles from './modal.module.css';
 
 type Props = {
   heading?: string
@@ -51,4 +51,4 @@ function Modal(props: Props) {
 
 }
 
-export default Modal;
+export default React.memo(Modal);

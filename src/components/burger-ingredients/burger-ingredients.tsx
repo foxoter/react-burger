@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import burgerIngredientsStyles from './burger-ingredients.styles.module.css';
+import burgerIngredientsStyles from './burger-ingredients.module.css';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
 import BurgersDataTypes from '../../types/burgers-data-types';
@@ -98,4 +98,4 @@ function BurgerIngredients(props: Props) {
   );
 }
 
-export default BurgerIngredients;
+export default React.memo(BurgerIngredients);

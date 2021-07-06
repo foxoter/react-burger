@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import BurgerIngredients from '../burger-ingridients/burger-ingredients';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-import mainContainerStyles from './main-container.styles.module.css'
+import mainContainerStyles from './main-container.module.css'
 import BurgersDataTypes from '../../types/burgers-data-types';
 
 type Props = {
@@ -37,4 +37,4 @@ function MainContainer(props: Props) {
   )
 }
 
-export default MainContainer
+export default React.memo(MainContainer);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import appStyles from './app.styles.module.css'
+import appStyles from './app.module.css'
 
 import AppHeader from '../app-header/app-header';
 import MainContainer from '../main-container/main-container';

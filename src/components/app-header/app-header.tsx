@@ -1,7 +1,7 @@
 import React from 'react';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import appHeaderStyles from './app-header.styles.module.css';
+import appHeaderStyles from './app-header.module.css';
 
 import HeaderItem from '../header-item/header-item';
 import { menuItems } from "../../utils/menu-titles-data";
@@ -13,6 +13,7 @@ function AppHeader(): JSX.Element {
         <HeaderItem
           key={idx}
           title={item.title}
+          Icon={item.Icon}
         />
       )
     });

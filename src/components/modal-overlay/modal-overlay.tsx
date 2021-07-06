@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import modalOverlayStyles from './modal-overlay.styles.module.css';
+import modalOverlayStyles from './modal-overlay.module.css';
 
 type Props = {
   onClose: () => void

@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import OrderDetails from '../order-details/order-details';
 
-import burgerConstructorStyles from './burger-constructor.styles.module.css';
+import burgerConstructorStyles from './burger-constructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import BurgersDataTypes from '../../types/burgers-data-types';
@@ -66,4 +66,4 @@ function BurgerConstructor(props: Props) {
   );
 }
 
-export default BurgerConstructor;
+export default React.memo(BurgerConstructor);
