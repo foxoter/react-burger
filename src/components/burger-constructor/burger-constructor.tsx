@@ -1,64 +1,69 @@
-import React, {Component} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
+import OrderDetails from '../order-details/order-details';
 
-import burgerConstructorStyles from './burger-constructor.styles.module.css';
-import {CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
+import burgerConstructorStyles from './burger-constructor.module.css';
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import BurgersDataTypes from '../../types/burgers-data-types';
+import Modal from '../modal/modal';
 
 type Props = {
   pickedItems: BurgersDataTypes[]
 }
 
-class BurgerConstructor extends Component<Props> {
-  state = {
-    orderTotal: 0
-  }
+function BurgerConstructor(props: Props) {
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps !== this.props) {
-      const {pickedItems} = this.props
-      if (pickedItems) {
-        const orderValue = pickedItems.reduce((sum, current) => sum += current.price, 0);
-        this.setState({orderTotal: orderValue});
-      }
+  const { pickedItems } = props;
+  const bun = pickedItems.find(item => item.type === 'bun');
+  const otherItems = pickedItems.filter(item => item.type !== 'bun');
+  const otherElements = otherItems.map((ingredient, index) => {
+    return <BurgerConstructorItem data={ingredient} key={index}/>
+  })
+
+  const orderTotalValue = useMemo(() => {
+    if (pickedItems.length) {
+      return pickedItems.reduce((sum, current) => sum += current.price, 0);
     }
+  }, [pickedItems]);
+
+  const closeOrder = () => {
+    setIsDetailsOpen(false);
   }
 
-  render() {
-    const {pickedItems} = this.props
-    const {orderTotal} = this.state
-    const bun = pickedItems.find(item => item.type === 'bun');
-    const otherItems = pickedItems.filter(item => item.type !== 'bun');
+  const openOrder = () => {
+    setIsDetailsOpen(true);
+  }
 
-    const otherElements = otherItems.map((ingredient, index) => {
-      return <BurgerConstructorItem data={ingredient} key={index}/>
-    })
-
-    return (
-      <div className={`${burgerConstructorStyles.container}`}>
-        {bun &&
+  return (
+    <div className={`${burgerConstructorStyles.container}`}>
+      {isDetailsOpen &&
+        <Modal handleClose={closeOrder}>
+            <OrderDetails orderId={123123} />
+        </Modal>
+      }
+      {bun &&
         <BurgerConstructorItem data={bun} headItem/>
-        }
-        {otherItems &&
+      }
+      {otherItems &&
         <div className={burgerConstructorStyles.items}>{otherElements}</div>
-        }
-        {bun &&
-        <BurgerConstructorItem data={bun} tailItem/>
-        }
-        {pickedItems.length > 0 &&
+      }
+      {bun &&
+       <BurgerConstructorItem data={bun} tailItem/>
+      }
+      {pickedItems.length > 0 &&
         <div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>
-            <p className="text text_type_digits-medium">{orderTotal}</p>
+            <p className="text text_type_digits-medium">{orderTotalValue}</p>
             <CurrencyIcon type="primary"/>
-            <Button type="primary" size="large">
+            <Button type="primary" size="large" onClick={openOrder}>
                 Оформить заказ
             </Button>
         </div>
-        }
-      </div>
-    );
-  }
+      }
+    </div>
+  );
 }
 
-export default BurgerConstructor;
+export default React.memo(BurgerConstructor);
