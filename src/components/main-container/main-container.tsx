@@ -8,12 +8,10 @@ import BurgersDataTypes from '../../types/burgers-data-types';
 
 type Props = {
   title: string
-  ingredients: BurgersDataTypes[]
 }
 
 function MainContainer(props: Props) {
   const [constructorItems, setConstructorItems] = useState<BurgersDataTypes[]>([]);
-  const { ingredients } = props
 
   const addItem = (item: BurgersDataTypes) => {
     if (item.type === 'bun') {
@@ -30,7 +28,7 @@ function MainContainer(props: Props) {
         {props.title}
       </h2>
       <section className={mainContainerStyles.container}>
-        <BurgerIngredients data={ingredients} onPickItem={addItem}/>
+        <BurgerIngredients onPickItem={addItem}/>
         <BurgerConstructor pickedItems={constructorItems}/>
       </section>
     </main>

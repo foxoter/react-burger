@@ -5,8 +5,12 @@ import burgerIngredientsStyles from './burger-ingredients.module.css';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
 import BurgersDataTypes from '../../types/burgers-data-types';
+import AppState from '../../types/app-state-types';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+
+import { getIngredients } from '../../services/actions/ingredients';
+import { useSelector, useDispatch } from 'react-redux';
 
 const SUBTITLES: { [key: string]: string } = {
   "bun": "Булки",
@@ -16,13 +20,19 @@ const SUBTITLES: { [key: string]: string } = {
 
 type Props = {
   onPickItem: (item: BurgersDataTypes) => void
-  data: BurgersDataTypes[]
 }
 
 function BurgerIngredients(props: Props) {
   const [currentTab, setCurrentTab] = useState('Булки');
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [detailedIngredient, setDetailedIngredient] = useState<BurgersDataTypes | null>(null);
+
+  const { ingredientsRequest, ingredientsFailed, ingredientsList } = useSelector((state: AppState) => state.ingredients);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!ingredientsList.length) dispatch(getIngredients());
+  }, [dispatch, ingredientsList]);
 
   const switchTab = (tab: string) => {
     setCurrentTab(tab);
@@ -41,7 +51,7 @@ function BurgerIngredients(props: Props) {
   }
 
   const renderIngredientsSection = (ingredient: string) => {
-    const sectionData = props.data.filter(item => {
+    const sectionData = ingredientsList.filter(item => {
       return item.type === ingredient
     })
     const elements = sectionData.map(ingredient => {
@@ -89,11 +99,16 @@ function BurgerIngredients(props: Props) {
         </Modal>
       }
       {renderTabs()}
-      <div className={burgerIngredientsStyles.sections}>
-        {renderIngredientsSection('bun')}
-        {renderIngredientsSection('sauce')}
-        {renderIngredientsSection('main')}
-      </div>
+      {!ingredientsRequest &&
+        <div className={burgerIngredientsStyles.sections}>
+          {renderIngredientsSection('bun')}
+          {renderIngredientsSection('sauce')}
+          {renderIngredientsSection('main')}
+        </div>
+      }
+      {ingredientsFailed &&
+        <p>Что-то пошло не так :(</p>
+      }
     </div>
   );
 }
