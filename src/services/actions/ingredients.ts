@@ -13,7 +13,7 @@ export const PLACE_ORDER_SUCCESS = 'PLACE_ORDER_SUCCESS';
 export const PLACE_ORDER_FAILED = 'PLACE_ORDER_FAILED';
 export const DELETE_ORDER_ID = 'DELETE_ORDER_ID';
 
-export const SET_CURRENT_ORDER = 'SET_CURRENT_ORDER';
+export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 
 export function getIngredients() {
   return function(dispatch: any) {

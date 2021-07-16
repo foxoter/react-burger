@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useDrop } from "react-dnd";
 
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import OrderDetails from '../order-details/order-details';
@@ -10,13 +11,22 @@ import Modal from '../modal/modal';
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from '../../types/app-state-types';
 
-import { DELETE_ORDER_ID, placeOrder } from '../../services/actions/ingredients';
+import { ADD_INGREDIENT, DELETE_ORDER_ID, placeOrder } from '../../services/actions/ingredients';
+
 
 function BurgerConstructor() {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const dispatch = useDispatch();
-
   const { constructorItems, currentOrderId } = useSelector((state: AppState) => state.ingredients);
+  const [{ isHover }, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop(ingredientData) {
+      dispatch({ type: ADD_INGREDIENT, payload: ingredientData });
+    },
+    collect: monitor => ({
+      isHover: monitor.isOver(),
+    })
+  });
 
   const bun = constructorItems.find(item => item.type === 'bun');
   const otherItems = constructorItems.filter(item => item.type !== 'bun');
@@ -45,7 +55,10 @@ function BurgerConstructor() {
   }
 
   return (
-    <div className={`${burgerConstructorStyles.container}`}>
+    <div
+      className={`${burgerConstructorStyles.container} ${isHover ? burgerConstructorStyles.bordered : ''}`}
+      ref={dropTarget}
+    >
       {isDetailsOpen && currentOrderId &&
         <Modal handleClose={closeOrder}>
             <OrderDetails orderId={currentOrderId} />

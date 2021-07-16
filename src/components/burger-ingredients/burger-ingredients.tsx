@@ -22,7 +22,13 @@ const SUBTITLES: { [key: string]: string } = {
 function BurgerIngredients() {
   const [currentTab, setCurrentTab] = useState('Булки');
 
-  const { ingredientsRequest, ingredientsFailed, ingredientsList, currentIngredient } = useSelector((state: AppState) => state.ingredients);
+  const {
+    ingredientsRequest,
+    ingredientsFailed,
+    ingredientsList,
+    currentIngredient,
+    constructorItems
+  } = useSelector((state: AppState) => state.ingredients);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,8 +54,14 @@ function BurgerIngredients() {
       return item.type === ingredient
     })
     const elements = sectionData.map(ingredient => {
+      const orderCount = constructorItems.filter(item => item._id === ingredient._id).length;
       return (
-        <BurgerIngredientsItem key={ingredient._id} data={ingredient} onShowDetails={() => openDetails(ingredient)}/>
+        <BurgerIngredientsItem
+          key={ingredient._id}
+          data={ingredient}
+          onShowDetails={() => openDetails(ingredient)}
+          count={orderCount}
+        />
       )
     })
     const sectionTitle = SUBTITLES[ingredient]
