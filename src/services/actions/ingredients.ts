@@ -14,6 +14,7 @@ export const PLACE_ORDER_FAILED = 'PLACE_ORDER_FAILED';
 export const DELETE_ORDER_ID = 'DELETE_ORDER_ID';
 
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 
 export function getIngredients() {
   return function(dispatch: any) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from "react-dnd";
 
@@ -12,7 +12,6 @@ type Props = {
 }
 
 function BurgerIngredientsItem(props: Props) {
-  // const [orderCount, setOrderCount] = useState(0);
   const { count, data, data: { image, name, price }, onShowDetails } = props;
 
   const [, dragRef] = useDrag({

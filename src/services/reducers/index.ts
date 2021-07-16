@@ -9,7 +9,8 @@ import {
   PLACE_ORDER_REQUEST,
   PLACE_ORDER_SUCCESS,
   DELETE_ORDER_ID,
-  ADD_INGREDIENT
+  ADD_INGREDIENT,
+  DELETE_INGREDIENT
 } from '../actions/ingredients';
 
 const initialState = {
@@ -94,6 +95,14 @@ const ingredientsReducer = (state = initialState, action: any) => {
       return {
         ...state,
         constructorItems: [...state.constructorItems, action.payload]
+      }
+    }
+    case DELETE_INGREDIENT: {
+      const newItems = state.constructorItems;
+      newItems.splice(newItems.findIndex(({ _id }) => _id === action.payload), 1);
+      return {
+        ...state,
+        constructorItems: [...newItems]
       }
     }
     default: {
