@@ -92,6 +92,13 @@ const ingredientsReducer = (state = initialState, action: any) => {
       }
     }
     case ADD_INGREDIENT: {
+      if (action.payload.type === 'bun') {
+        const filteredItems = state.constructorItems.filter(({ type }) => type !== 'bun');
+        return {
+          ...state,
+          constructorItems: [...filteredItems, action.payload]
+        }
+      }
       return {
         ...state,
         constructorItems: [...state.constructorItems, action.payload]
