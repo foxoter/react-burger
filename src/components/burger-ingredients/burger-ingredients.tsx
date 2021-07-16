@@ -19,11 +19,7 @@ const SUBTITLES: { [key: string]: string } = {
   "sauce": "Соусы"
 }
 
-type Props = {
-  onPickItem: (item: BurgersDataTypes) => void
-}
-
-function BurgerIngredients(props: Props) {
+function BurgerIngredients() {
   const [currentTab, setCurrentTab] = useState('Булки');
 
   const { ingredientsRequest, ingredientsFailed, ingredientsList, currentIngredient } = useSelector((state: AppState) => state.ingredients);
@@ -44,7 +40,6 @@ function BurgerIngredients(props: Props) {
   }
 
   const openDetails = (data: BurgersDataTypes) => {
-    props.onPickItem(data);
     dispatch({ type: ADD_CURRENT_INGREDIENT, ingredient: data});
   }
 
@@ -54,7 +49,7 @@ function BurgerIngredients(props: Props) {
     })
     const elements = sectionData.map(ingredient => {
       return (
-        <BurgerIngredientsItem key={ingredient._id} data={ingredient} onPurchase={() => openDetails(ingredient)}/>
+        <BurgerIngredientsItem key={ingredient._id} data={ingredient} onShowDetails={() => openDetails(ingredient)}/>
       )
     })
     const sectionTitle = SUBTITLES[ingredient]

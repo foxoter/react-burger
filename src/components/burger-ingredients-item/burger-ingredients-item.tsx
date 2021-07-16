@@ -6,25 +6,20 @@ import burgerIngredientStyles from './burger-ingredients-item.module.css';
 
 type Props = {
   data: BurgersDataTypes
-  onPurchase: (ingredient: BurgersDataTypes) => void
+  onShowDetails: (ingredient: BurgersDataTypes) => void
 }
 
 function BurgerIngredientsItem(props: Props) {
   const [orderCount, setOrderCount] = useState(0);
-  const { data, data: { image, name, price } } = props
-
-  const handlePurchase = (ingredient: BurgersDataTypes) => {
-    setOrderCount(orderCount + 1);
-    props.onPurchase(ingredient);
-  }
+  const { data, data: { image, name, price }, onShowDetails } = props
 
   return (
     <div className={`${burgerIngredientStyles.container} pl-4 pr-4`}
-         onClick={() => handlePurchase(data)}>
+         onClick={() => onShowDetails(data)}>
       {orderCount > 0 &&
-      <div className={burgerIngredientStyles.counter}>
-          <Counter count={orderCount} size='default'/>
-      </div>
+        <div className={burgerIngredientStyles.counter}>
+            <Counter count={orderCount} size='default'/>
+        </div>
       }
       <img src={image} alt={name} className='mb-1'/>
       <div className={`${burgerIngredientStyles.price} mb-1`}>

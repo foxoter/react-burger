@@ -7,7 +7,8 @@ import {
   DELETE_CURRENT_INGREDIENT,
   PLACE_ORDER_FAILED,
   PLACE_ORDER_REQUEST,
-  PLACE_ORDER_SUCCESS
+  PLACE_ORDER_SUCCESS,
+  DELETE_ORDER_ID
 } from '../actions/ingredients';
 
 const initialState = {
@@ -109,6 +110,12 @@ const ingredientsReducer = (state = initialState, action: any) => {
         currentOrderRequest: false,
         currentOrderFailed: false,
         currentOrderId: action.id
+      }
+    }
+    case DELETE_ORDER_ID: {
+      return {
+        ...state,
+        currentOrderId: null
       }
     }
     default: {

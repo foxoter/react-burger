@@ -10,7 +10,7 @@ import Modal from '../modal/modal';
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from '../../types/app-state-types';
 
-import { placeOrder } from '../../services/actions/ingredients';
+import { DELETE_ORDER_ID, placeOrder } from '../../services/actions/ingredients';
 
 function BurgerConstructor() {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -33,6 +33,7 @@ function BurgerConstructor() {
 
   const closeOrder = () => {
     setIsDetailsOpen(false);
+    dispatch({ type: DELETE_ORDER_ID });
   }
 
   const openOrder = () => {
