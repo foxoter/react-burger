@@ -5,43 +5,49 @@ import OrderDetails from '../order-details/order-details';
 
 import burgerConstructorStyles from './burger-constructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-
-import BurgersDataTypes from '../../types/burgers-data-types';
 import Modal from '../modal/modal';
 
-type Props = {
-  pickedItems: BurgersDataTypes[]
-}
+import { useDispatch, useSelector } from 'react-redux';
+import AppState from '../../types/app-state-types';
 
-function BurgerConstructor(props: Props) {
+import { placeOrder } from '../../services/actions/ingredients';
+
+function BurgerConstructor() {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const dispatch = useDispatch();
 
-  const { pickedItems } = props;
-  const bun = pickedItems.find(item => item.type === 'bun');
-  const otherItems = pickedItems.filter(item => item.type !== 'bun');
+  const { constructorItems, currentOrderId } = useSelector((state: AppState) => state.ingredients);
+
+  const bun = constructorItems.find(item => item.type === 'bun');
+  const otherItems = constructorItems.filter(item => item.type !== 'bun');
   const otherElements = otherItems.map((ingredient, index) => {
     return <BurgerConstructorItem data={ingredient} key={index}/>
-  })
+  });
 
   const orderTotalValue = useMemo(() => {
-    if (pickedItems.length) {
-      return pickedItems.reduce((sum, current) => sum += current.price, 0);
+    if (constructorItems.length) {
+      return constructorItems.reduce((sum, current) => sum
+        += (current.type === 'bun' ? current.price * 2 : current.price), 0);
     }
-  }, [pickedItems]);
+  }, [constructorItems]);
 
   const closeOrder = () => {
     setIsDetailsOpen(false);
   }
 
   const openOrder = () => {
+    const order = {
+      ingredients: constructorItems.map(item => item._id)
+    };
+    dispatch(placeOrder(order));
     setIsDetailsOpen(true);
   }
 
   return (
     <div className={`${burgerConstructorStyles.container}`}>
-      {isDetailsOpen &&
+      {isDetailsOpen && currentOrderId &&
         <Modal handleClose={closeOrder}>
-            <OrderDetails orderId={123123} />
+            <OrderDetails orderId={currentOrderId} />
         </Modal>
       }
       {bun &&
@@ -53,7 +59,7 @@ function BurgerConstructor(props: Props) {
       {bun &&
        <BurgerConstructorItem data={bun} tailItem/>
       }
-      {pickedItems.length > 0 &&
+      {constructorItems.length > 0 &&
         <div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>
             <p className="text text_type_digits-medium">{orderTotalValue}</p>
             <CurrencyIcon type="primary"/>

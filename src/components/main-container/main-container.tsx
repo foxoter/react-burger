@@ -29,7 +29,7 @@ function MainContainer(props: Props) {
       </h2>
       <section className={mainContainerStyles.container}>
         <BurgerIngredients onPickItem={addItem}/>
-        <BurgerConstructor pickedItems={constructorItems}/>
+        <BurgerConstructor />
       </section>
     </main>
   )

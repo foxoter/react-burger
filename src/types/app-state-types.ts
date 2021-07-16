@@ -4,11 +4,12 @@ type AppState = {
   ingredients: {
     ingredientsRequest: boolean
     ingredientsFailed: boolean
-    ingredientsList: BurgersDataTypes[] | []
+    ingredientsList: BurgersDataTypes[]
 
-    constructorItems: BurgersDataTypes[] | []
-    currentIngredient: BurgersDataTypes | {}
-    currentOrder: BurgersDataTypes | {}
+    constructorItems: BurgersDataTypes[]
+    currentIngredient: BurgersDataTypes
+    currentOrder: string[]
+    currentOrderId: string
   }
 }
 

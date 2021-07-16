@@ -11,6 +11,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 
 import { getIngredients } from '../../services/actions/ingredients';
 import { useSelector, useDispatch } from 'react-redux';
+import { ADD_CURRENT_INGREDIENT, DELETE_CURRENT_INGREDIENT} from '../../services/actions/ingredients';
 
 const SUBTITLES: { [key: string]: string } = {
   "bun": "Булки",
@@ -24,10 +25,8 @@ type Props = {
 
 function BurgerIngredients(props: Props) {
   const [currentTab, setCurrentTab] = useState('Булки');
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const [detailedIngredient, setDetailedIngredient] = useState<BurgersDataTypes | null>(null);
 
-  const { ingredientsRequest, ingredientsFailed, ingredientsList } = useSelector((state: AppState) => state.ingredients);
+  const { ingredientsRequest, ingredientsFailed, ingredientsList, currentIngredient } = useSelector((state: AppState) => state.ingredients);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,13 +40,12 @@ function BurgerIngredients(props: Props) {
   }
 
   const closeDetails = () => {
-    setIsDetailsOpen(false);
+    dispatch({ type: DELETE_CURRENT_INGREDIENT });
   }
 
   const openDetails = (data: BurgersDataTypes) => {
     props.onPickItem(data);
-    setDetailedIngredient(data);
-    setIsDetailsOpen(true);
+    dispatch({ type: ADD_CURRENT_INGREDIENT, ingredient: data});
   }
 
   const renderIngredientsSection = (ingredient: string) => {
@@ -93,9 +91,9 @@ function BurgerIngredients(props: Props) {
 
   return (
     <div>
-      {isDetailsOpen &&
+      {currentIngredient &&
         <Modal handleClose={closeDetails} heading={'Детали ингредиента'}>
-            <IngredientDetails ingredient={detailedIngredient} />
+            <IngredientDetails ingredient={currentIngredient} />
         </Modal>
       }
       {renderTabs()}
