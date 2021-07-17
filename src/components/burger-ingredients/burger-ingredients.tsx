@@ -95,10 +95,7 @@ function BurgerIngredients() {
         id={sectionTitle}
         ref={el => {
           // @ts-ignore
-          if (!elemRefs.current[sectionTitle]) {
-            // @ts-ignore
-            elemRefs.current[sectionTitle] = el;
-          }
+          elemRefs.current[sectionTitle] = el;
         }}
       >
         <h3 className="text text_type_main-medium mb-6">{sectionTitle}</h3>
@@ -108,16 +105,21 @@ function BurgerIngredients() {
   }
 
   const handleScroll = () => {
-    console.log('refs obj', elemRefs.current);
     // @ts-ignore
-    const scrollContainerPosition = scrollContainerRef.current.getBoundingClientRect().top;
-    console.log('1', scrollContainerPosition);
+    const containerPosition = scrollContainerRef.current.getBoundingClientRect().top;
+    let minDiff = Number.POSITIVE_INFINITY;
+    let highlightedTab = '';
     Object.keys(elemRefs.current).forEach(key => {
       // @ts-ignore
       const ref = elemRefs.current[key];
-      const pos = ref.getBoundingClientRect().top;
-      console.log('2', ref, pos);
-    })
+      const tabPosition = ref.getBoundingClientRect().top;
+      const diff = Math.abs(tabPosition - containerPosition);
+      if (diff < minDiff) {
+        minDiff = diff;
+        highlightedTab = key;
+      }
+    });
+    setCurrentTab(highlightedTab);
   }
 
   return (
