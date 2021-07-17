@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, MutableRefObject } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import burgerIngredientsStyles from './burger-ingredients.module.css';
@@ -19,10 +19,14 @@ const SUBTITLES: { [key: string]: string } = {
   "sauce": "Соусы"
 }
 
+type RefsObjectType = {
+  [key: string]: HTMLDivElement
+}
+
 function BurgerIngredients() {
   const [currentTab, setCurrentTab] = useState('Булки');
-  const scrollContainerRef = useRef(null);
-  const elemRefs = useRef({});
+  const scrollContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
+  const elemRefs = useRef({}) as MutableRefObject<RefsObjectType>;
 
   const {
     ingredientsRequest,
@@ -94,8 +98,7 @@ function BurgerIngredients() {
       <div
         id={sectionTitle}
         ref={el => {
-          // @ts-ignore
-          elemRefs.current[sectionTitle] = el;
+          if (el) elemRefs.current[sectionTitle] = el;
         }}
       >
         <h3 className="text text_type_main-medium mb-6">{sectionTitle}</h3>
@@ -105,12 +108,10 @@ function BurgerIngredients() {
   }
 
   const handleScroll = () => {
-    // @ts-ignore
     const containerPosition = scrollContainerRef.current.getBoundingClientRect().top;
     let minDiff = Number.POSITIVE_INFINITY;
     let highlightedTab = '';
     Object.keys(elemRefs.current).forEach(key => {
-      // @ts-ignore
       const ref = elemRefs.current[key];
       const tabPosition = ref.getBoundingClientRect().top;
       const diff = Math.abs(tabPosition - containerPosition);
