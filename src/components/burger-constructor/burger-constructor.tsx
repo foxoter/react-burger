@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useDrop } from "react-dnd";
 
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
@@ -28,24 +28,19 @@ function BurgerConstructor() {
     })
   });
 
-  // const [, sortDropTarget] = useDrop({
-  //   accept: 'constructor-item',
-  //   drop(itemId) {
-  //     console.log(itemId);
-  //   }
-  // });
-
-  const moveCard = (dragIndex: number, hoverIndex: number) => {
-    // console.log('dragindex', dragIndex);
-    // console.log('hoverindex', hoverIndex);
-    const newArr = constructorItems;
-    console.log('start', newArr);
-    const dragItem = newArr[dragIndex];
-    newArr.splice(dragIndex, 1);
-    newArr.splice(hoverIndex, 0, dragItem);
-    console.log('end', newArr);
-    dispatch({ type: REWRITE_INGREDIENTS, payload: newArr });
-  }
+  const moveCard = useCallback(
+    (dragIndex: number, hoverIndex: number) => {
+      // console.log('dragindex', dragIndex);
+      // console.log('hoverindex', hoverIndex);
+      const newArr = constructorItems;
+      console.log('start', newArr);
+      const dragItem = newArr[dragIndex];
+      newArr.splice(dragIndex, 1);
+      newArr.splice(hoverIndex, 0, dragItem);
+      console.log('end', newArr);
+      dispatch({ type: REWRITE_INGREDIENTS, payload: newArr });
+    },
+    [constructorItems]);
 
   const bun = constructorItems.find(item => item.type === 'bun');
   const otherItems = constructorItems.filter(item => item.type !== 'bun');
