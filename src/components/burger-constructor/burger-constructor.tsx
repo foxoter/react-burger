@@ -28,6 +28,13 @@ function BurgerConstructor() {
     })
   });
 
+  const [, sortDropTarget] = useDrop({
+    accept: 'constructor-item',
+    drop(itemId) {
+      console.log(itemId);
+    }
+  })
+
   const bun = constructorItems.find(item => item.type === 'bun');
   const otherItems = constructorItems.filter(item => item.type !== 'bun');
   const otherElements = otherItems.map((ingredient, index) => {
@@ -60,27 +67,27 @@ function BurgerConstructor() {
       ref={dropTarget}
     >
       {isDetailsOpen && currentOrderId &&
-      <Modal handleClose={closeOrder}>
-          <OrderDetails orderId={currentOrderId}/>
-      </Modal>
+        <Modal handleClose={closeOrder}>
+            <OrderDetails orderId={currentOrderId}/>
+        </Modal>
       }
       {bun &&
-      <BurgerConstructorItem data={bun} headItem/>
+        <BurgerConstructorItem data={bun} headItem/>
       }
       {otherItems &&
-      <div className={burgerConstructorStyles.items}>{otherElements}</div>
+        <div className={burgerConstructorStyles.items} ref={sortDropTarget}>{otherElements}</div>
       }
       {bun &&
-      <BurgerConstructorItem data={bun} tailItem/>
+        <BurgerConstructorItem data={bun} tailItem/>
       }
       {constructorItems.length > 0 &&
-      <div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>
-          <p className="text text_type_digits-medium">{orderTotalValue}</p>
-          <CurrencyIcon type="primary"/>
-          <Button type="primary" size="large" onClick={openOrder}>
-              Оформить заказ
-          </Button>
-      </div>
+        <div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>
+            <p className="text text_type_digits-medium">{orderTotalValue}</p>
+            <CurrencyIcon type="primary"/>
+            <Button type="primary" size="large" onClick={openOrder}>
+                Оформить заказ
+            </Button>
+        </div>
       }
     </div>
   );

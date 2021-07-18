@@ -1,10 +1,11 @@
 import React from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDrag } from 'react-dnd';
+import { useDispatch } from 'react-redux';
 
 import burgerConstructorItemStyles from './burger-constructor-item.module.css';
 import BurgersDataTypes from '../../types/burgers-data-types';
 
-import { useDispatch } from 'react-redux';
 import { DELETE_INGREDIENT } from '../../services/actions/ingredients';
 
 type Props = {
@@ -22,13 +23,26 @@ function BurgerConstructorItem(props: Props) {
 
   const dispatch = useDispatch();
 
+  const [{ isDrag }, dragRef] = useDrag({
+    type: 'constructor-item',
+    item: {_id},
+    collect: monitor => ({
+      isDrag: monitor.isDragging()
+    })
+  });
+
   const deleteIngredient = () => {
     dispatch({ type: DELETE_INGREDIENT, payload: _id});
   }
 
-  return (
-    <div className={`${burgerConstructorItemStyles.item} ${uiKitSpacing}`}>
-      {dragIcon && <DragIcon type='primary'/>}
+  const containerAttributes = {
+    ...(!headItem && !tailItem && {ref: dragRef}),
+    className: `${burgerConstructorItemStyles.item} ${uiKitSpacing}`
+  }
+
+  return (!isDrag ?
+    <div {...containerAttributes}>
+      {dragIcon && <DragIcon type='primary' />}
       <ConstructorElement
         type={type}
         isLocked={headItem || tailItem}
@@ -37,7 +51,7 @@ function BurgerConstructorItem(props: Props) {
         thumbnail={image}
         handleClose={deleteIngredient}
       />
-    </div>
+    </div> : null
   )
 }
 

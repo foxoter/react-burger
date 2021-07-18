@@ -16,7 +16,10 @@ function BurgerIngredientsItem(props: Props) {
 
   const [, dragRef] = useDrag({
     type: "ingredient",
-    item: {...data}
+    item: {...data},
+    collect: monitor => ({
+      isDrag: monitor.isDragging()
+    })
   });
 
   return (
