@@ -1,14 +1,13 @@
 import React, { MutableRefObject, useRef } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { XYCoord } from 'dnd-core'
 
 import burgerConstructorItemStyles from './burger-constructor-item.module.css';
 import BurgersDataTypes from '../../types/burgers-data-types';
 
 import { DELETE_INGREDIENT } from '../../services/actions/ingredients';
-import AppState from '../../types/app-state-types';
 
 type Props = {
   index: number
@@ -36,20 +35,15 @@ function BurgerConstructorItem(props: Props) {
   const [{ isDrag }, dragRef] = useDrag({
     type: 'constructor-item',
     item: () => {
-      return {_id, index}
+      return {index}
     },
     collect: monitor => ({
       isDrag: monitor.isDragging()
     })
   });
 
-  const [{ handlerId }, dropRef] = useDrop({
+  const [, dropRef] = useDrop({
     accept: 'constructor-item',
-    collect(monitor) {
-      return {
-        handlerId: monitor.getHandlerId(),
-      }
-    },
     hover(item: DragItemProps, monitor) {
       if (!ref.current) {
         return
@@ -79,14 +73,11 @@ function BurgerConstructorItem(props: Props) {
   }
 
   dragRef(dropRef(ref));
-  const opacity = isDrag ? 0 : 1;
 
   return (
     <div
       ref={ref}
       className={`${burgerConstructorItemStyles.item} ${uiKitSpacing}`}
-      style={{ opacity: opacity }}
-      data-handler-id={handlerId}
     >
       {dragIcon && <DragIcon type='primary' />}
       <ConstructorElement
