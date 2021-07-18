@@ -11,7 +11,7 @@ import Modal from '../modal/modal';
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from '../../types/app-state-types';
 
-import { ADD_INGREDIENT, DELETE_ORDER_ID, placeOrder } from '../../services/actions/ingredients';
+import { ADD_INGREDIENT, DELETE_ORDER_ID, REWRITE_INGREDIENTS, placeOrder } from '../../services/actions/ingredients';
 
 
 function BurgerConstructor() {
@@ -28,17 +28,29 @@ function BurgerConstructor() {
     })
   });
 
-  const [, sortDropTarget] = useDrop({
-    accept: 'constructor-item',
-    drop(itemId) {
-      console.log(itemId);
-    }
-  })
+  // const [, sortDropTarget] = useDrop({
+  //   accept: 'constructor-item',
+  //   drop(itemId) {
+  //     console.log(itemId);
+  //   }
+  // });
+
+  const moveCard = (dragIndex: number, hoverIndex: number) => {
+    // console.log('dragindex', dragIndex);
+    // console.log('hoverindex', hoverIndex);
+    const newArr = constructorItems;
+    console.log('start', newArr);
+    const dragItem = newArr[dragIndex];
+    newArr.splice(dragIndex, 1);
+    newArr.splice(hoverIndex, 0, dragItem);
+    console.log('end', newArr);
+    dispatch({ type: REWRITE_INGREDIENTS, payload: newArr });
+  }
 
   const bun = constructorItems.find(item => item.type === 'bun');
   const otherItems = constructorItems.filter(item => item.type !== 'bun');
   const otherElements = otherItems.map((ingredient, index) => {
-    return <BurgerConstructorItem data={ingredient} key={index}/>
+    return <BurgerConstructorItem data={ingredient} key={index} index={index} moveItem={moveCard}/>
   });
 
   const orderTotalValue = useMemo(() => {
@@ -75,7 +87,7 @@ function BurgerConstructor() {
         <BurgerConstructorItem data={bun} headItem/>
       }
       {otherItems &&
-        <div className={burgerConstructorStyles.items} ref={sortDropTarget}>{otherElements}</div>
+        <div className={burgerConstructorStyles.items}>{otherElements}</div>
       }
       {bun &&
         <BurgerConstructorItem data={bun} tailItem/>

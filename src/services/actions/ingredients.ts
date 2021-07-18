@@ -15,6 +15,7 @@ export const DELETE_ORDER_ID = 'DELETE_ORDER_ID';
 
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
+export const REWRITE_INGREDIENTS = 'REWRITE_INGREDIENTS';
 
 export function getIngredients() {
   return function(dispatch: any) {

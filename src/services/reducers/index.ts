@@ -10,7 +10,8 @@ import {
   PLACE_ORDER_SUCCESS,
   DELETE_ORDER_ID,
   ADD_INGREDIENT,
-  DELETE_INGREDIENT
+  DELETE_INGREDIENT,
+  REWRITE_INGREDIENTS
 } from '../actions/ingredients';
 
 const initialState = {
@@ -110,6 +111,12 @@ const ingredientsReducer = (state = initialState, action: any) => {
       return {
         ...state,
         constructorItems: [...newItems]
+      }
+    }
+    case REWRITE_INGREDIENTS: {
+      return {
+        ...state,
+        constructorItems: [...action.payload]
       }
     }
     default: {
