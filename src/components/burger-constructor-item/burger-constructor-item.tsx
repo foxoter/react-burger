@@ -1,19 +1,21 @@
 import React, { MutableRefObject, useRef } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { XYCoord } from 'dnd-core'
 
 import burgerConstructorItemStyles from './burger-constructor-item.module.css';
 import BurgersDataTypes from '../../types/burgers-data-types';
 
 import { DELETE_INGREDIENT } from '../../services/actions/ingredients';
+import AppState from '../../types/app-state-types';
 
 type Props = {
-  index?: number
+  index: number
   data: BurgersDataTypes
   headItem?: boolean
   tailItem?: boolean
-  moveItem?: (dragIndex: number, hoverIndex: number) => void
+  moveItem: (dragIndex: number, hoverIndex: number) => void
 }
 
 type DragItemProps = {
@@ -30,16 +32,19 @@ function BurgerConstructorItem(props: Props) {
   const uiKitSpacing = headItem || tailItem ? 'ml-8 pl-4 pr-4' : 'pl-4 pr-4';
 
   const dispatch = useDispatch();
+  const { constructorItems } = useSelector((state: AppState) => state.ingredients);
 
   const [{ isDrag }, dragRef] = useDrag({
     type: 'constructor-item',
-    item: {_id, index},
+    item: () => {
+      return {_id, index}
+    },
     collect: monitor => ({
       isDrag: monitor.isDragging()
     })
   });
 
-  const [{ handlerId }, dropRef] = useDrop({
+  const [, dropRef] = useDrop({
     accept: 'constructor-item',
     collect(monitor) {
       return {
@@ -57,10 +62,18 @@ function BurgerConstructorItem(props: Props) {
       }
       console.log('dragIndex', dragIndex);
       console.log('hoverIndex', hoverIndex);
-    },
-    drop(id) {
-      console.log('1', handlerId);
-      console.log('2', id);
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return
+      }
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return
+      }
+      moveItem(dragIndex, hoverIndex);
+      item.index = hoverIndex;
     }
   })
 

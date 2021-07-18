@@ -30,14 +30,15 @@ function BurgerConstructor() {
 
   const moveCard = useCallback(
     (dragIndex: number, hoverIndex: number) => {
-      // console.log('dragindex', dragIndex);
-      // console.log('hoverindex', hoverIndex);
+      // // console.log('dragindex', dragIndex);
+      // // console.log('hoverindex', hoverIndex);
       const newArr = constructorItems;
-      console.log('start', newArr);
+      console.log('new arr 1', newArr);
       const dragItem = newArr[dragIndex];
       newArr.splice(dragIndex, 1);
+      console.log('new arr 2', newArr);
       newArr.splice(hoverIndex, 0, dragItem);
-      console.log('end', newArr);
+      console.log('new arr 3', newArr);
       dispatch({ type: REWRITE_INGREDIENTS, payload: newArr });
     },
     [constructorItems]);
@@ -45,7 +46,7 @@ function BurgerConstructor() {
   const bun = constructorItems.find(item => item.type === 'bun');
   const otherItems = constructorItems.filter(item => item.type !== 'bun');
   const otherElements = otherItems.map((ingredient, index) => {
-    return <BurgerConstructorItem data={ingredient} key={index} index={index} moveItem={moveCard}/>
+    return <BurgerConstructorItem data={ingredient} key={index} index={index + 1} moveItem={moveCard} />
   });
 
   const orderTotalValue = useMemo(() => {
@@ -75,17 +76,17 @@ function BurgerConstructor() {
     >
       {isDetailsOpen && currentOrderId &&
         <Modal handleClose={closeOrder}>
-            <OrderDetails orderId={currentOrderId}/>
+          <OrderDetails orderId={currentOrderId}/>
         </Modal>
       }
       {bun &&
-        <BurgerConstructorItem data={bun} headItem/>
+        <BurgerConstructorItem data={bun} headItem index={1} moveItem={moveCard} />
       }
       {otherItems &&
         <div className={burgerConstructorStyles.items}>{otherElements}</div>
       }
       {bun &&
-        <BurgerConstructorItem data={bun} tailItem/>
+        <BurgerConstructorItem data={bun} tailItem index={1} moveItem={moveCard} />
       }
       {constructorItems.length > 0 &&
         <div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>
