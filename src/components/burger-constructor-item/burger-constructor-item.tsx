@@ -32,7 +32,6 @@ function BurgerConstructorItem(props: Props) {
   const uiKitSpacing = headItem || tailItem ? 'ml-8 pl-4 pr-4' : 'pl-4 pr-4';
 
   const dispatch = useDispatch();
-  const { constructorItems } = useSelector((state: AppState) => state.ingredients);
 
   const [{ isDrag }, dragRef] = useDrag({
     type: 'constructor-item',
@@ -44,11 +43,11 @@ function BurgerConstructorItem(props: Props) {
     })
   });
 
-  const [, dropRef] = useDrop({
+  const [{ handlerId }, dropRef] = useDrop({
     accept: 'constructor-item',
     collect(monitor) {
       return {
-        handlerId: monitor.getHandlerId
+        handlerId: monitor.getHandlerId(),
       }
     },
     hover(item: DragItemProps, monitor) {
@@ -60,8 +59,6 @@ function BurgerConstructorItem(props: Props) {
       if (dragIndex === hoverIndex) {
         return
       }
-      console.log('dragIndex', dragIndex);
-      console.log('hoverIndex', hoverIndex);
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
@@ -82,14 +79,15 @@ function BurgerConstructorItem(props: Props) {
   }
 
   dragRef(dropRef(ref));
-  const containerAttributes = {
-    ...(!headItem && !tailItem && {ref: ref}),
-    className: `${burgerConstructorItemStyles.item} ${uiKitSpacing}`,
-    ...(isDrag && { style: { opacity: '0'}})
-  }
+  const opacity = isDrag ? 0 : 1;
 
   return (
-    <div {...containerAttributes}>
+    <div
+      ref={ref}
+      className={`${burgerConstructorItemStyles.item} ${uiKitSpacing}`}
+      style={{ opacity: opacity }}
+      data-handler-id={handlerId}
+    >
       {dragIcon && <DragIcon type='primary' />}
       <ConstructorElement
         type={type}

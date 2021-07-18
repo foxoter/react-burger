@@ -1,5 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { useDrop } from "react-dnd";
+import { useDrop } from 'react-dnd';
+import update from 'immutability-helper';
+
 
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import OrderDetails from '../order-details/order-details';
@@ -30,18 +32,17 @@ function BurgerConstructor() {
 
   const moveCard = useCallback(
     (dragIndex: number, hoverIndex: number) => {
-      // // console.log('dragindex', dragIndex);
-      // // console.log('hoverindex', hoverIndex);
-      const newArr = constructorItems;
-      console.log('new arr 1', newArr);
-      const dragItem = newArr[dragIndex];
-      newArr.splice(dragIndex, 1);
-      console.log('new arr 2', newArr);
-      newArr.splice(hoverIndex, 0, dragItem);
-      console.log('new arr 3', newArr);
+      const copyArr = constructorItems;
+      const dragItem = copyArr[dragIndex];
+      const newArr = update(copyArr, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, dragItem],
+        ],
+      })
       dispatch({ type: REWRITE_INGREDIENTS, payload: newArr });
     },
-    [constructorItems]);
+    [constructorItems, dispatch]);
 
   const bun = constructorItems.find(item => item.type === 'bun');
   const otherItems = constructorItems.filter(item => item.type !== 'bun');
