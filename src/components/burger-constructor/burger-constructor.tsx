@@ -47,9 +47,11 @@ function BurgerConstructor() {
 
   const bun = constructorItems.find(item => item.type === 'bun');
   const otherItems = constructorItems.filter(item => item.type !== 'bun');
+
   const otherElements = otherItems.map((ingredient, index) => {
     return <BurgerConstructorItem data={ingredient} key={index} index={index} moveItem={moveCard} />
   });
+  console.log('rerun?', Math.random(), otherItems);
 
   const orderTotalValue = useMemo(() => {
     if (constructorItems.length) {

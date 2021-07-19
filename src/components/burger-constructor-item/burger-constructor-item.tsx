@@ -18,7 +18,6 @@ type Props = {
 }
 
 type DragItemProps = {
-  _id: string
   index: number
 }
 
@@ -38,7 +37,7 @@ function BurgerConstructorItem(props: Props) {
       return {index}
     },
     collect: monitor => ({
-      isDrag: monitor.isDragging()
+      isDrag: monitor.isDragging(),
     })
   });
 
@@ -65,6 +64,9 @@ function BurgerConstructorItem(props: Props) {
       }
       moveItem(dragIndex, hoverIndex);
       item.index = hoverIndex;
+      console.log('drag idx', dragIndex);
+      console.log('hover idx', hoverIndex);
+      console.log('item', item);
     }
   })
 
@@ -72,10 +74,12 @@ function BurgerConstructorItem(props: Props) {
     dispatch({ type: DELETE_INGREDIENT, payload: _id});
   }
 
+  // const opacity = isDrag ? 0 : 1;
   dragRef(dropRef(ref));
   const containerAttributes = {
     className: `${burgerConstructorItemStyles.item} ${uiKitSpacing}`,
-    ...(!tailItem && !headItem && {ref: ref})
+    ...(!tailItem && !headItem && {ref: ref}),
+    ...(isDrag && {style: { opacity: 0}})
   }
 
   return (
