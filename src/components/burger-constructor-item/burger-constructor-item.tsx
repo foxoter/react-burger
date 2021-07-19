@@ -73,11 +73,14 @@ function BurgerConstructorItem(props: Props) {
   }
 
   dragRef(dropRef(ref));
+  const containerAttributes = {
+    className: `${burgerConstructorItemStyles.item} ${uiKitSpacing}`,
+    ...(!tailItem && !headItem && {ref: ref})
+  }
 
   return (
     <div
-      ref={ref}
-      className={`${burgerConstructorItemStyles.item} ${uiKitSpacing}`}
+      {...containerAttributes}
     >
       {dragIcon && <DragIcon type='primary' />}
       <ConstructorElement
