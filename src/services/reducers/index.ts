@@ -93,6 +93,8 @@ const ingredientsReducer = (state = initialState, action: any) => {
       }
     }
     case ADD_INGREDIENT: {
+      const uuid = String(action.payload._id + Math.random());
+      action.payload.uuid = uuid;
       if (action.payload.type === 'bun') {
         const filteredItems = state.constructorItems.filter(({ type }) => type !== 'bun');
         return {

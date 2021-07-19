@@ -2,7 +2,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 
-
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import OrderDetails from '../order-details/order-details';
 
@@ -30,6 +29,9 @@ function BurgerConstructor() {
     })
   });
 
+  const bun = constructorItems.find(item => item.type === 'bun');
+  const otherItems = constructorItems.filter(item => item.type !== 'bun');
+
   const moveCard = useCallback(
     (dragIndex: number, hoverIndex: number) => {
       const storageArrCopy = constructorItems;
@@ -43,15 +45,11 @@ function BurgerConstructor() {
       const resultArr = storageArrCopy.filter(i => i.type === 'bun').concat(...newArr);
       dispatch({ type: REWRITE_INGREDIENTS, payload: resultArr });
     },
-    [constructorItems, dispatch]);
-
-  const bun = constructorItems.find(item => item.type === 'bun');
-  const otherItems = constructorItems.filter(item => item.type !== 'bun');
+    [constructorItems, dispatch, otherItems]);
 
   const otherElements = otherItems.map((ingredient, index) => {
-    return <BurgerConstructorItem data={ingredient} key={index} index={index} moveItem={moveCard} />
+    return <BurgerConstructorItem data={ingredient} key={ingredient.uuid} index={index} moveItem={moveCard} />
   });
-  console.log('rerun?', Math.random(), otherItems);
 
   const orderTotalValue = useMemo(() => {
     if (constructorItems.length) {
@@ -84,13 +82,13 @@ function BurgerConstructor() {
         </Modal>
       }
       {bun &&
-        <BurgerConstructorItem data={bun} headItem index={1} moveItem={moveCard} />
+        <BurgerConstructorItem data={bun} headItem index={999} moveItem={moveCard} />
       }
       {otherItems &&
         <div className={burgerConstructorStyles.items}>{otherElements}</div>
       }
       {bun &&
-        <BurgerConstructorItem data={bun} tailItem index={1} moveItem={moveCard} />
+        <BurgerConstructorItem data={bun} tailItem index={999} moveItem={moveCard} />
       }
       {constructorItems.length > 0 &&
         <div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>

@@ -31,18 +31,17 @@ function BurgerConstructorItem(props: Props) {
 
   const dispatch = useDispatch();
 
-  const [{ isDrag }, dragRef] = useDrag({
-    type: 'constructor-item',
-    item: () => {
-      return {index}
-    },
-    collect: monitor => ({
-      isDrag: monitor.isDragging(),
-    })
-  });
+  const deleteIngredient = () => {
+    dispatch({ type: DELETE_INGREDIENT, payload: _id});
+  }
 
-  const [, dropRef] = useDrop({
+  const [{ handlerId }, dropRef] = useDrop({
     accept: 'constructor-item',
+    collect(monitor) {
+      return {
+        handlerId: monitor.getHandlerId(),
+      }
+    },
     hover(item: DragItemProps, monitor) {
       if (!ref.current) {
         return
@@ -64,27 +63,30 @@ function BurgerConstructorItem(props: Props) {
       }
       moveItem(dragIndex, hoverIndex);
       item.index = hoverIndex;
-      console.log('drag idx', dragIndex);
-      console.log('hover idx', hoverIndex);
-      console.log('item', item);
     }
-  })
+  });
 
-  const deleteIngredient = () => {
-    dispatch({ type: DELETE_INGREDIENT, payload: _id});
-  }
+  const [{ isDrag }, dragRef] = useDrag({
+    type: 'constructor-item',
+    item: () => {
+      return { index }
+    },
+    collect: monitor => ({
+      isDrag: monitor.isDragging(),
+    })
+  });
 
-  // const opacity = isDrag ? 0 : 1;
   dragRef(dropRef(ref));
   const containerAttributes = {
     className: `${burgerConstructorItemStyles.item} ${uiKitSpacing}`,
     ...(!tailItem && !headItem && {ref: ref}),
-    ...(isDrag && {style: { opacity: 0}})
+    ...(isDrag && {style: { opacity: 0 }})
   }
 
   return (
     <div
       {...containerAttributes}
+      data-handler-id={handlerId}
     >
       {dragIcon && <DragIcon type='primary' />}
       <ConstructorElement
