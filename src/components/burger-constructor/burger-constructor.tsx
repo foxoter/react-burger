@@ -32,22 +32,23 @@ function BurgerConstructor() {
 
   const moveCard = useCallback(
     (dragIndex: number, hoverIndex: number) => {
-      const copyArr = constructorItems;
-      const dragItem = copyArr[dragIndex];
-      const newArr = update(copyArr, {
+      const storageArrCopy = constructorItems;
+      const dragItem = otherItems[dragIndex];
+      const newArr = update(otherItems, {
         $splice: [
           [dragIndex, 1],
           [hoverIndex, 0, dragItem],
         ],
-      })
-      dispatch({ type: REWRITE_INGREDIENTS, payload: newArr });
+      });
+      const resultArr = storageArrCopy.filter(i => i.type === 'bun').concat(...newArr);
+      dispatch({ type: REWRITE_INGREDIENTS, payload: resultArr });
     },
     [constructorItems, dispatch]);
 
   const bun = constructorItems.find(item => item.type === 'bun');
   const otherItems = constructorItems.filter(item => item.type !== 'bun');
   const otherElements = otherItems.map((ingredient, index) => {
-    return <BurgerConstructorItem data={ingredient} key={index} index={index + 1} moveItem={moveCard} />
+    return <BurgerConstructorItem data={ingredient} key={index} index={index} moveItem={moveCard} />
   });
 
   const orderTotalValue = useMemo(() => {
