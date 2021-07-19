@@ -1,6 +1,6 @@
 import BurgersDataTypes from './burgers-data-types';
 
-type AppState = {
+type AppStateTypes = {
   ingredients: {
     ingredientsRequest: boolean
     ingredientsFailed: boolean
@@ -8,9 +8,11 @@ type AppState = {
 
     constructorItems: BurgersDataTypes[]
     currentIngredient: BurgersDataTypes
+  },
+  order: {
     currentOrder: string[]
     currentOrderId: string
   }
 }
 
-export default AppState;
+export default AppStateTypes;

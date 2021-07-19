@@ -10,7 +10,7 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import Modal from '../modal/modal';
 
 import { useDispatch, useSelector } from 'react-redux';
-import AppState from '../../types/app-state-types';
+import AppStateTypes from '../../types/app-state-types';
 
 import { ADD_INGREDIENT, DELETE_ORDER_ID, REWRITE_INGREDIENTS, placeOrder } from '../../services/actions/ingredients';
 
@@ -18,7 +18,8 @@ import { ADD_INGREDIENT, DELETE_ORDER_ID, REWRITE_INGREDIENTS, placeOrder } from
 function BurgerConstructor() {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const dispatch = useDispatch();
-  const { constructorItems, currentOrderId } = useSelector((state: AppState) => state.ingredients);
+  const { constructorItems } = useSelector((state: AppStateTypes) => state.ingredients);
+  const { currentOrderId } = useSelector((state: AppStateTypes) => state.order);
   const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredient",
     drop(ingredientData) {

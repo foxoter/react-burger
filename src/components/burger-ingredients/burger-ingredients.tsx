@@ -5,7 +5,7 @@ import burgerIngredientsStyles from './burger-ingredients.module.css';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
 import BurgersDataTypes from '../../types/burgers-data-types';
-import AppState from '../../types/app-state-types';
+import AppStateTypes from '../../types/app-state-types';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
@@ -34,7 +34,7 @@ function BurgerIngredients() {
     ingredientsList,
     currentIngredient,
     constructorItems
-  } = useSelector((state: AppState) => state.ingredients);
+  } = useSelector((state: AppStateTypes) => state.ingredients);
   const dispatch = useDispatch();
 
   useEffect(() => {

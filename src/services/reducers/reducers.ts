@@ -14,7 +14,7 @@ import {
   REWRITE_INGREDIENTS
 } from '../actions/ingredients';
 
-const initialState = {
+const ingredientsState = {
   ingredientsRequest: false,
   ingredientsFailed: false,
   ingredientsList: [],
@@ -22,14 +22,13 @@ const initialState = {
   constructorItems: [],
   currentIngredient: null,
 
-  currentOrder: [],
 
   currentOrderRequest: false,
   currentOrderFailed: false,
   currentOrderId: null
 }
 
-export const ingredientsReducer = (state = initialState, action: any) => {
+export const ingredientsReducer = (state = ingredientsState, action: any) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
@@ -65,34 +64,7 @@ export const ingredientsReducer = (state = initialState, action: any) => {
         currentIngredient: null
       }
     }
-    case PLACE_ORDER_REQUEST: {
-      return {
-        ...state,
-        currentOrderRequest: true
-      }
-    }
-    case PLACE_ORDER_FAILED: {
-      return {
-        ...state,
-        currentOrderRequest: false,
-        currentOrderId: null,
-        currentOrderFailed: true
-      }
-    }
-    case PLACE_ORDER_SUCCESS: {
-      return {
-        ...state,
-        currentOrderRequest: false,
-        currentOrderFailed: false,
-        currentOrderId: action.id
-      }
-    }
-    case DELETE_ORDER_ID: {
-      return {
-        ...state,
-        currentOrderId: null
-      }
-    }
+
     case ADD_INGREDIENT: {
       const uuid = String(action.payload._id + Math.random());
       action.payload.uuid = uuid;
@@ -120,6 +92,48 @@ export const ingredientsReducer = (state = initialState, action: any) => {
       return {
         ...state,
         constructorItems: [...action.payload]
+      }
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+const orderInitialState = {
+  currentOrderRequest: false,
+  currentOrderFailed: false,
+  currentOrderId: null
+}
+
+export const orderReducer = (state = orderInitialState, action: any) => {
+  switch (action.type) {
+    case PLACE_ORDER_REQUEST: {
+      return {
+        ...state,
+        currentOrderRequest: true
+      }
+    }
+    case PLACE_ORDER_FAILED: {
+      return {
+        ...state,
+        currentOrderRequest: false,
+        currentOrderId: null,
+        currentOrderFailed: true
+      }
+    }
+    case PLACE_ORDER_SUCCESS: {
+      return {
+        ...state,
+        currentOrderRequest: false,
+        currentOrderFailed: false,
+        currentOrderId: action.id
+      }
+    }
+    case DELETE_ORDER_ID: {
+      return {
+        ...state,
+        currentOrderId: null
       }
     }
     default: {
