@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding-top: 16px;
+}
+
+.bordered {
+  outline: 3px dotted #8585AD;
 }
 
 .items {

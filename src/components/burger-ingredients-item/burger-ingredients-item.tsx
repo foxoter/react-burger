@@ -1,30 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDrag } from "react-dnd";
 
 import BurgersDataTypes from '../../types/burgers-data-types';
 import burgerIngredientStyles from './burger-ingredients-item.module.css';
 
 type Props = {
   data: BurgersDataTypes
-  onPurchase: (ingredient: BurgersDataTypes) => void
+  onShowDetails: (ingredient: BurgersDataTypes) => void
+  count: number
 }
 
 function BurgerIngredientsItem(props: Props) {
-  const [orderCount, setOrderCount] = useState(0);
-  const { data, data: { image, name, price } } = props
+  const { count, data, data: { image, name, price }, onShowDetails } = props;
 
-  const handlePurchase = (ingredient: BurgersDataTypes) => {
-    setOrderCount(orderCount + 1);
-    props.onPurchase(ingredient);
-  }
+  const [, dragRef] = useDrag({
+    type: "ingredient",
+    item: {...data},
+    collect: monitor => ({
+      isDrag: monitor.isDragging()
+    })
+  });
 
   return (
-    <div className={`${burgerIngredientStyles.container} pl-4 pr-4`}
-         onClick={() => handlePurchase(data)}>
-      {orderCount > 0 &&
-      <div className={burgerIngredientStyles.counter}>
-          <Counter count={orderCount} size='default'/>
-      </div>
+    <div
+      className={`${burgerIngredientStyles.container} pl-4 pr-4`}
+      onClick={() => onShowDetails(data)}
+      ref={dragRef}
+    >
+      {count > 0 &&
+        <div className={burgerIngredientStyles.counter}>
+            <Counter count={count} size='default'/>
+        </div>
       }
       <img src={image} alt={name} className='mb-1'/>
       <div className={`${burgerIngredientStyles.price} mb-1`}>

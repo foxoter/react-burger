@@ -11,6 +11,7 @@ type BurgersDataTypes = {
   image_mobile: string
   image_large: string
   __v: number
+  uuid?: string
 }
 
 export default BurgersDataTypes;
