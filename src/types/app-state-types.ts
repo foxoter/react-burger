@@ -12,6 +12,9 @@ type AppStateTypes = {
   order: {
     currentOrder: string[]
     currentOrderId: string
+  },
+  burger: {
+    constructorItems: BurgersDataTypes[]
   }
 }
 

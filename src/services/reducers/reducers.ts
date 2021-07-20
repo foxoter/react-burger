@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_REQUEST,
@@ -14,18 +13,52 @@ import {
   REWRITE_INGREDIENTS
 } from '../actions/ingredients';
 
+const burgerConstructorInitialState = {
+  constructorItems: [],
+}
+
+export const constructorReducer = (state = burgerConstructorInitialState, action: any) => {
+  switch (action.type) {
+    case ADD_INGREDIENT: {
+      const uuid = String(action.payload._id + Math.random());
+      action.payload.uuid = uuid;
+      if (action.payload.type === 'bun') {
+        const filteredItems = state.constructorItems.filter(({ type }) => type !== 'bun');
+        return {
+          ...state,
+          constructorItems: [...filteredItems, action.payload]
+        }
+      }
+      return {
+        ...state,
+        constructorItems: [...state.constructorItems, action.payload]
+      }
+    }
+    case DELETE_INGREDIENT: {
+      const newItems = state.constructorItems;
+      newItems.splice(newItems.findIndex(({ _id }) => _id === action.payload), 1);
+      return {
+        ...state,
+        constructorItems: [...newItems]
+      }
+    }
+    case REWRITE_INGREDIENTS: {
+      return {
+        ...state,
+        constructorItems: [...action.payload]
+      }
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 const ingredientsState = {
   ingredientsRequest: false,
   ingredientsFailed: false,
   ingredientsList: [],
-
-  constructorItems: [],
   currentIngredient: null,
-
-
-  currentOrderRequest: false,
-  currentOrderFailed: false,
-  currentOrderId: null
 }
 
 export const ingredientsReducer = (state = ingredientsState, action: any) => {
@@ -62,36 +95,6 @@ export const ingredientsReducer = (state = ingredientsState, action: any) => {
       return {
         ...state,
         currentIngredient: null
-      }
-    }
-
-    case ADD_INGREDIENT: {
-      const uuid = String(action.payload._id + Math.random());
-      action.payload.uuid = uuid;
-      if (action.payload.type === 'bun') {
-        const filteredItems = state.constructorItems.filter(({ type }) => type !== 'bun');
-        return {
-          ...state,
-          constructorItems: [...filteredItems, action.payload]
-        }
-      }
-      return {
-        ...state,
-        constructorItems: [...state.constructorItems, action.payload]
-      }
-    }
-    case DELETE_INGREDIENT: {
-      const newItems = state.constructorItems;
-      newItems.splice(newItems.findIndex(({ _id }) => _id === action.payload), 1);
-      return {
-        ...state,
-        constructorItems: [...newItems]
-      }
-    }
-    case REWRITE_INGREDIENTS: {
-      return {
-        ...state,
-        constructorItems: [...action.payload]
       }
     }
     default: {

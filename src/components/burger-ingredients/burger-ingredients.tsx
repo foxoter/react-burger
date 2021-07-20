@@ -33,8 +33,8 @@ function BurgerIngredients() {
     ingredientsFailed,
     ingredientsList,
     currentIngredient,
-    constructorItems
   } = useSelector((state: AppStateTypes) => state.ingredients);
+  const { constructorItems } = useSelector((state: AppStateTypes) => state.burger);
   const dispatch = useDispatch();
 
   useEffect(() => {
