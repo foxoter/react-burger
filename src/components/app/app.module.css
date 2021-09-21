@@ -2,3 +2,8 @@
   margin: 0 auto;
   position: relative;
 }
+
+.main {
+  max-width: 1240px;
+  margin: 0 auto;
+}

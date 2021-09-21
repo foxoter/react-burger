@@ -13,29 +13,31 @@ function App() {
     <Router>
       <div className={appStyles.app} id="app">
         <AppHeader/>
-        <Switch>
-          <Route path='/login'>
-            <Login />
-          </Route>
-          <Route path='/register'>
-            <Register />
-          </Route>
-          <Route path='/forgot-password'>
-            <ForgotPassword />
-          </Route>
-          <Route path='/reset-password'>
-            <ResetPassword />
-          </Route>
-          <Route path='/profile'>
-            <Profile />
-          </Route>
-          <Route path='/' exact>
-            <MainContainer title={mainTitle}/>
-          </Route>
-          <Route path='*'>
-            <NotFoundError />
-          </Route>
-        </Switch>
+        <main className={appStyles.main}>
+          <Switch>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route path='/register'>
+              <Register />
+            </Route>
+            <Route path='/forgot-password'>
+              <ForgotPassword />
+            </Route>
+            <Route path='/reset-password'>
+              <ResetPassword />
+            </Route>
+            <Route path='/profile'>
+              <Profile />
+            </Route>
+            <Route path='/' exact>
+              <MainContainer title={mainTitle}/>
+            </Route>
+            <Route path='*'>
+              <NotFoundError />
+            </Route>
+          </Switch>
+          </main>
       </div>
     </Router>
   );
