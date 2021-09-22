@@ -1,7 +1,8 @@
 import React from 'react';
+import AuthForm from '../components/auth-form/auth-form';
 
 function ResetPassword() {
-  return <div>ResetPassword</div>
+  return <AuthForm type='reset' />
 }
 
 export default ResetPassword;

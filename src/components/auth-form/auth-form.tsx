@@ -111,10 +111,10 @@ function AuthForm(props: Props) {
     <section className={authFormStyles.container}>
       <h2 className="text text_type_main-medium mb-6">{title}</h2>
       <form onSubmit={submit} className={authFormStyles.form}>
-        {formData.name !== undefined && <Input value={formData.name} name={'name'} onChange={onChange} />}
+        {formData.name !== undefined && <Input value={formData.name} name={'name'} onChange={onChange} placeholder={'Имя'} />}
         {formData.email !== undefined && <EmailInput value={formData.email} name={'email'} onChange={onChange}/>}
         {formData.password !== undefined && <PasswordInput value={formData.password} name={'password'} onChange={onChange}/>}
-        {formData.code !== undefined && <Input value={formData.code} name={'password'} onChange={onChange}/>}
+        {formData.code !== undefined && <Input value={formData.code} name={'password'} onChange={onChange} placeholder={'Код из письма'}/>}
         <Button type='primary' size="medium">{buttonText}</Button>
       </form>
       {bottomLinks}
