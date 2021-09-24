@@ -1,23 +1,23 @@
-import React, { useState, ChangeEvent, useCallback, useMemo } from 'react';
+import React, { useState, ChangeEvent, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import authFormStyles from './auth-form.module.css';
-import { stat } from 'fs';
 
 type Props = {
   type: string
+  submitCallback?: (arg: any) => Promise<any>
 }
 
 type FormData = {
   name?: string
   email?: string
   password?: string
-  code?: string
+  token?: string
 }
 
 function AuthForm(props: Props) {
-  const { type } = props;
+  const { type, submitCallback } = props;
   let stateKeys;
   let buttonText;
   let title;
@@ -39,7 +39,7 @@ function AuthForm(props: Props) {
       break
     case('reset'):
       title = 'Восстановление пароля'
-      stateKeys = {password: '', code: ''}
+      stateKeys = {password: '', token: ''}
       buttonText = 'Сохранить'
       break
   }
@@ -51,7 +51,10 @@ function AuthForm(props: Props) {
 
   const submit = (e: any) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log('auth component', formData);
+    if (submitCallback) {
+      submitCallback(formData)
+    }
   }
 
   const bottomLinks = useMemo(() => {
@@ -114,7 +117,7 @@ function AuthForm(props: Props) {
         {formData.name !== undefined && <Input value={formData.name} name={'name'} onChange={onChange} placeholder={'Имя'} />}
         {formData.email !== undefined && <EmailInput value={formData.email} name={'email'} onChange={onChange}/>}
         {formData.password !== undefined && <PasswordInput value={formData.password} name={'password'} onChange={onChange}/>}
-        {formData.code !== undefined && <Input value={formData.code} name={'password'} onChange={onChange} placeholder={'Код из письма'}/>}
+        {formData.token !== undefined && <Input value={formData.token} name={'token'} onChange={onChange} placeholder={'Код из письма'}/>}
         <Button type='primary' size="medium">{buttonText}</Button>
       </form>
       {bottomLinks}
