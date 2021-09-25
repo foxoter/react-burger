@@ -17,7 +17,11 @@ const IngredientDetails = (props: Props) => {
   return (
     <div className={ingredientDetailsStyles.details}>
       <img src={image} alt={name} className={ingredientDetailsStyles.image}/>
-      <p className="text text_type_main-medium mb-8">{name}</p>
+      <p
+        className={`text text_type_main-medium mb-8 ${ingredientDetailsStyles.subtitle}`}
+      >
+        {name}
+      </p>
       <div className={modalStyles.nutrients}>
         <p className={`text text_type_main-medium ${ingredientDetailsStyles.text} text_color_inactive`}>
           Калории, ккал
