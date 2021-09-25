@@ -27,7 +27,7 @@ function App() {
             <Route path='/reset-password'>
               <ResetPassword />
             </Route>
-            <Route path='/profile'>
+            <Route path='/profile' exact>
               <Profile />
             </Route>
             <Route path='/' exact>
