@@ -44,7 +44,7 @@ export function placeOrder(order: OrderDataTypes) {
         })
       })
       .catch(() => {
-        dispatch({ type: PLACE_ORDER_FAILED })
+        dispatch({ type: PLACE_ORDER_FAILED });
       })
   }
 }
