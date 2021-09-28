@@ -2,14 +2,11 @@ import React, { useState, ChangeEvent, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useDispatch } from 'react-redux';
-
 import authFormStyles from './auth-form.module.css';
 
 type Props = {
   type: string
   submitCallback?: any
-  withDispatch?: boolean
 }
 
 type FormData = {
@@ -20,9 +17,7 @@ type FormData = {
 }
 
 function AuthForm(props: Props) {
-  const { type, submitCallback, withDispatch } = props;
-
-  const dispatch = useDispatch();
+  const { type, submitCallback } = props;
 
   let stateKeys;
   let buttonText;
@@ -57,9 +52,7 @@ function AuthForm(props: Props) {
 
   const submit = (e: any) => {
     e.preventDefault();
-    if (submitCallback && withDispatch) {
-      dispatch(submitCallback(formData));
-    } else if (submitCallback) {
+    if (submitCallback) {
       submitCallback(formData);
     }
   }
