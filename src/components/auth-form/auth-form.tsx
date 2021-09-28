@@ -18,6 +18,7 @@ type FormData = {
 
 function AuthForm(props: Props) {
   const { type, submitCallback } = props;
+
   let stateKeys;
   let buttonText;
   let title;
@@ -51,7 +52,6 @@ function AuthForm(props: Props) {
 
   const submit = (e: any) => {
     e.preventDefault();
-    // console.log('auth component', formData);
     if (submitCallback) {
       submitCallback(formData)
     }

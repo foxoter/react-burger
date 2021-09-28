@@ -48,3 +48,8 @@
 .form > div > div {
   width: 100%;
 }
+
+.form > button {
+  display: block;
+  margin: 0 auto;
+}
