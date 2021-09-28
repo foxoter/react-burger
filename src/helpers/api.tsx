@@ -1,6 +1,6 @@
 import { API_URL } from '../constants/apiConfig';
 import { OrderDataTypes } from '../types/order-data-types';
-import { resetPasswordTypes } from '../types/reset-password-types';
+import { ResetPasswordTypes } from '../types/reset-password-types';
 import { UserDataTypes } from '../types/user-data-types';
 
 const getProductsData = async () => {
@@ -21,7 +21,7 @@ const sendOrderData = async (order: OrderDataTypes) => {
   return data;
 }
 
-const resetPasswordRequest = async (data: resetPasswordTypes) => {
+const resetPasswordRequest = async (data: ResetPasswordTypes) => {
   const response = await fetch(`${API_URL}/password-reset`, {
     method: "POST",
     headers: {
@@ -36,7 +36,7 @@ const resetPasswordRequest = async (data: resetPasswordTypes) => {
   }
 }
 
-const confirmPasswordReset = async (data: resetPasswordTypes) => {
+const confirmPasswordReset = async (data: ResetPasswordTypes) => {
   const response = await fetch(`${API_URL}/password-reset/reset`, {
     method: "POST",
     headers: {
@@ -64,10 +64,23 @@ const sendNewUserData = async (data: UserDataTypes) => {
   return res;
 }
 
+const sendAuthData = async (data: UserDataTypes) => {
+  const response = await fetch(`${API_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(data)
+  });
+  const res = response.ok ? await response.json() : await Promise.reject(response);
+  return res;
+}
+
 export {
   getProductsData,
   sendOrderData,
   resetPasswordRequest,
   confirmPasswordReset,
-  sendNewUserData
+  sendNewUserData,
+  sendAuthData
 }

@@ -7,4 +7,4 @@ type confirmPasswordResetTypes = {
   token: string
 }
 
-export type resetPasswordTypes = resetPasswordRequestTypes | confirmPasswordResetTypes
+export type ResetPasswordTypes = resetPasswordRequestTypes | confirmPasswordResetTypes

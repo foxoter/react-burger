@@ -7,4 +7,4 @@ function Register() {
   return <AuthForm type='register' submitCallback={registerUser} withDispatch />
 }
 
-export default Register;
+export default React.memo(Register);
