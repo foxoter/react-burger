@@ -76,6 +76,10 @@ const sendAuthData = async (data: UserDataTypes) => {
   return res;
 }
 
+// const getUserData = async () => {
+//   const response = await fetch(`${API_URL}/auth/user`)
+// }
+
 export {
   getProductsData,
   sendOrderData,

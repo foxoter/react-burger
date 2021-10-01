@@ -1,7 +1,7 @@
 import { UserDataTypes } from '../../types/user-data-types';
 
 import { sendNewUserData, sendAuthData } from '../../helpers/api';
-import { assignTokens } from '../../helpers/cookie-helper';
+import { assignTokens, getCookie } from '../../helpers/cookie-helper';
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
@@ -39,6 +39,7 @@ export function authUser(data: UserDataTypes) {
         const { user, accessToken, refreshToken } = res;
         dispatch({ type: LOGIN_USER_SUCCESS, user: user });
         assignTokens(accessToken, refreshToken);
+        console.log(getCookie('token'));
       })
       .catch(err => {
         console.log('user auth res: ', err);
