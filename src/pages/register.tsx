@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 import AuthForm from '../components/auth-form/auth-form';
 import { registerUser } from '../services/actions/user';
@@ -21,6 +21,10 @@ function Register() {
       history.replace('/');
     }
   }, [currentUser, history]);
+
+  if (currentUser) {
+    return <Redirect to='/' />
+  }
 
   return <AuthForm type='register' submitCallback={onRegister} />
 }

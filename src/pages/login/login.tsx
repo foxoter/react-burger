@@ -5,7 +5,7 @@ import { authUser } from '../../services/actions/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserDataTypes } from '../../types/user-data-types';
 import AppStateTypes from '../../types/app-state-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 function Login() {
   const dispatch = useDispatch();
@@ -24,6 +24,9 @@ function Login() {
     }
   }, [currentUser, history]);
 
+  if (currentUser) {
+    return <Redirect to='/'/>
+  }
   return <AuthForm type='login' submitCallback={onLogin} />
 }
 
