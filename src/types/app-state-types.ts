@@ -1,4 +1,5 @@
 import BurgersDataTypes from './burgers-data-types';
+import { UserDataTypes } from './user-data-types';
 
 type AppStateTypes = {
   ingredients: {
@@ -15,6 +16,13 @@ type AppStateTypes = {
   },
   burger: {
     constructorItems: BurgersDataTypes[]
+  },
+  user: {
+    currentUser: null | UserDataTypes,
+    userRegisterRequest: boolean,
+    userRegisterFailed: boolean,
+    userLoginRequest: boolean,
+    userLoginFailed: boolean
   }
 }
 
