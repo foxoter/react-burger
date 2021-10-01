@@ -2,6 +2,7 @@ import { API_URL } from '../constants/apiConfig';
 import { OrderDataTypes } from '../types/order-data-types';
 import { ResetPasswordTypes } from '../types/reset-password-types';
 import { UserDataTypes } from '../types/user-data-types';
+import { getCookie } from './cookie-helper';
 
 const getProductsData = async () => {
   const response = await fetch(`${API_URL}/ingredients`);
@@ -29,6 +30,7 @@ const resetPasswordRequest = async (data: ResetPasswordTypes) => {
     },
     body: JSON.stringify(data)
   });
+  // remove later
   if (response.ok) {
     console.log(await response.json());
   } else {
@@ -44,6 +46,7 @@ const confirmPasswordReset = async (data: ResetPasswordTypes) => {
     },
     body: JSON.stringify(data)
   });
+  // remove later
   if (response.ok) {
     console.log(await response.json());
   } else {
@@ -60,8 +63,7 @@ const sendNewUserData = async (data: UserDataTypes) => {
     },
     body: JSON.stringify(data)
   });
-  const res = response.ok ? await response.json() : await Promise.reject(response);
-  return res;
+  return response.ok ? await response.json() : await Promise.reject(response);
 }
 
 const sendAuthData = async (data: UserDataTypes) => {
@@ -72,13 +74,17 @@ const sendAuthData = async (data: UserDataTypes) => {
     },
     body: JSON.stringify(data)
   });
-  const res = response.ok ? await response.json() : await Promise.reject(response);
-  return res;
+  return response.ok ? await response.json() : await Promise.reject(response);
 }
 
-// const getUserData = async () => {
-//   const response = await fetch(`${API_URL}/auth/user`)
-// }
+const getUserData = async () => {
+  const response = await fetch(`${API_URL}/auth/user`, {
+    headers: {
+      Authorization: 'Bearer ' + getCookie('token'),
+    }
+  });
+  return response.ok ? await response.json() : await Promise.reject(response);
+}
 
 export {
   getProductsData,
@@ -86,5 +92,6 @@ export {
   resetPasswordRequest,
   confirmPasswordReset,
   sendNewUserData,
-  sendAuthData
+  sendAuthData,
+  getUserData
 }
