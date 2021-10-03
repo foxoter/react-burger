@@ -1,7 +1,7 @@
 import { UserDataTypes } from '../../types/user-data-types';
 
 import { sendNewUserData, sendAuthData, getUserData } from '../../helpers/api';
-import { assignTokens, getCookie } from '../../helpers/cookie-helper';
+import { assignTokens, getCookie } from '../../helpers/tokens-helper';
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';

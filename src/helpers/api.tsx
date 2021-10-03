@@ -2,7 +2,7 @@ import { API_URL } from '../constants/apiConfig';
 import { OrderDataTypes } from '../types/order-data-types';
 import { ResetPasswordTypes } from '../types/reset-password-types';
 import { UserDataTypes } from '../types/user-data-types';
-import { getCookie } from './cookie-helper';
+import { getCookie } from './tokens-helper';
 
 const getProductsData = async () => {
   const response = await fetch(`${API_URL}/ingredients`);

@@ -30,6 +30,6 @@ export function getCookie(name: string) {
 
 export function assignTokens(accessToken: string, refreshToken: string) {
   accessToken = accessToken.split('Bearer ')[1];
-  setCookie('token', accessToken);
+  setCookie('token', accessToken, { path: '/'});
   localStorage.setItem('token', refreshToken);
 }
