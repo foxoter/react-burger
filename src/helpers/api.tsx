@@ -2,7 +2,7 @@ import { API_URL } from '../constants/apiConfig';
 import { OrderDataTypes } from '../types/order-data-types';
 import { ResetPasswordTypes } from '../types/reset-password-types';
 import { UserDataTypes } from '../types/user-data-types';
-import { getCookie } from './tokens-helper';
+import { getCookie, getRefreshToken } from './tokens-helper';
 
 const getProductsData = async () => {
   const response = await fetch(`${API_URL}/ingredients`);
@@ -86,6 +86,18 @@ const getUserData = async () => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
+const clearUserData = async () => {
+  const body = { token: getRefreshToken() };
+  const response = await fetch(`${API_URL}/auth/logout`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(body)
+  });
+  return response.ok ? await response.json() : await Promise.reject(response);
+}
+
 export {
   getProductsData,
   sendOrderData,
@@ -93,5 +105,6 @@ export {
   confirmPasswordReset,
   sendNewUserData,
   sendAuthData,
-  getUserData
+  getUserData,
+  clearUserData
 }

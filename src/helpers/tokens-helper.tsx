@@ -1,21 +1,17 @@
 export function setCookie(name: string, value: string, props?: any) {
-  props = props || {};
-  let exp = props.expires;
-  if (typeof exp == 'number' && exp) {
-    const d = new Date();
-    d.setTime(d.getTime() + exp * 1000);
-    exp = props.expires = d;
+  props = {
+    path: '/',
+    ...props
+  };
+  if (props.expires instanceof Date) {
+    props.expires = props.expires.toUTCString();
   }
-  if (exp && exp.toUTCString) {
-    props.expires = exp.toUTCString();
-  }
-  value = encodeURIComponent(value);
-  let updatedCookie = name + '=' + value;
-  for (const propName in props) {
-    updatedCookie += '; ' + propName;
-    const propValue = props[propName];
-    if (propValue !== true) {
-      updatedCookie += '=' + propValue;
+  let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+  for (let optionKey in props) {
+    updatedCookie += "; " + optionKey;
+    let optionValue = props[optionKey];
+    if (optionValue !== true) {
+      updatedCookie += "=" + optionValue;
     }
   }
   document.cookie = updatedCookie;
@@ -28,8 +24,23 @@ export function getCookie(name: string) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+export function deleteCookie(name: string) {
+  setCookie(name, "", {
+    'max-age': -1
+  })
+}
+
+export function getRefreshToken() {
+  return localStorage.getItem('token');
+}
+
 export function assignTokens(accessToken: string, refreshToken: string) {
   accessToken = accessToken.split('Bearer ')[1];
-  setCookie('token', accessToken, { path: '/'});
+  setCookie('token', accessToken);
   localStorage.setItem('token', refreshToken);
+}
+
+export function clearTokens() {
+  deleteCookie('token');
+  localStorage.removeItem('token');
 }
