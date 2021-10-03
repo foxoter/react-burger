@@ -26,6 +26,9 @@
 
 .link {
   text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .link_active {

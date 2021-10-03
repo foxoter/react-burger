@@ -5,6 +5,8 @@ import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burg
 
 import profileStyles from './profile.module.css';
 import profileMenuTitles from '../../utils/profile-menu-titles';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../services/actions/user';
 
 function Profile() {
   const [formData, setFormData] = useState({
@@ -12,6 +14,8 @@ function Profile() {
     email: '',
     password: ''
   });
+
+  const dispatch = useDispatch();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({...formData, [e.target.name]: e.target.value});
@@ -22,6 +26,10 @@ function Profile() {
     console.log(formData);
   }
 
+  const logout = () => {
+    dispatch(logoutUser());
+  }
+
   return (
     <section className={profileStyles.container}>
       <div className={profileStyles.menu}>
@@ -30,13 +38,23 @@ function Profile() {
             {profileMenuTitles.map((item, index) => {
               return (
                 <li className={profileStyles.list_item} key={index}>
-                  <NavLink
-                    to={item.path}
-                    className={`${profileStyles.link} text text_type_main-medium text_color_inactive`}
-                    activeClassName={profileStyles.link_active}
-                  >
-                    {item.title}
-                  </NavLink>
+                  {item.path ? (
+                    <NavLink
+                      to={item.path}
+                      className={`${profileStyles.link} text text_type_main-medium text_color_inactive`}
+                      activeClassName={profileStyles.link_active}
+                    >
+                      {item.title}
+                    </NavLink>
+                  ) : (
+                    <button
+                      onClick={logout}
+                      className={`${profileStyles.link} text text_type_main-medium text_color_inactive`}
+                    >
+                      {item.title}
+                    </button>
+                  )}
+
                 </li>
               )
             })}
