@@ -50,12 +50,15 @@ export function authUser(data: UserDataTypes) {
 
 export function checkAuth() {
   return function (dispatch: any) {
+    dispatch({ type: LOGIN_USER_REQUEST });
     getUserData()
       .then(res => {
         console.log('check user method res:', res);
+        dispatch({ type: LOGIN_USER_SUCCESS, user: res.user });
       })
       .catch(err => {
         console.log('check user method res:', err);
+        dispatch({ type: LOGIN_USER_FAILED });
       })
   }
 }
