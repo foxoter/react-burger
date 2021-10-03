@@ -98,6 +98,18 @@ const clearUserData = async () => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
+const refreshToken = async () => {
+  const body = { token: getRefreshToken() };
+  const response = await fetch(`${API_URL}/auth/token`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(body)
+  });
+  return response.ok ? await response.json() : await Promise.reject(response);
+}
+
 export {
   getProductsData,
   sendOrderData,
@@ -106,5 +118,6 @@ export {
   sendNewUserData,
   sendAuthData,
   getUserData,
-  clearUserData
+  clearUserData,
+  refreshToken
 }
