@@ -86,8 +86,8 @@ const getUserData = async () => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
-const refreshToken = async () => {
-  const body = { token: getRefreshToken() };
+const refreshToken = async (token: string | null) => {
+  const body = { token: token };
   const response = await fetch(`${API_URL}/auth/token`, {
     method: "POST",
     headers: {
