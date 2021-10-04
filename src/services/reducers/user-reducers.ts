@@ -5,7 +5,9 @@ import {
   LOGIN_USER_REQUEST,
   LOGIN_USER_FAILED,
   LOGIN_USER_SUCCESS,
-  LOGOUT_USER
+  LOGOUT_USER_SUCCESS,
+  LOGOUT_USER_REQUEST,
+  LOGOUT_USER_FAILED,
 } from '../actions/user';
 
 const userInitialState = {
@@ -13,7 +15,9 @@ const userInitialState = {
   userRegisterRequest: false,
   userRegisterFailed: false,
   userLoginRequest: false,
-  userLoginFailed: false
+  userLoginFailed: false,
+  userLogoutRequest: false,
+  userLogoutFailed: false,
 }
 
 export const userReducer = (state = userInitialState, action: any) => {
@@ -64,9 +68,24 @@ export const userReducer = (state = userInitialState, action: any) => {
         currentUser: action.user
       }
     }
-    case LOGOUT_USER: {
+    case LOGOUT_USER_REQUEST: {
       return {
         ...state,
+        userLogoutRequest: true,
+      }
+    }
+    case LOGOUT_USER_FAILED: {
+      return {
+        ...state,
+        userLogoutRequest: false,
+        userLogoutFailed: true,
+      }
+    }
+    case LOGOUT_USER_SUCCESS: {
+      return {
+        ...state,
+        userLogoutRequest: false,
+        userLogoutFailed: false,
         currentUser: null
       }
     }

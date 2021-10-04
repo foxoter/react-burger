@@ -11,7 +11,9 @@ export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAILED = 'LOGIN_USER_FAILED';
 
-export const LOGOUT_USER = 'LOGOUT_USER';
+export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
+export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER';
+export const LOGOUT_USER_FAILED = 'LOGOUT_USER';
 
 export function registerUser(data: UserDataTypes) {
   return function (dispatch: any) {
@@ -65,14 +67,16 @@ export function checkAuth() {
 
 export function logoutUser() {
   return function (dispatch: any) {
+    dispatch({ type: LOGOUT_USER_REQUEST });
     clearUserData()
       .then(res => {
         console.log('logout user method ok: ', res);
         clearTokens();
-        dispatch({ type: LOGOUT_USER });
+        dispatch({ type: LOGOUT_USER_SUCCESS });
       })
       .catch(err => {
         console.log('logout user method fail: ', err);
+        dispatch({ type: LOGOUT_USER_FAILED });
       })
   }
 }

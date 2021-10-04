@@ -86,9 +86,9 @@ const getUserData = async () => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
-const clearUserData = async () => {
+const refreshToken = async () => {
   const body = { token: getRefreshToken() };
-  const response = await fetch(`${API_URL}/auth/logout`, {
+  const response = await fetch(`${API_URL}/auth/token`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -98,9 +98,9 @@ const clearUserData = async () => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
-const refreshToken = async () => {
+const clearUserData = async () => {
   const body = { token: getRefreshToken() };
-  const response = await fetch(`${API_URL}/auth/token`, {
+  const response = await fetch(`${API_URL}/auth/logout`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
