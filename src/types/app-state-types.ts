@@ -22,7 +22,9 @@ type AppStateTypes = {
     userRegisterRequest: boolean,
     userRegisterFailed: boolean,
     userLoginRequest: boolean,
-    userLoginFailed: boolean
+    userLoginFailed: boolean,
+    userLogoutRequest: boolean,
+    userLogoutFailed: boolean
   }
 }
 
