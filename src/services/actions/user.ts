@@ -1,6 +1,6 @@
 import { UserDataTypes } from '../../types/user-data-types';
 
-import { sendNewUserData, sendAuthData, getUserData, clearUserData, refreshToken } from '../../helpers/api';
+import { sendNewUserData, sendAuthData, getUserData, clearUserData, refreshToken, resetPasswordRequest } from '../../helpers/api';
 import { assignTokens, clearTokens, getCookie, getRefreshToken } from '../../helpers/tokens-helper';
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
@@ -14,6 +14,29 @@ export const LOGIN_USER_FAILED = 'LOGIN_USER_FAILED';
 export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
 export const LOGOUT_USER_FAILED = 'LOGOUT_USER_FAILED';
+
+export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
+export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_FAILED = 'RESET_PASSWORD_FAILED';
+
+export const UPDATE_PASSWORD_REQUEST = 'UPDATE_PASSWORD_REQUEST';
+export const UPDATE_PASSWORD_SUCCESS = 'UPDATE_PASSWORD_SUCCESS';
+export const UPDATE_PASSWORD_FAILED = 'UPDATE_PASSWORD_FAILED';
+
+export function handleResetPasswordRequest(data: UserDataTypes) {
+  return function (dispatch: any) {
+    dispatch({ type: RESET_PASSWORD_REQUEST });
+    resetPasswordRequest(data)
+      .then(res => {
+        console.log('reset password request res: ', res);
+        dispatch({ type: RESET_PASSWORD_SUCCESS });
+      })
+      .catch(err => {
+        console.log('reset password request err: ', err);
+        dispatch({ type: RESET_PASSWORD_FAILED });
+      })
+  }
+}
 
 export function registerUser(data: UserDataTypes) {
   return function (dispatch: any) {

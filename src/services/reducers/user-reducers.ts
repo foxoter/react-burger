@@ -7,7 +7,7 @@ import {
   LOGIN_USER_SUCCESS,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_REQUEST,
-  LOGOUT_USER_FAILED,
+  LOGOUT_USER_FAILED, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAILED, RESET_PASSWORD_SUCCESS,
 } from '../actions/user';
 
 const userInitialState = {
@@ -18,10 +18,38 @@ const userInitialState = {
   userLoginFailed: false,
   userLogoutRequest: false,
   userLogoutFailed: false,
+  resetPasswordRequest: false,
+  resetPasswordSuccess: false,
+  resetPasswordFailed: false,
+  updatePasswordRequest: false,
+  updatePasswordSuccess: false,
+  updatePasswordFailed: false,
 }
 
 export const userReducer = (state = userInitialState, action: any) => {
   switch (action.type) {
+    case RESET_PASSWORD_REQUEST: {
+      return {
+        ...state,
+        resetPasswordRequest: true
+      }
+    }
+    case RESET_PASSWORD_FAILED: {
+      return {
+        ...state,
+        resetPasswordRequest: false,
+        resetPasswordSuccess: false,
+        resetPasswordFailed: true
+      }
+    }
+    case RESET_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        resetPasswordRequest: false,
+        resetPasswordFailed: false,
+        resetPasswordSuccess: true,
+      }
+    }
     case REGISTER_USER_REQUEST: {
       return {
         ...state,

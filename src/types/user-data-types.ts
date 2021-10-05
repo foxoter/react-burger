@@ -1,3 +1,7 @@
+type UserResetPasswordTypes = {
+  email: string
+}
+
 type UserRegisterTypes = {
   email: string
   password: string
@@ -9,4 +13,4 @@ type UserAuthTypes = {
   password: string
 }
 
-export type UserDataTypes = UserRegisterTypes | UserAuthTypes
+export type UserDataTypes = UserResetPasswordTypes | UserRegisterTypes | UserAuthTypes

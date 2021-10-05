@@ -28,7 +28,6 @@ const resetPasswordRequest = async (data: ResetPasswordTypes) => {
     },
     body: JSON.stringify(data)
   });
-  // remove later
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
@@ -40,7 +39,6 @@ const confirmPasswordReset = async (data: ResetPasswordTypes) => {
     },
     body: JSON.stringify(data)
   });
-  // remove later
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
