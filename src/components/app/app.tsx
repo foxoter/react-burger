@@ -8,6 +8,7 @@ import MainContainer from '../main-container/main-container';
 import { mainTitle } from '../../utils/menu-titles-data';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, NotFoundError } from '../../pages';
 import AuthWrapper from '../auth-wrapper/auth-wrapper';
+import ProtectedRoute from '../protected-route/protected-route';
 
 function App() {
   return (
@@ -29,12 +30,12 @@ function App() {
               <Route path='/reset-password'>
                 <ResetPassword />
               </Route>
-              <Route path='/profile' exact>
+              <ProtectedRoute path='/profile' exact>
                 <Profile />
-              </Route>
-              <Route path='/' exact>
+              </ProtectedRoute>
+              <ProtectedRoute path='/' exact>
                 <MainContainer title={mainTitle}/>
-              </Route>
+              </ProtectedRoute>
               <Route path='*'>
                 <NotFoundError />
               </Route>
