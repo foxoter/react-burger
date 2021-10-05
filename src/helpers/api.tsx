@@ -6,8 +6,7 @@ import { getCookie, getRefreshToken } from './tokens-helper';
 
 const getProductsData = async () => {
   const response = await fetch(`${API_URL}/ingredients`);
-  const data = response.ok ? await response.json() : await Promise.reject(response);
-  return data;
+  return response.ok ? await response.json() : await Promise.reject(response);
 }
 
 const sendOrderData = async (order: OrderDataTypes) => {
@@ -18,8 +17,7 @@ const sendOrderData = async (order: OrderDataTypes) => {
     },
     body: JSON.stringify(order)
   });
-  const data = response.ok ? await response.json() : await Promise.reject(response);
-  return data;
+  return response.ok ? await response.json() : await Promise.reject(response);
 }
 
 const resetPasswordRequest = async (data: ResetPasswordTypes) => {
@@ -31,11 +29,7 @@ const resetPasswordRequest = async (data: ResetPasswordTypes) => {
     body: JSON.stringify(data)
   });
   // remove later
-  if (response.ok) {
-    console.log(await response.json());
-  } else {
-    await Promise.reject(response);
-  }
+  return response.ok ? await response.json() : await Promise.reject(response);
 }
 
 const confirmPasswordReset = async (data: ResetPasswordTypes) => {
@@ -47,12 +41,7 @@ const confirmPasswordReset = async (data: ResetPasswordTypes) => {
     body: JSON.stringify(data)
   });
   // remove later
-  if (response.ok) {
-    console.log(await response.json());
-  } else {
-    console.log(await response.json());
-    await Promise.reject(response);
-  }
+  return response.ok ? await response.json() : await Promise.reject(response);
 }
 
 const sendNewUserData = async (data: UserDataTypes) => {
