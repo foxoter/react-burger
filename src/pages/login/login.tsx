@@ -13,7 +13,6 @@ type LocationState = {
   };
 }
 
-
 function Login() {
   const dispatch = useDispatch();
   const { currentUser, userLoginRequest } = useSelector((state: AppStateTypes) => state.user);

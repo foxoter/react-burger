@@ -7,43 +7,40 @@ import AppHeader from '../app-header/app-header';
 import MainContainer from '../main-container/main-container';
 import { mainTitle } from '../../utils/menu-titles-data';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, NotFoundError } from '../../pages';
-import AuthWrapper from '../auth-wrapper/auth-wrapper';
 import ProtectedRoute from '../protected-route/protected-route';
 
 function App() {
   return (
-    <AuthWrapper>
-      <Router>
-        <div className={appStyles.app} id="app">
-          <AppHeader/>
-          <main className={appStyles.main}>
-            <Switch>
-              <Route path='/login'>
-                <Login />
-              </Route>
-              <Route path='/register'>
-                <Register />
-              </Route>
-              <Route path='/forgot-password'>
-                <ForgotPassword />
-              </Route>
-              <Route path='/reset-password'>
-                <ResetPassword />
-              </Route>
-              <ProtectedRoute path='/profile' exact>
-                <Profile />
-              </ProtectedRoute>
-              <ProtectedRoute path='/' exact>
-                <MainContainer title={mainTitle}/>
-              </ProtectedRoute>
-              <Route path='*'>
-                <NotFoundError />
-              </Route>
-            </Switch>
-            </main>
-        </div>
-      </Router>
-    </AuthWrapper>
+    <Router>
+      <div className={appStyles.app} id="app">
+        <AppHeader/>
+        <main className={appStyles.main}>
+          <Switch>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route path='/register'>
+              <Register />
+            </Route>
+            <Route path='/forgot-password'>
+              <ForgotPassword />
+            </Route>
+            <Route path='/reset-password'>
+              <ResetPassword />
+            </Route>
+            <ProtectedRoute path='/profile' exact>
+              <Profile />
+            </ProtectedRoute>
+            <ProtectedRoute path='/' exact>
+              <MainContainer title={mainTitle}/>
+            </ProtectedRoute>
+            <Route path='*'>
+              <NotFoundError />
+            </Route>
+          </Switch>
+          </main>
+      </div>
+    </Router>
   );
 }
 
