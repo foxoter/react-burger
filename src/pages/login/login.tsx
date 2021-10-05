@@ -26,14 +26,14 @@ function Login() {
     dispatch(checkAuth());
   }, [dispatch]);
 
-  if (userLoginRequest) {
-    return null;
-  }
-
   if (currentUser) {
     return (
       <Redirect to={ state?.from || '/'} />
     )
+  }
+
+  if (userLoginRequest) {
+    return null;
   }
 
   return <AuthForm type='login' submitCallback={onLogin} />

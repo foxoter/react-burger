@@ -1,29 +1,39 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Redirect } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
 
 import AuthForm from '../components/auth-form/auth-form';
-import { registerUser } from '../services/actions/user';
+import { checkAuth, registerUser } from '../services/actions/user';
 import { UserDataTypes } from '../types/user-data-types';
 import AppStateTypes from '../types/app-state-types';
 
+type LocationState = {
+  from: {
+    pathname: string;
+  };
+}
+
 function Register() {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state: AppStateTypes) => state.user);
-  const history = useHistory();
+  const { currentUser, userLoginRequest } = useSelector((state: AppStateTypes) => state.user);
+  const { state } = useLocation<LocationState>();
 
   const onRegister = (data: UserDataTypes) => {
     dispatch(registerUser(data));
   }
 
   useEffect(() => {
-    if (currentUser) {
-      history.replace('/');
-    }
-  }, [currentUser, history]);
+    dispatch(checkAuth());
+  }, [dispatch]);
 
   if (currentUser) {
-    return <Redirect to='/' />
+    return (
+      <Redirect to={ state?.from || '/'} />
+    )
+  }
+
+  if (userLoginRequest) {
+    return null;
   }
 
   return <AuthForm type='register' submitCallback={onRegister} />

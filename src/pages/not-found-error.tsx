@@ -1,12 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { checkAuth } from '../services/actions/user';
+import React from 'react';
 
 function NotFoundError() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(checkAuth());
-  }, [dispatch]);
   return <div>not found page</div>
 }
 

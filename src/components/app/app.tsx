@@ -31,9 +31,9 @@ function App() {
             <ProtectedRoute path='/profile' exact>
               <Profile />
             </ProtectedRoute>
-            <ProtectedRoute path='/' exact>
+            <Route path='/' exact>
               <MainContainer title={mainTitle}/>
-            </ProtectedRoute>
+            </Route>
             <Route path='*'>
               <NotFoundError />
             </Route>

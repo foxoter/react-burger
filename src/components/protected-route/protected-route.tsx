@@ -17,7 +17,7 @@ function ProtectedRoute(props: Props) {
 
   useEffect(() => {
     dispatch(checkAuth());
-  }, []);
+  }, [dispatch]);
 
 
   return (
