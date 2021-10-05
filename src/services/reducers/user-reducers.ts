@@ -7,7 +7,12 @@ import {
   LOGIN_USER_SUCCESS,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_REQUEST,
-  LOGOUT_USER_FAILED, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAILED, RESET_PASSWORD_SUCCESS,
+  LOGOUT_USER_FAILED,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_FAILED,
+  RESET_PASSWORD_SUCCESS,
+  UPDATE_PASSWORD_REQUEST,
+  UPDATE_PASSWORD_FAILED, UPDATE_PASSWORD_SUCCESS, RESET_PASSWORD_CLEAR, UPDATE_PASSWORD_CLEAR,
 } from '../actions/user';
 
 const userInitialState = {
@@ -31,7 +36,9 @@ export const userReducer = (state = userInitialState, action: any) => {
     case RESET_PASSWORD_REQUEST: {
       return {
         ...state,
-        resetPasswordRequest: true
+        resetPasswordRequest: true,
+        resetPasswordSuccess: false,
+        resetPasswordFailed: false,
       }
     }
     case RESET_PASSWORD_FAILED: {
@@ -48,6 +55,42 @@ export const userReducer = (state = userInitialState, action: any) => {
         resetPasswordRequest: false,
         resetPasswordFailed: false,
         resetPasswordSuccess: true,
+      }
+    }
+    case RESET_PASSWORD_CLEAR: {
+      return {
+        ...state,
+        resetPasswordSuccess: false,
+      }
+    }
+    case UPDATE_PASSWORD_REQUEST: {
+      return {
+        ...state,
+        updatePasswordRequest: true,
+        updatePasswordSuccess: false,
+        updatePasswordFailed: false,
+      }
+    }
+    case UPDATE_PASSWORD_FAILED: {
+      return {
+        ...state,
+        updatePasswordRequest: false,
+        updatePasswordSuccess: false,
+        updatePasswordFailed: true,
+      }
+    }
+    case UPDATE_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        updatePasswordRequest: false,
+        updatePasswordFailed: false,
+        updatePasswordSuccess: true,
+      }
+    }
+    case UPDATE_PASSWORD_CLEAR: {
+      return {
+        ...state,
+        updatePasswordSuccess: false,
       }
     }
     case REGISTER_USER_REQUEST: {

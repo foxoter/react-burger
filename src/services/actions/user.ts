@@ -1,7 +1,16 @@
 import { UserDataTypes } from '../../types/user-data-types';
 
-import { sendNewUserData, sendAuthData, getUserData, clearUserData, refreshToken, resetPasswordRequest } from '../../helpers/api';
+import {
+  sendNewUserData,
+  sendAuthData,
+  getUserData,
+  clearUserData,
+  refreshToken,
+  resetPasswordRequest,
+  confirmPasswordReset
+} from '../../helpers/api';
 import { assignTokens, clearTokens, getCookie, getRefreshToken } from '../../helpers/tokens-helper';
+import { ResetPasswordTypes } from '../../types/reset-password-types';
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
@@ -18,12 +27,14 @@ export const LOGOUT_USER_FAILED = 'LOGOUT_USER_FAILED';
 export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
 export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
 export const RESET_PASSWORD_FAILED = 'RESET_PASSWORD_FAILED';
+export const RESET_PASSWORD_CLEAR = 'RESET_PASSWORD_CLEAR';
 
 export const UPDATE_PASSWORD_REQUEST = 'UPDATE_PASSWORD_REQUEST';
 export const UPDATE_PASSWORD_SUCCESS = 'UPDATE_PASSWORD_SUCCESS';
 export const UPDATE_PASSWORD_FAILED = 'UPDATE_PASSWORD_FAILED';
+export const UPDATE_PASSWORD_CLEAR = 'UPDATE_PASSWORD_CLEAR';
 
-export function handleResetPasswordRequest(data: UserDataTypes) {
+export function handleResetPasswordRequest(data: ResetPasswordTypes) {
   return function (dispatch: any) {
     dispatch({ type: RESET_PASSWORD_REQUEST });
     resetPasswordRequest(data)
@@ -35,6 +46,29 @@ export function handleResetPasswordRequest(data: UserDataTypes) {
         console.log('reset password request err: ', err);
         dispatch({ type: RESET_PASSWORD_FAILED });
       })
+      .finally(() => {
+        console.log('reset pass finally...');
+        dispatch({ type: RESET_PASSWORD_CLEAR })
+      });
+  }
+}
+
+export function handlePasswordUpdate(data: ResetPasswordTypes) {
+  return function (dispatch: any) {
+    dispatch({ type: UPDATE_PASSWORD_REQUEST });
+    confirmPasswordReset(data)
+      .then(res => {
+        console.log('confirm password reset res: ', res);
+        dispatch({ type: UPDATE_PASSWORD_SUCCESS });
+      })
+      .catch(err => {
+        console.log('confirm password reset err: ', err);
+        dispatch({ type: UPDATE_PASSWORD_FAILED });
+      })
+      .finally(() => {
+        console.log('update pass finally...');
+        dispatch({ type: UPDATE_PASSWORD_CLEAR })
+      });
   }
 }
 
