@@ -6,17 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UserDataTypes } from '../../types/user-data-types';
 import AppStateTypes from '../../types/app-state-types';
 import { Redirect, useLocation } from 'react-router-dom';
-
-type LocationState = {
-  from: {
-    pathname: string;
-  };
-}
+import { LocationStateTypes } from '../../types/location-state-types';
 
 function Login() {
   const dispatch = useDispatch();
   const { currentUser, userLoginRequest } = useSelector((state: AppStateTypes) => state.user);
-  const { state } = useLocation<LocationState>();
+  const { state } = useLocation<LocationStateTypes>();
 
   const onLogin = (data: UserDataTypes) => {
     dispatch(authUser(data));

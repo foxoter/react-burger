@@ -6,17 +6,12 @@ import AuthForm from '../components/auth-form/auth-form';
 import { checkAuth, registerUser } from '../services/actions/user';
 import { UserDataTypes } from '../types/user-data-types';
 import AppStateTypes from '../types/app-state-types';
-
-type LocationState = {
-  from: {
-    pathname: string;
-  };
-}
+import { LocationStateTypes } from '../types/location-state-types';
 
 function Register() {
   const dispatch = useDispatch();
   const { currentUser, userLoginRequest } = useSelector((state: AppStateTypes) => state.user);
-  const { state } = useLocation<LocationState>();
+  const { state } = useLocation<LocationStateTypes>();
 
   const onRegister = (data: UserDataTypes) => {
     dispatch(registerUser(data));

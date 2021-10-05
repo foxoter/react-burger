@@ -9,7 +9,7 @@ import {
   resetPasswordRequest,
   confirmPasswordReset
 } from '../../helpers/api';
-import { assignTokens, clearTokens, getCookie, getRefreshToken } from '../../helpers/tokens-helper';
+import { assignTokens, clearTokens, getRefreshToken } from '../../helpers/tokens-helper';
 import { ResetPasswordTypes } from '../../types/reset-password-types';
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
@@ -98,7 +98,6 @@ export function authUser(data: UserDataTypes) {
         const { user, accessToken, refreshToken } = res;
         dispatch({ type: LOGIN_USER_SUCCESS, user: user });
         assignTokens(accessToken, refreshToken);
-        console.log(getCookie('token'));
       })
       .catch(err => {
         console.log('user auth res: ', err);
