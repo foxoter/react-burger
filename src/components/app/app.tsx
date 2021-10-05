@@ -7,39 +7,42 @@ import AppHeader from '../app-header/app-header';
 import MainContainer from '../main-container/main-container';
 import { mainTitle } from '../../utils/menu-titles-data';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, NotFoundError } from '../../pages';
+import AuthWrapper from '../auth-wrapper/auth-wrapper';
 
 function App() {
   return (
-    <Router>
-      <div className={appStyles.app} id="app">
-        <AppHeader/>
-        <main className={appStyles.main}>
-          <Switch>
-            <Route path='/login'>
-              <Login />
-            </Route>
-            <Route path='/register'>
-              <Register />
-            </Route>
-            <Route path='/forgot-password'>
-              <ForgotPassword />
-            </Route>
-            <Route path='/reset-password'>
-              <ResetPassword />
-            </Route>
-            <Route path='/profile' exact>
-              <Profile />
-            </Route>
-            <Route path='/' exact>
-              <MainContainer title={mainTitle}/>
-            </Route>
-            <Route path='*'>
-              <NotFoundError />
-            </Route>
-          </Switch>
-          </main>
-      </div>
-    </Router>
+    <AuthWrapper>
+      <Router>
+        <div className={appStyles.app} id="app">
+          <AppHeader/>
+          <main className={appStyles.main}>
+            <Switch>
+              <Route path='/login'>
+                <Login />
+              </Route>
+              <Route path='/register'>
+                <Register />
+              </Route>
+              <Route path='/forgot-password'>
+                <ForgotPassword />
+              </Route>
+              <Route path='/reset-password'>
+                <ResetPassword />
+              </Route>
+              <Route path='/profile' exact>
+                <Profile />
+              </Route>
+              <Route path='/' exact>
+                <MainContainer title={mainTitle}/>
+              </Route>
+              <Route path='*'>
+                <NotFoundError />
+              </Route>
+            </Switch>
+            </main>
+        </div>
+      </Router>
+    </AuthWrapper>
   );
 }
 

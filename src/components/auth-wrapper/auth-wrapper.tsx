@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 type Props = {
   children: React.ReactNode
 }
 
 function AuthWrapper(props: Props) {
-  return (
-    <>
-      {props.children}
-    </>
-  )
+  console.log('auth wrapper works');
+  return <>{props.children}</>
 }
 
 export default AuthWrapper;

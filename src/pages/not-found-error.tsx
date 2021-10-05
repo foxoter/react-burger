@@ -6,7 +6,7 @@ function NotFoundError() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkAuth());
-  }, []);
+  }, [dispatch]);
   return <div>not found page</div>
 }
 
