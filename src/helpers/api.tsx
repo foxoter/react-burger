@@ -78,6 +78,7 @@ const patchUserData = async (data: UserDataTypes) => {
     method: "PATCH",
     body: JSON.stringify(data),
     headers: {
+      'Content-Type': 'application/json;charset=utf-8',
       Authorization: 'Bearer ' + getCookie('token'),
     }
   });

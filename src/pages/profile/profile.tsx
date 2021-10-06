@@ -6,7 +6,7 @@ import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burg
 import profileStyles from './profile.module.css';
 import profileMenuTitles from '../../utils/profile-menu-titles';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../../services/actions/user';
+import { logoutUser, updateUserInfo } from '../../services/actions/user';
 import AppStateTypes from '../../types/app-state-types';
 
 function Profile() {
@@ -26,7 +26,7 @@ function Profile() {
 
   const submit = (e: any) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(updateUserInfo(formData));
   }
 
   const onCancel = useCallback((e: any) => {

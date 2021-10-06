@@ -31,6 +31,9 @@ type AppStateTypes = {
     updatePasswordRequest: boolean
     updatePasswordSuccess: boolean
     updatePasswordFailed: boolean
+    updateProfileRequest: boolean
+    updateProfileSuccess: boolean
+    updateProfileFailed: boolean
   }
 }
 

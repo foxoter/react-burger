@@ -12,7 +12,12 @@ import {
   RESET_PASSWORD_FAILED,
   RESET_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_REQUEST,
-  UPDATE_PASSWORD_FAILED, UPDATE_PASSWORD_SUCCESS, RESET_PASSWORD_CLEAR, UPDATE_PASSWORD_CLEAR,
+  UPDATE_PASSWORD_FAILED,
+  UPDATE_PASSWORD_SUCCESS,
+  RESET_PASSWORD_CLEAR,
+  UPDATE_PASSWORD_CLEAR,
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_FAILED, UPDATE_USER_SUCCESS,
 } from '../actions/user';
 
 const userInitialState = {
@@ -29,6 +34,9 @@ const userInitialState = {
   updatePasswordRequest: false,
   updatePasswordSuccess: false,
   updatePasswordFailed: false,
+  updateProfileRequest: false,
+  updateProfileSuccess: false,
+  updateProfileFailed: false,
 }
 
 export const userReducer = (state = userInitialState, action: any) => {
@@ -158,6 +166,31 @@ export const userReducer = (state = userInitialState, action: any) => {
         userLogoutRequest: false,
         userLogoutFailed: false,
         currentUser: null
+      }
+    }
+    case UPDATE_USER_REQUEST: {
+      return {
+        ...state,
+        updateProfileRequest: true,
+        updateProfileFailed: false,
+        updateProfileSuccess: false,
+      }
+    }
+    case UPDATE_USER_FAILED: {
+      return {
+        ...state,
+        updateProfileRequest: false,
+        updateProfileSuccess: false,
+        updateProfileFailed: true,
+      }
+    }
+    case UPDATE_USER_SUCCESS: {
+      return {
+        ...state,
+        updateProfileRequest: false,
+        updateProfileFailed: false,
+        updateProfileSuccess: true,
+        currentUser: action.user,
       }
     }
     default: {
