@@ -5,13 +5,17 @@ import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burg
 
 import profileStyles from './profile.module.css';
 import profileMenuTitles from '../../utils/profile-menu-titles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../services/actions/user';
+import AppStateTypes from '../../types/app-state-types';
 
 function Profile() {
+  const { currentUser } = useSelector((state: AppStateTypes) => state.user);
+
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    // @ts-ignore
+    name: currentUser?.name || '',
+    email: currentUser?.email || '',
     password: ''
   });
 
@@ -64,14 +68,17 @@ function Profile() {
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </div>
-      <div className={profileStyles.form_container}>
-        <form className={profileStyles.form} onSubmit={submit}>
-          <Input value={formData.name} onChange={onChange} placeholder={'Имя'} name={'name'}/>
-          <Input value={formData.email} onChange={onChange} placeholder={'Логин'} name={'email'}/>
-          <PasswordInput value={formData.password} onChange={onChange} name={'password'}/>
-          <Button type='primary' size="medium">Сохранить</Button>
-        </form>
-      </div>
+      {currentUser &&
+        <div className={profileStyles.form_container}>
+          <form className={profileStyles.form} onSubmit={submit}>
+            <Input value={formData.name} onChange={onChange} placeholder={'Имя'} name={'name'}/>
+            <Input value={formData.email} onChange={onChange} placeholder={'Логин'} name={'email'}/>
+            <PasswordInput value={formData.password} onChange={onChange} name={'password'}/>
+            <Button type='primary' size="medium">Сохранить</Button>
+            <Button type='secondary' size="medium">Отмена</Button>
+          </form>
+        </div>
+      }
     </section>
   )
 }
