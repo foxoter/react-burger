@@ -6,6 +6,7 @@ type UserRegisterTypes = {
 
 type UserAuthTypes = {
   email: string
+  name?: string
   password: string
 }
 

@@ -13,7 +13,6 @@ function Profile() {
   const { currentUser } = useSelector((state: AppStateTypes) => state.user);
 
   const [formData, setFormData] = useState({
-    // @ts-ignore
     name: currentUser?.name || '',
     email: currentUser?.email || '',
     password: ''
