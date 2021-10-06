@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -28,6 +28,14 @@ function Profile() {
     e.preventDefault();
     console.log(formData);
   }
+
+  const onCancel = useCallback((e: any) => {
+    e.preventDefault();
+    if (currentUser) {
+      // @ts-ignore
+      setFormData({ name: currentUser?.name, email: currentUser?.email, password: '' });
+    }
+  }, [currentUser]);
 
   const logout = () => {
     dispatch(logoutUser());
@@ -74,7 +82,9 @@ function Profile() {
             <Input value={formData.email} onChange={onChange} placeholder={'Логин'} name={'email'}/>
             <PasswordInput value={formData.password} onChange={onChange} name={'password'}/>
             <Button type='primary' size="medium">Сохранить</Button>
-            <Button type='secondary' size="medium">Отмена</Button>
+            <div onClick={onCancel}>
+              <Button type='secondary' size="medium">Отмена</Button>
+            </div>
           </form>
         </div>
       }

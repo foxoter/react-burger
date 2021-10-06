@@ -8,6 +8,7 @@ import MainContainer from '../main-container/main-container';
 import { mainTitle } from '../../utils/menu-titles-data';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, NotFoundError } from '../../pages';
 import ProtectedRoute from '../protected-route/protected-route';
+import OrderHistory from '../../pages/order-history';
 
 function App() {
   return (
@@ -28,8 +29,11 @@ function App() {
             <Route path='/reset-password'>
               <ResetPassword />
             </Route>
-            <ProtectedRoute path='/profile'>
+            <ProtectedRoute path='/profile' exact>
               <Profile />
+            </ProtectedRoute>
+            <ProtectedRoute path='/profile/orders'>
+              <OrderHistory />
             </ProtectedRoute>
             <Route path='/' exact>
               <MainContainer title={mainTitle}/>
