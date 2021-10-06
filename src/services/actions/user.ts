@@ -7,7 +7,7 @@ import {
   clearUserData,
   refreshToken,
   resetPasswordRequest,
-  confirmPasswordReset
+  confirmPasswordReset, patchUserData
 } from '../../helpers/api';
 import { assignTokens, clearTokens, getRefreshToken } from '../../helpers/tokens-helper';
 import { ResetPasswordTypes } from '../../types/reset-password-types';
@@ -33,6 +33,10 @@ export const UPDATE_PASSWORD_REQUEST = 'UPDATE_PASSWORD_REQUEST';
 export const UPDATE_PASSWORD_SUCCESS = 'UPDATE_PASSWORD_SUCCESS';
 export const UPDATE_PASSWORD_FAILED = 'UPDATE_PASSWORD_FAILED';
 export const UPDATE_PASSWORD_CLEAR = 'UPDATE_PASSWORD_CLEAR';
+
+export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED';
 
 export function handleResetPasswordRequest(data: ResetPasswordTypes) {
   return function (dispatch: any) {
@@ -128,6 +132,21 @@ export function checkAuth() {
             console.log('check user method err 2:', err);
             dispatch({ type: LOGIN_USER_FAILED });
           })
+      })
+  }
+}
+
+export function updateUserInfo(data: UserDataTypes) {
+  return function (dispatch: any) {
+    dispatch({ type: UPDATE_USER_REQUEST});
+    patchUserData(data)
+      .then(res => {
+        console.log('update user res: ', res);
+        dispatch({ type: UPDATE_USER_SUCCESS, user: res.user });
+      })
+      .catch(err => {
+        console.log('update user err: ', err);
+        dispatch({ type: UPDATE_USER_FAILED });
       })
   }
 }

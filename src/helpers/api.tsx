@@ -73,6 +73,17 @@ const getUserData = async () => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
+const patchUserData = async (data: UserDataTypes) => {
+  const response = await fetch(`${API_URL}/auth/user`, {
+    method: "PATCH",
+    body: JSON.stringify(data),
+    headers: {
+      Authorization: 'Bearer ' + getCookie('token'),
+    }
+  });
+  return response.ok ? await response.json() : await Promise.reject(response);
+}
+
 const refreshToken = async (token: string | null) => {
   const body = { token: token };
   const response = await fetch(`${API_URL}/auth/token`, {
@@ -105,6 +116,7 @@ export {
   sendNewUserData,
   sendAuthData,
   getUserData,
+  patchUserData,
   clearUserData,
   refreshToken
 }
