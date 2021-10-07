@@ -9,6 +9,7 @@ import { mainTitle } from '../../utils/menu-titles-data';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, NotFoundError } from '../../pages';
 import ProtectedRoute from '../protected-route/protected-route';
 import OrderHistory from '../../pages/order-history';
+import IngredientPage from '../../pages/ingredient';
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
             </ProtectedRoute>
             <Route path='/' exact>
               <MainContainer title={mainTitle}/>
+            </Route>
+            <Route path='/ingredients/:ingredientId'>
+              <IngredientPage />
             </Route>
             <Route path='*'>
               <NotFoundError />

@@ -14,7 +14,7 @@ import AppStateTypes from '../../types/app-state-types';
 
 import { ADD_INGREDIENT, DELETE_ORDER_ID, REWRITE_INGREDIENTS, placeOrder } from '../../services/actions/ingredients';
 import { checkAuth } from '../../services/actions/user';
-import { Redirect, Route, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function BurgerConstructor() {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -36,7 +36,7 @@ function BurgerConstructor() {
 
   useEffect(() => {
     dispatch(checkAuth());
-  }, []);
+  }, [dispatch]);
 
   const bun = constructorItems.find(item => item.type === 'bun');
   const otherItems = constructorItems.filter(item => item.type !== 'bun');

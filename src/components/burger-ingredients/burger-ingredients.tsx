@@ -13,6 +13,8 @@ import { getIngredients } from '../../services/actions/ingredients';
 import { useSelector, useDispatch } from 'react-redux';
 import { ADD_CURRENT_INGREDIENT, DELETE_CURRENT_INGREDIENT} from '../../services/actions/ingredients';
 
+import { useHistory } from 'react-router-dom';
+
 const SUBTITLES: { [key: string]: string } = {
   "bun": "Булки",
   "main": "Начинки",
@@ -36,6 +38,7 @@ function BurgerIngredients() {
   } = useSelector((state: AppStateTypes) => state.ingredients);
   const { constructorItems } = useSelector((state: AppStateTypes) => state.burger);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (!ingredientsList.length) dispatch(getIngredients());
@@ -75,6 +78,7 @@ function BurgerIngredients() {
 
   const openDetails = (data: BurgersDataTypes) => {
     dispatch({ type: ADD_CURRENT_INGREDIENT, ingredient: data});
+    history.push(`/ingredients/${data._id}`)
   }
 
   const renderIngredientsSection = (ingredient: string) => {
