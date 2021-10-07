@@ -7,6 +7,7 @@ import { UserDataTypes } from '../../types/user-data-types';
 import AppStateTypes from '../../types/app-state-types';
 import { Redirect, useLocation } from 'react-router-dom';
 import { LocationStateTypes } from '../../types/location-state-types';
+import Loader from '../../components/loader/loader';
 
 function Login() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function Login() {
   }
 
   if (userLoginRequest) {
-    return null;
+    return <Loader />;
   }
 
   return <AuthForm type='login' submitCallback={onLogin} />
