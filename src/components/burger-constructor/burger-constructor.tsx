@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 
@@ -13,12 +13,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppStateTypes from '../../types/app-state-types';
 
 import { ADD_INGREDIENT, DELETE_ORDER_ID, REWRITE_INGREDIENTS, placeOrder } from '../../services/actions/ingredients';
+import { checkAuth } from '../../services/actions/user';
+import { Redirect, Route, useHistory } from 'react-router-dom';
 
 function BurgerConstructor() {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const dispatch = useDispatch();
   const { constructorItems } = useSelector((state: AppStateTypes) => state.burger);
   const { currentOrderId } = useSelector((state: AppStateTypes) => state.order);
+  const { currentUser } = useSelector((state: AppStateTypes) => state.user);
   const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredient",
     drop(ingredientData) {
@@ -28,6 +30,13 @@ function BurgerConstructor() {
       isHover: monitor.isOver(),
     })
   });
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, []);
 
   const bun = constructorItems.find(item => item.type === 'bun');
   const otherItems = constructorItems.filter(item => item.type !== 'bun');
@@ -64,11 +73,15 @@ function BurgerConstructor() {
   }
 
   const openOrder = () => {
-    const order = {
-      ingredients: constructorItems.map(item => item._id)
-    };
-    dispatch(placeOrder(order));
-    setIsDetailsOpen(true);
+    if (currentUser) {
+      const order = {
+        ingredients: constructorItems.map(item => item._id)
+      };
+      dispatch(placeOrder(order));
+      setIsDetailsOpen(true);
+    } else {
+      history.push('/login');
+    }
   }
 
   return (
