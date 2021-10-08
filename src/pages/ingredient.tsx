@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import IngredientDetails from '../components/ingredient-details/ingredient-details';
 import { useDispatch, useSelector } from 'react-redux';
 import AppStateTypes from '../types/app-state-types';
