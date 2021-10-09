@@ -120,18 +120,23 @@ export function checkAuth() {
       })
       .catch(err => {
         console.log('check user method err 1:', err);
-        const token = getRefreshToken();
-        refreshToken(token)
-          .then(res => {
-            console.log('refresh token method res:', res);
-            const { accessToken, refreshToken } = res;
-            assignTokens(accessToken, refreshToken);
-            dispatch(checkAuth());
-          })
-          .catch(err => {
-            console.log('check user method err 2:', err);
-            dispatch({ type: LOGIN_USER_FAILED });
-          })
+        if (err.status === 403) {
+          const token = getRefreshToken();
+          refreshToken(token)
+            .then(res => {
+              console.log('refresh token method res:', res);
+              const { accessToken, refreshToken } = res;
+              assignTokens(accessToken, refreshToken);
+              dispatch(checkAuth());
+            })
+            .catch(err => {
+              console.log('check user method err 2:', err);
+              dispatch({ type: LOGIN_USER_FAILED });
+            })
+        } else {
+          console.log('check user method err 2:', err);
+          dispatch({ type: LOGIN_USER_FAILED });
+        }
       })
   }
 }
@@ -146,18 +151,23 @@ export function updateUserInfo(data: UserDataTypes) {
       })
       .catch(err => {
         console.log('update user err 1: ', err);
-        const token = getRefreshToken();
-        refreshToken(token)
-          .then(res => {
-            console.log('refresh token method res:', res);
-            const { accessToken, refreshToken } = res;
-            assignTokens(accessToken, refreshToken);
-            dispatch(updateUserInfo(data));
-          })
-          .catch(err => {
-            console.log('update user err 2: ', err);
-            dispatch({ type: UPDATE_USER_FAILED });
-          });
+        if (err.status === 403) {
+          const token = getRefreshToken();
+          refreshToken(token)
+            .then(res => {
+              console.log('refresh token method res:', res);
+              const { accessToken, refreshToken } = res;
+              assignTokens(accessToken, refreshToken);
+              dispatch(updateUserInfo(data));
+            })
+            .catch(err => {
+              console.log('update user err 2: ', err);
+              dispatch({ type: UPDATE_USER_FAILED });
+            });
+        } else {
+          console.log('update user err 2: ', err);
+          dispatch({ type: UPDATE_USER_FAILED });
+        }
       });
   }
 }
