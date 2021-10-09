@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, MutableRefObject } from 'react';
+import React, { useState, useRef, MutableRefObject } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import burgerIngredientsStyles from './burger-ingredients.module.css';
@@ -7,7 +7,6 @@ import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients
 import BurgersDataTypes from '../../types/burgers-data-types';
 import AppStateTypes from '../../types/app-state-types';
 
-import { getIngredients } from '../../services/actions/ingredients';
 import { useSelector, useDispatch } from 'react-redux';
 import { ADD_CURRENT_INGREDIENT } from '../../services/actions/ingredients';
 
@@ -37,10 +36,6 @@ function BurgerIngredients() {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-
-  useEffect(() => {
-    if (!ingredientsList.length) dispatch(getIngredients());
-  }, [dispatch, ingredientsList]);
 
   const renderTabs = () => {
     return (
@@ -123,13 +118,8 @@ function BurgerIngredients() {
 
   return (
     <div>
-      {/*{currentIngredient &&*/}
-      {/*  <Modal heading={'Детали ингредиента'}>*/}
-      {/*      <IngredientDetails ingredient={currentIngredient} />*/}
-      {/*  </Modal>*/}
-      {/*}*/}
       {renderTabs()}
-      {!ingredientsRequest &&
+      {!ingredientsRequest && ingredientsList.length > 0 &&
         <div
           className={burgerIngredientsStyles.sections}
           ref={scrollContainerRef}

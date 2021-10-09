@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import appStyles from './app.module.css'
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
@@ -12,6 +12,8 @@ import * as H from 'history';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import BurgersDataTypes from '../../types/burgers-data-types';
+import { useDispatch } from 'react-redux';
+import { getIngredients } from '../../services/actions/ingredients';
 
 type LocationState = {
   background?: H.Location
@@ -21,8 +23,13 @@ type LocationState = {
 function App() {
   const location = useLocation<LocationState>();
   const history = useHistory();
+  const dispatch = useDispatch();
   let background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background;
   const ingredient = location.state && location.state.ingredient;
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, []);
 
   return (
     <div className={appStyles.app} id="app">
