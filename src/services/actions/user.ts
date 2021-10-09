@@ -145,9 +145,20 @@ export function updateUserInfo(data: UserDataTypes) {
         dispatch({ type: UPDATE_USER_SUCCESS, user: res.user });
       })
       .catch(err => {
-        console.log('update user err: ', err);
-        dispatch({ type: UPDATE_USER_FAILED });
-      })
+        console.log('update user err 1: ', err);
+        const token = getRefreshToken();
+        refreshToken(token)
+          .then(res => {
+            console.log('refresh token method res:', res);
+            const { accessToken, refreshToken } = res;
+            assignTokens(accessToken, refreshToken);
+            dispatch(updateUserInfo(data));
+          })
+          .catch(err => {
+            console.log('update user err 2: ', err);
+            dispatch({ type: UPDATE_USER_FAILED });
+          });
+      });
   }
 }
 
