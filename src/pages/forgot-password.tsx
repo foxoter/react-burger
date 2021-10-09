@@ -7,6 +7,7 @@ import { checkAuth, handleResetPasswordRequest } from '../services/actions/user'
 import AppStateTypes from '../types/app-state-types';
 import { ResetPasswordTypes } from '../types/reset-password-types';
 import { LocationStateTypes } from '../types/location-state-types';
+import Loader from '../components/loader/loader';
 
 function ForgotPassword() {
   const dispatch = useDispatch();
@@ -32,10 +33,14 @@ function ForgotPassword() {
   }
 
   if (userLoginRequest) {
-    return null;
+    return <Loader />
   }
 
-  return resetPasswordSuccess ? <Redirect to='/reset-password' /> : <AuthForm type='forgot' submitCallback={onSubmit}/>
+  return (
+    resetPasswordSuccess ?
+      <Redirect to={{ pathname: '/reset-password', state: { referrer: 'forgot-password'} }} /> :
+      <AuthForm type='forgot' submitCallback={onSubmit}/>
+    )
 }
 
 export default ForgotPassword;

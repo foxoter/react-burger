@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import AuthForm from '../components/auth-form/auth-form';
+import Loader from '../components/loader/loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResetPasswordTypes } from '../types/reset-password-types';
 import { checkAuth, handlePasswordUpdate } from '../services/actions/user';
@@ -30,8 +31,14 @@ function ResetPassword() {
     )
   }
 
+  if (state?.referrer !== 'forgot-password') {
+    return (
+      <Redirect to={ state?.from || '/login' } />
+    )
+  }
+
   if (userLoginRequest) {
-    return null;
+    return <Loader />;
   }
 
   return updatePasswordSuccess ? <Redirect to='/login' /> : <AuthForm type='reset' submitCallback={onSubmit}/>
