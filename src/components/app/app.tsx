@@ -1,6 +1,6 @@
 import React from 'react';
 import appStyles from './app.module.css'
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import MainContainer from '../main-container/main-container';
 import { mainTitle } from '../../utils/menu-titles-data';
@@ -20,7 +20,8 @@ type LocationState = {
 
 function App() {
   const location = useLocation<LocationState>();
-  let background = location.state && location.state.background;
+  const history = useHistory();
+  let background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background;
   const ingredient = location.state && location.state.ingredient;
 
   return (
