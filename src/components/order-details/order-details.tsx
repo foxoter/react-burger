@@ -13,7 +13,7 @@ function OrderDetails(props: Props) {
   return (
     <div>
       <h1 className={`${orderDetailsStyles.order} text text_type_digits-large`}>{orderId}</h1>
-      <p className="text text_type_main-medium mb-15">идентификатор заказа</p>
+      <p className={`${orderDetailsStyles.subtitle} text text_type_main-medium mb-15`}>идентификатор заказа</p>
       <img src={checkIconPath} alt="check-icon" className={orderDetailsStyles.check} />
       <p className={`text text_type_main-medium ${orderDetailsStyles.text} mb-2`}>ваш заказ начали готовить</p>
       <p

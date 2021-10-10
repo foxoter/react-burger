@@ -1,19 +1,17 @@
-.item {
-  display: flex;
-  align-items: center;
-}
-
-.item:hover {
-  cursor: pointer;
-}
-
-.text {
+.link {
+  text-decoration: none;
   font-size: 14px;
   line-height: 1.43;
   font-weight: normal;
   color: #8585AD;
+  display: flex;
+  align-items: center;
 }
 
-.text_active {
+.link > svg {
+  margin-right: 10px;
+}
+
+.link_active {
   color: white;
 }

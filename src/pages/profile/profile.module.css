@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  margin-top: 120px;
+}
+
+.menu {
+  width: 320px;
+  margin-right: 60px;
+}
+
+.navigation {
+  margin-bottom: 80px;
+}
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list_item {
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.link_active {
+  color: white;
+}
+
+.form_container {
+  width: 480px;
+}
+
+.form {
+  width: 100%;
+}
+
+.form > div {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.form > div > div {
+  width: 100%;
+}
+
+.form > div > button,
+.form > button {
+  display: block;
+  margin: 0 auto;
+}

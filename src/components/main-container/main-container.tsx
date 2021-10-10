@@ -14,7 +14,7 @@ type Props = {
 
 function MainContainer(props: Props) {
   return (
-    <main className={mainContainerStyles.main}>
+    <div>
       <h2 className="pt-10 mb-5 text text_type_main-large">
         {props.title}
       </h2>
@@ -24,7 +24,7 @@ function MainContainer(props: Props) {
           <BurgerConstructor />
         </DndProvider>
       </section>
-    </main>
+    </div>
   )
 }
 

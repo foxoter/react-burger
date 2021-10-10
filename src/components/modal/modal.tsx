@@ -4,22 +4,26 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 
 import modalStyles from './modal.module.css';
+import { useHistory } from 'react-router-dom';
 
 type Props = {
   heading?: string
   children: React.ReactElement
-  handleClose: () => void
+  handleClose?: () => void
 }
 
 function Modal(props: Props) {
   const modalsRoot = document.getElementById('app');
   const { heading, children, handleClose } = props;
+  const history = useHistory();
 
   const escapeClose = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
-      handleClose();
+      onClose();
     }
   }
+
+  const onClose = handleClose ? handleClose : history.goBack;
 
   useEffect(() => {
     document.addEventListener('keydown', escapeClose);
@@ -31,10 +35,8 @@ function Modal(props: Props) {
   const renderHeading = () => {
     return (
       <div className={modalStyles.header}>
-        {heading &&
-          <p className={`${modalStyles.heading} text text_type_main-medium`}>{heading}</p>
-        }
-        <CloseIcon type="primary" onClick={handleClose} />
+        <p className={`${modalStyles.heading} text text_type_main-medium`}>{heading || 'Детали ингредиента'}</p>
+        <CloseIcon type="primary" onClick={onClose} />
       </div>
     )
   }
@@ -45,7 +47,7 @@ function Modal(props: Props) {
         {renderHeading()}
         {children}
       </div>
-      <ModalOverlay onClose={handleClose} />
+      <ModalOverlay onClose={onClose} />
     </>
   ), modalsRoot) : null;
 

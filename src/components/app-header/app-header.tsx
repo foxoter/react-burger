@@ -14,6 +14,7 @@ function AppHeader(): JSX.Element {
           key={idx}
           title={item.title}
           Icon={item.Icon}
+          path={item.path}
         />
       )
     });

@@ -1,17 +1,21 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { useRouteMatch } from "react-router-dom";
+
 
 import headerItemStyles from './header-item.module.css'
 
 type Props = {
   title: string
-  isActive?: boolean
-  onClick?: (a: string) => void
   Icon: any
+  path: string
 }
 
 function HeaderItem(props: Props) {
-  const { title, isActive, Icon } = props;
-  const iconType = isActive ? 'primary' : 'secondary';
+  const { title, Icon, path } = props;
+  const match = useRouteMatch(path);
+
+  const iconType = match?.isExact ? 'primary' : 'secondary';
 
   const uiKitStyles = {
     listItem: 'pl-5 pr-5',
@@ -20,12 +24,17 @@ function HeaderItem(props: Props) {
 
   return (
     <li
-      className={`${headerItemStyles.item} ${uiKitStyles.listItem}`}
+      className={uiKitStyles.listItem}
     >
-      <Icon type={iconType} />
-      <p className={`${uiKitStyles.text} ${headerItemStyles.text}`}>
+      <NavLink
+        exact
+        to={path}
+        className={`${uiKitStyles.text} ${headerItemStyles.link}`}
+        activeClassName={headerItemStyles.link_active}
+      >
+        <Icon type={iconType} />
         {title}
-      </p>
+      </NavLink>
     </li>
   );
 }

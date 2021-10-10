@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, MutableRefObject } from 'react';
+import React, { useState, useRef, MutableRefObject } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import burgerIngredientsStyles from './burger-ingredients.module.css';
@@ -6,12 +6,11 @@ import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients
 
 import BurgersDataTypes from '../../types/burgers-data-types';
 import AppStateTypes from '../../types/app-state-types';
-import Modal from '../modal/modal';
-import IngredientDetails from '../ingredient-details/ingredient-details';
 
-import { getIngredients } from '../../services/actions/ingredients';
 import { useSelector, useDispatch } from 'react-redux';
-import { ADD_CURRENT_INGREDIENT, DELETE_CURRENT_INGREDIENT} from '../../services/actions/ingredients';
+import { ADD_CURRENT_INGREDIENT } from '../../services/actions/ingredients';
+
+import { useHistory, useLocation } from 'react-router-dom';
 
 const SUBTITLES: { [key: string]: string } = {
   "bun": "Булки",
@@ -32,14 +31,11 @@ function BurgerIngredients() {
     ingredientsRequest,
     ingredientsFailed,
     ingredientsList,
-    currentIngredient,
   } = useSelector((state: AppStateTypes) => state.ingredients);
   const { constructorItems } = useSelector((state: AppStateTypes) => state.burger);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!ingredientsList.length) dispatch(getIngredients());
-  }, [dispatch, ingredientsList]);
+  const history = useHistory();
+  const location = useLocation();
 
   const renderTabs = () => {
     return (
@@ -69,12 +65,9 @@ function BurgerIngredients() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  const closeDetails = () => {
-    dispatch({ type: DELETE_CURRENT_INGREDIENT });
-  }
-
   const openDetails = (data: BurgersDataTypes) => {
     dispatch({ type: ADD_CURRENT_INGREDIENT, ingredient: data});
+    history.push(`/ingredients/${data._id}`, { background: location, ingredient: data });
   }
 
   const renderIngredientsSection = (ingredient: string) => {
@@ -125,13 +118,8 @@ function BurgerIngredients() {
 
   return (
     <div>
-      {currentIngredient &&
-        <Modal handleClose={closeDetails} heading={'Детали ингредиента'}>
-            <IngredientDetails ingredient={currentIngredient} />
-        </Modal>
-      }
       {renderTabs()}
-      {!ingredientsRequest &&
+      {!ingredientsRequest && ingredientsList.length > 0 &&
         <div
           className={burgerIngredientsStyles.sections}
           ref={scrollContainerRef}
