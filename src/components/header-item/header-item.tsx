@@ -14,7 +14,6 @@ type Props = {
 
 const HeaderItem: FC<Props> = ({ title, Icon, path }) => {
   const match = useRouteMatch(path);
-  console.log(typeof Icon);
 
   const iconType = match?.isExact ? 'primary' : 'secondary';
 

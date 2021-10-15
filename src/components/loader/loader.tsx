@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 
 import loaderStyles from './loader.module.css'
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function Loader() {
+const Loader: FC = () => {
   return (
     <div className={loaderStyles.container}>
       <div className={loaderStyles.loader}>
