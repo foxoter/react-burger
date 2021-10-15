@@ -1,3 +1,6 @@
+import TBurgersDataTypes from '../types/t-burgers-data-types';
+import { TIngredientsActions } from '../actions/ingredients';
+
 import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_REQUEST,
@@ -13,11 +16,15 @@ import {
   REWRITE_INGREDIENTS
 } from '../constants/ingredients';
 
-const burgerConstructorInitialState = {
+type TBurgerConstructorInitialState = {
+  constructorItems: TBurgersDataTypes[]
+}
+
+const burgerConstructorInitialState: TBurgerConstructorInitialState = {
   constructorItems: [],
 }
 
-export const constructorReducer = (state = burgerConstructorInitialState, action: any) => {
+export const constructorReducer = (state = burgerConstructorInitialState, action: TIngredientsActions) => {
   switch (action.type) {
     case ADD_INGREDIENT: {
       const uuid = String(action.payload._id + Math.random());
@@ -54,14 +61,21 @@ export const constructorReducer = (state = burgerConstructorInitialState, action
   }
 }
 
-const ingredientsState = {
+type TIngredientsState = {
+  ingredientsRequest: boolean;
+  ingredientsFailed: boolean;
+  ingredientsList: TBurgersDataTypes[],
+  currentIngredient: TBurgersDataTypes | null;
+}
+
+const ingredientsState: TIngredientsState = {
   ingredientsRequest: false,
   ingredientsFailed: false,
   ingredientsList: [],
   currentIngredient: null,
 }
 
-export const ingredientsReducer = (state = ingredientsState, action: any) => {
+export const ingredientsReducer = (state = ingredientsState, action: TIngredientsActions) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
@@ -103,13 +117,19 @@ export const ingredientsReducer = (state = ingredientsState, action: any) => {
   }
 }
 
-const orderInitialState = {
+type TOrderInitialState = {
+  currentOrderRequest: boolean;
+  currentOrderFailed: boolean;
+  currentOrderId: number | null;
+}
+
+const orderInitialState: TOrderInitialState = {
   currentOrderRequest: false,
   currentOrderFailed: false,
   currentOrderId: null
 }
 
-export const orderReducer = (state = orderInitialState, action: any) => {
+export const orderReducer = (state = orderInitialState, action: TIngredientsActions) => {
   switch (action.type) {
     case PLACE_ORDER_REQUEST: {
       return {
