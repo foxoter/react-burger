@@ -1,4 +1,4 @@
-import { memo, FC, MutableRefObject, useRef } from 'react';
+import { memo, FC, useRef } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';

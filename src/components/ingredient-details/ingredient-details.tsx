@@ -1,14 +1,14 @@
-import React from 'react';
+import { memo, FC } from 'react';
 
 import ingredientDetailsStyles from './ingredient-details.module.css';
 import TBurgersDataTypes from '../../types/t-burgers-data-types';
 import modalStyles from '../modal/modal.module.css';
 
 type Props = {
-  ingredient?: TBurgersDataTypes | null
+  ingredient: TBurgersDataTypes | undefined;
 }
 
-const IngredientDetails = (props: Props) => {
+const IngredientDetails: FC<Props> = (props) => {
   if (!props.ingredient) {
     return null
   }
@@ -48,4 +48,4 @@ const IngredientDetails = (props: Props) => {
   )
 }
 
-export default React.memo(IngredientDetails);
+export default memo(IngredientDetails);

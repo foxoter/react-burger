@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={appStyles.app} id="app">
