@@ -7,7 +7,7 @@ import { XYCoord } from 'dnd-core'
 import burgerConstructorItemStyles from './burger-constructor-item.module.css';
 import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 
-import { deleteIngredientAction } from '../../services/actions/ingredients';
+import { deleteIngredientAction } from '../../services/actions/burger';
 
 type Props = {
   index: number

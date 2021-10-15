@@ -7,58 +7,7 @@ import {
   GET_INGREDIENTS_FAILED,
   ADD_CURRENT_INGREDIENT,
   DELETE_CURRENT_INGREDIENT,
-  PLACE_ORDER_FAILED,
-  PLACE_ORDER_REQUEST,
-  PLACE_ORDER_SUCCESS,
-  DELETE_ORDER_ID,
-  ADD_INGREDIENT,
-  DELETE_INGREDIENT,
-  REWRITE_INGREDIENTS
 } from '../constants/ingredients';
-
-type TBurgerConstructorInitialState = {
-  constructorItems: TBurgersDataTypes[];
-}
-
-const burgerConstructorInitialState: TBurgerConstructorInitialState = {
-  constructorItems: [],
-}
-
-export const constructorReducer = (state = burgerConstructorInitialState, action: TIngredientsActions) => {
-  switch (action.type) {
-    case ADD_INGREDIENT: {
-      action.payload.uuid = String(action.payload._id + Math.random());
-      if (action.payload.type === 'bun') {
-        const filteredItems = state.constructorItems.filter(({ type }) => type !== 'bun');
-        return {
-          ...state,
-          constructorItems: [...filteredItems, action.payload],
-        }
-      }
-      return {
-        ...state,
-        constructorItems: [...state.constructorItems, action.payload]
-      }
-    }
-    case DELETE_INGREDIENT: {
-      const newItems = state.constructorItems;
-      newItems.splice(newItems.findIndex(({ _id }) => _id === action.payload), 1);
-      return {
-        ...state,
-        constructorItems: [...newItems]
-      }
-    }
-    case REWRITE_INGREDIENTS: {
-      return {
-        ...state,
-        constructorItems: [...action.payload]
-      }
-    }
-    default: {
-      return state;
-    }
-  }
-}
 
 type TIngredientsState = {
   ingredientsRequest: boolean;
@@ -108,54 +57,6 @@ export const ingredientsReducer = (state = ingredientsState, action: TIngredient
       return {
         ...state,
         currentIngredient: null
-      }
-    }
-    default: {
-      return state;
-    }
-  }
-}
-
-type TOrderInitialState = {
-  currentOrderRequest: boolean;
-  currentOrderFailed: boolean;
-  currentOrderId: number | null;
-}
-
-const orderInitialState: TOrderInitialState = {
-  currentOrderRequest: false,
-  currentOrderFailed: false,
-  currentOrderId: null
-}
-
-export const orderReducer = (state = orderInitialState, action: TIngredientsActions) => {
-  switch (action.type) {
-    case PLACE_ORDER_REQUEST: {
-      return {
-        ...state,
-        currentOrderRequest: true
-      }
-    }
-    case PLACE_ORDER_FAILED: {
-      return {
-        ...state,
-        currentOrderRequest: false,
-        currentOrderId: null,
-        currentOrderFailed: true
-      }
-    }
-    case PLACE_ORDER_SUCCESS: {
-      return {
-        ...state,
-        currentOrderRequest: false,
-        currentOrderFailed: false,
-        currentOrderId: action.id
-      }
-    }
-    case DELETE_ORDER_ID: {
-      return {
-        ...state,
-        currentOrderId: null
       }
     }
     default: {

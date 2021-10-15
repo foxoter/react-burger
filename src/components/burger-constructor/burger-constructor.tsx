@@ -8,7 +8,8 @@ import BurgerConstructorItem from '../burger-constructor-item/burger-constructor
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 
-import { addIngredientAction, deleteOrderIdAction, rewriteIngredientsAction, placeOrder } from '../../services/actions/ingredients';
+import { addIngredientAction, rewriteIngredientsAction } from '../../services/actions/burger';
+import { deleteOrderIdAction, placeOrder } from '../../services/actions/order';
 import { checkAuth } from '../../services/actions/user';
 import { useHistory } from 'react-router-dom';
 

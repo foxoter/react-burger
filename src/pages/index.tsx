@@ -1,4 +1,4 @@
-import Login from './login/login';
+import Login from './login';
 import Profile from './profile/profile';
 import Register from './register';
 import ForgotPassword from './forgot-password';
