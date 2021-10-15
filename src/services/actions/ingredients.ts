@@ -71,6 +71,20 @@ export interface IRewriteIngredientsAction {
   readonly payload: TBurgersDataTypes[];
 }
 
+export type TIngredientsActions =
+  IGetIngredientsRequestAction
+  | IGetIngredientsSuccessAction
+  | IGetIngredientsFailedAction
+  | IAddCurrentIngredientAction
+  | IDeleteCurrentIngredientAction
+  | IPlaceOrderRequestAction
+  | IPlaceOrderSuccessAction
+  | IPlaceOrderFailedAction
+  | IDeleteOrderIdAction
+  | IAddIngredientAction
+  | IDeleteIngredientAction
+  | IRewriteIngredientsAction
+
 export const getIngredientsRequestAction = (): IGetIngredientsRequestAction => ({
   type: GET_INGREDIENTS_REQUEST
 });
@@ -124,20 +138,6 @@ export const rewriteIngredientsAction = (payload: TBurgersDataTypes[]): IRewrite
   type: REWRITE_INGREDIENTS,
   payload,
 });
-
-export type TIngredientsActions =
-  IGetIngredientsRequestAction
-  | IGetIngredientsSuccessAction
-  | IGetIngredientsFailedAction
-  | IAddCurrentIngredientAction
-  | IDeleteCurrentIngredientAction
-  | IPlaceOrderRequestAction
-  | IPlaceOrderSuccessAction
-  | IPlaceOrderFailedAction
-  | IDeleteOrderIdAction
-  | IAddIngredientAction
-  | IDeleteIngredientAction
-  | IRewriteIngredientsAction
 
 export function getIngredients() {
   return function(dispatch: any) {

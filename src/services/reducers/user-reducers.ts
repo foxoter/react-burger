@@ -18,7 +18,7 @@ import {
   UPDATE_PASSWORD_CLEAR,
   UPDATE_USER_REQUEST,
   UPDATE_USER_FAILED, UPDATE_USER_SUCCESS,
-} from '../actions/user';
+} from '../constants/user';
 
 const userInitialState = {
   currentUser: null,

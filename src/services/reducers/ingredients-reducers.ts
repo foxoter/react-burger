@@ -17,7 +17,7 @@ import {
 } from '../constants/ingredients';
 
 type TBurgerConstructorInitialState = {
-  constructorItems: TBurgersDataTypes[]
+  constructorItems: TBurgersDataTypes[];
 }
 
 const burgerConstructorInitialState: TBurgerConstructorInitialState = {
@@ -27,13 +27,12 @@ const burgerConstructorInitialState: TBurgerConstructorInitialState = {
 export const constructorReducer = (state = burgerConstructorInitialState, action: TIngredientsActions) => {
   switch (action.type) {
     case ADD_INGREDIENT: {
-      const uuid = String(action.payload._id + Math.random());
-      action.payload.uuid = uuid;
+      action.payload.uuid = String(action.payload._id + Math.random());
       if (action.payload.type === 'bun') {
         const filteredItems = state.constructorItems.filter(({ type }) => type !== 'bun');
         return {
           ...state,
-          constructorItems: [...filteredItems, action.payload]
+          constructorItems: [...filteredItems, action.payload],
         }
       }
       return {
@@ -81,7 +80,7 @@ export const ingredientsReducer = (state = ingredientsState, action: TIngredient
       return {
         ...state,
         ingredientsFailed: false,
-        ingredientsRequest: true
+        ingredientsRequest: true,
       }
     }
     case GET_INGREDIENTS_SUCCESS: {
@@ -102,7 +101,7 @@ export const ingredientsReducer = (state = ingredientsState, action: TIngredient
     case ADD_CURRENT_INGREDIENT: {
       return {
         ...state,
-        currentIngredient: action.ingredient
+        currentIngredient: action.ingredient,
       }
     }
     case DELETE_CURRENT_INGREDIENT: {

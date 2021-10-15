@@ -1,3 +1,8 @@
+export type TNewUser = {
+  email: string;
+  name: string;
+}
+
 type UserRegisterTypes = {
   email: string
   password: string
