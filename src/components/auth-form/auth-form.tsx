@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useMemo, FC } from 'react';
+import React, { useState, ChangeEvent, useMemo, FC, SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -11,7 +11,6 @@ type Props = {
 }
 
 const AuthForm: FC<Props> = ({ type, submitCallback }) => {
-
   let stateKeys;
   let buttonText;
   let title;
@@ -43,7 +42,7 @@ const AuthForm: FC<Props> = ({ type, submitCallback }) => {
     setFormData({...formData, [e.target.name]: e.target.value});
   }
 
-  const submit = (e: any) => {
+  const submit = (e: SyntheticEvent) => {
     e.preventDefault();
     if (submitCallback) {
       submitCallback(formData);
