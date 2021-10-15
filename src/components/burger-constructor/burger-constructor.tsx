@@ -90,7 +90,7 @@ const BurgerConstructor: FC = () => {
       ref={dropTarget}
     >
       {isDetailsOpen && currentOrderId &&
-        <Modal handleClose={closeOrder}>
+        <Modal handleClose={closeOrder} heading='Ваш заказ'>
           <OrderDetails orderId={currentOrderId}/>
         </Modal>
       }
