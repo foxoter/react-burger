@@ -1,7 +1,8 @@
-import React, { useState, ChangeEvent, useMemo } from 'react';
+import React, { useState, ChangeEvent, useMemo, FC } from 'react';
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import { TAuthFormData } from '../../types/auth-form-types';
 import authFormStyles from './auth-form.module.css';
 
 type Props = {
@@ -9,15 +10,7 @@ type Props = {
   submitCallback?: any
 }
 
-type FormData = {
-  name?: string
-  email?: string
-  password?: string
-  token?: string
-}
-
-function AuthForm(props: Props) {
-  const { type, submitCallback } = props;
+const AuthForm: FC<Props> = ({ type, submitCallback }) => {
 
   let stateKeys;
   let buttonText;
@@ -44,7 +37,7 @@ function AuthForm(props: Props) {
       buttonText = 'Сохранить'
       break
   }
-  const [formData, setFormData] = useState<FormData>({...stateKeys});
+  const [formData, setFormData] = useState<TAuthFormData>({...stateKeys});
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({...formData, [e.target.name]: e.target.value});

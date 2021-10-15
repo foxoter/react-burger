@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import appHeaderStyles from './app-header.module.css';
@@ -6,7 +6,7 @@ import appHeaderStyles from './app-header.module.css';
 import HeaderItem from '../header-item/header-item';
 import { menuItems } from "../../utils/menu-titles-data";
 
-function AppHeader(): JSX.Element {
+const AppHeader: FC = () => {
   const renderMenuItems = () => {
     return menuItems.map((item, idx) => {
       return (
