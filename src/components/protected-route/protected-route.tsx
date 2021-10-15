@@ -1,7 +1,7 @@
 import { memo, FC, ReactNode, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import AppStateTypes from '../../types/app-state-types';
+import AppStateTypes from '../../services/types/app-state-types';
 import { checkAuth } from '../../services/actions/user';
 
 type Props = {

@@ -2,7 +2,7 @@ import { FC, memo } from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from "react-dnd";
 
-import TBurgersDataTypes from '../../types/t-burgers-data-types';
+import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 import burgerIngredientStyles from './burger-ingredients-item.module.css';
 
 type Props = {

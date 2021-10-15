@@ -1,7 +1,7 @@
-import { API_URL } from '../constants/apiConfig';
-import { OrderDataTypes } from '../types/order-data-types';
-import { ResetPasswordTypes } from '../types/reset-password-types';
-import { UserDataTypes } from '../types/user-data-types';
+import { API_URL } from '../services/constants/apiConfig';
+import { OrderDataTypes } from '../services/types/order-data-types';
+import { ResetPasswordTypes } from '../services/types/reset-password-types';
+import { UserDataTypes } from '../services/types/user-data-types';
 import { getCookie, getRefreshToken } from './tokens-helper';
 
 const getProductsData = async () => {

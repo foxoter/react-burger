@@ -1,5 +1,5 @@
 import { getProductsData, sendOrderData } from '../../helpers/api';
-import { OrderDataTypes } from '../../types/order-data-types';
+import { OrderDataTypes } from '../types/order-data-types';
 
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';

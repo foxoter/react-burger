@@ -4,9 +4,9 @@ import { Redirect, useLocation } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth, handleResetPasswordRequest } from '../services/actions/user';
-import AppStateTypes from '../types/app-state-types';
-import { ResetPasswordTypes } from '../types/reset-password-types';
-import { LocationStateTypes } from '../types/location-state-types';
+import AppStateTypes from '../services/types/app-state-types';
+import { ResetPasswordTypes } from '../services/types/reset-password-types';
+import { LocationStateTypes } from '../services/types/location-state-types';
 import Loader from '../components/loader/loader';
 
 function ForgotPassword() {

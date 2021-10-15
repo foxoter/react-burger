@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, useMemo, FC, SyntheticEvent } from 'react
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { TAuthFormData } from '../../types/auth-form-types';
+import { TAuthFormData } from '../../services/types/auth-form-types';
 import authFormStyles from './auth-form.module.css';
 
 type Props = {

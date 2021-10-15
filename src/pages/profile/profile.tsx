@@ -4,10 +4,10 @@ import { NavLink } from 'react-router-dom';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import profileStyles from './profile.module.css';
-import profileMenuTitles from '../../utils/profile-menu-titles';
+import profileMenuTitles from '../../services/constants/profile-menu-titles';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser, updateUserInfo } from '../../services/actions/user';
-import AppStateTypes from '../../types/app-state-types';
+import AppStateTypes from '../../services/types/app-state-types';
 
 function Profile() {
   const { currentUser } = useSelector((state: AppStateTypes) => state.user);

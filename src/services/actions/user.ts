@@ -1,4 +1,4 @@
-import { UserDataTypes } from '../../types/user-data-types';
+import { UserDataTypes } from '../types/user-data-types';
 
 import {
   sendNewUserData,
@@ -10,7 +10,7 @@ import {
   confirmPasswordReset, patchUserData
 } from '../../helpers/api';
 import { assignTokens, clearTokens, getRefreshToken } from '../../helpers/tokens-helper';
-import { ResetPasswordTypes } from '../../types/reset-password-types';
+import { ResetPasswordTypes } from '../types/reset-password-types';
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';

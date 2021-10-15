@@ -2,17 +2,13 @@ import React  from 'react';
 import { useParams } from 'react-router-dom';
 import IngredientDetails from '../components/ingredient-details/ingredient-details';
 import { useSelector } from 'react-redux';
-import AppStateTypes from '../types/app-state-types';
+import AppStateTypes from '../services/types/app-state-types';
 import Loader from '../components/loader/loader';
 import NotFoundError from './not-found-error';
 
-type Params = {
-  ingredientId: string
-}
-
 function IngredientPage() {
   const { ingredientsList, ingredientsRequest, ingredientsFailed } = useSelector((state: AppStateTypes) => state.ingredients);
-  const { ingredientId } = useParams<Params>();
+  const { ingredientId } = useParams<{ ingredientId: string }>();
 
   let ingredient = null;
   if (ingredientsList.length > 0) {

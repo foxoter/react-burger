@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { XYCoord } from 'dnd-core'
 
 import burgerConstructorItemStyles from './burger-constructor-item.module.css';
-import TBurgersDataTypes from '../../types/t-burgers-data-types';
+import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 
 import { DELETE_INGREDIENT } from '../../services/actions/ingredients';
 

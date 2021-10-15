@@ -4,9 +4,9 @@ import { Redirect, useLocation } from 'react-router-dom';
 
 import AuthForm from '../components/auth-form/auth-form';
 import { checkAuth, registerUser } from '../services/actions/user';
-import { UserDataTypes } from '../types/user-data-types';
-import AppStateTypes from '../types/app-state-types';
-import { LocationStateTypes } from '../types/location-state-types';
+import { UserDataTypes } from '../services/types/user-data-types';
+import AppStateTypes from '../services/types/app-state-types';
+import { LocationStateTypes } from '../services/types/location-state-types';
 
 function Register() {
   const dispatch = useDispatch();

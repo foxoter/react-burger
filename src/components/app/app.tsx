@@ -10,7 +10,7 @@ import IngredientPage from '../../pages/ingredient';
 import * as H from 'history';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import TBurgersDataTypes from '../../types/t-burgers-data-types';
+import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 import { useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 

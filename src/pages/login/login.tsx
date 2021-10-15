@@ -3,10 +3,10 @@ import AuthForm from '../../components/auth-form/auth-form';
 
 import { authUser, checkAuth } from '../../services/actions/user';
 import { useDispatch, useSelector } from 'react-redux';
-import { UserDataTypes } from '../../types/user-data-types';
-import AppStateTypes from '../../types/app-state-types';
+import { UserDataTypes } from '../../services/types/user-data-types';
+import AppStateTypes from '../../services/types/app-state-types';
 import { Redirect, useLocation } from 'react-router-dom';
-import { LocationStateTypes } from '../../types/location-state-types';
+import { LocationStateTypes } from '../../services/types/location-state-types';
 import Loader from '../../components/loader/loader';
 
 function Login() {

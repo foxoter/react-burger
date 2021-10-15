@@ -1,7 +1,7 @@
 import { memo, FC } from 'react';
 
 import ingredientDetailsStyles from './ingredient-details.module.css';
-import TBurgersDataTypes from '../../types/t-burgers-data-types';
+import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 import modalStyles from '../modal/modal.module.css';
 
 type Props = {

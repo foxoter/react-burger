@@ -13,7 +13,7 @@ import { checkAuth } from '../../services/actions/user';
 import { useHistory } from 'react-router-dom';
 
 import burgerConstructorStyles from './burger-constructor.module.css';
-import AppStateTypes from '../../types/app-state-types';
+import AppStateTypes from '../../services/types/app-state-types';
 
 const BurgerConstructor: FC = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);

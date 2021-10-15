@@ -4,8 +4,8 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import burgerIngredientsStyles from './burger-ingredients.module.css';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
-import TBurgersDataTypes from '../../types/t-burgers-data-types';
-import AppStateTypes from '../../types/app-state-types';
+import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
+import AppStateTypes from '../../services/types/app-state-types';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { ADD_CURRENT_INGREDIENT } from '../../services/actions/ingredients';

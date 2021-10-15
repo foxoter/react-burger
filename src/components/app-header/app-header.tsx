@@ -4,7 +4,7 @@ import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import appHeaderStyles from './app-header.module.css';
 
 import HeaderItem from '../header-item/header-item';
-import { menuItems } from "../../utils/menu-titles-data";
+import { menuItems } from "../../services/constants/menu-titles-data";
 
 const AppHeader: FC = () => {
   const renderMenuItems = () => {
