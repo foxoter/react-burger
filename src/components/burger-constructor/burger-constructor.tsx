@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 
@@ -16,7 +16,7 @@ import { ADD_INGREDIENT, DELETE_ORDER_ID, REWRITE_INGREDIENTS, placeOrder } from
 import { checkAuth } from '../../services/actions/user';
 import { useHistory } from 'react-router-dom';
 
-function BurgerConstructor() {
+const BurgerConstructor: FC = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const { constructorItems } = useSelector((state: AppStateTypes) => state.burger);
   const { currentOrderId } = useSelector((state: AppStateTypes) => state.order);
@@ -116,4 +116,4 @@ function BurgerConstructor() {
   );
 }
 
-export default React.memo(BurgerConstructor);
+export default memo(BurgerConstructor);

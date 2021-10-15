@@ -1,21 +1,21 @@
-import BurgersDataTypes from './burgers-data-types';
+import TBurgersDataTypes from './t-burgers-data-types';
 import { UserDataTypes } from './user-data-types';
 
 type AppStateTypes = {
   ingredients: {
     ingredientsRequest: boolean
     ingredientsFailed: boolean
-    ingredientsList: BurgersDataTypes[]
+    ingredientsList: TBurgersDataTypes[]
 
-    constructorItems: BurgersDataTypes[]
-    currentIngredient: BurgersDataTypes
+    constructorItems: TBurgersDataTypes[]
+    currentIngredient: TBurgersDataTypes
   },
   order: {
     currentOrder: string[]
     currentOrderId: string
   },
   burger: {
-    constructorItems: BurgersDataTypes[]
+    constructorItems: TBurgersDataTypes[]
   },
   user: {
     currentUser: null | UserDataTypes

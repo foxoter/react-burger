@@ -4,7 +4,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import burgerIngredientsStyles from './burger-ingredients.module.css';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
-import BurgersDataTypes from '../../types/burgers-data-types';
+import TBurgersDataTypes from '../../types/t-burgers-data-types';
 import AppStateTypes from '../../types/app-state-types';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -65,7 +65,7 @@ function BurgerIngredients() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  const openDetails = (data: BurgersDataTypes) => {
+  const openDetails = (data: TBurgersDataTypes) => {
     dispatch({ type: ADD_CURRENT_INGREDIENT, ingredient: data});
     history.push(`/ingredients/${data._id}`, { background: location, ingredient: data });
   }

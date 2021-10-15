@@ -1,11 +1,11 @@
 import React from 'react';
 
 import ingredientDetailsStyles from './ingredient-details.module.css';
-import BurgersDataTypes from '../../types/burgers-data-types';
+import TBurgersDataTypes from '../../types/t-burgers-data-types';
 import modalStyles from '../modal/modal.module.css';
 
 type Props = {
-  ingredient?: BurgersDataTypes | null
+  ingredient?: TBurgersDataTypes | null
 }
 
 const IngredientDetails = (props: Props) => {

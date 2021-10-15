@@ -1,29 +1,31 @@
-import React, { MutableRefObject, useRef } from 'react';
+import { memo, FC, MutableRefObject, useRef } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { XYCoord } from 'dnd-core'
 
 import burgerConstructorItemStyles from './burger-constructor-item.module.css';
-import BurgersDataTypes from '../../types/burgers-data-types';
+import TBurgersDataTypes from '../../types/t-burgers-data-types';
 
 import { DELETE_INGREDIENT } from '../../services/actions/ingredients';
 
 type Props = {
   index: number
-  data: BurgersDataTypes
+  data: TBurgersDataTypes
   headItem?: boolean
   tailItem?: boolean
   moveItem: (dragIndex: number, hoverIndex: number) => void
 }
 
-type DragItemProps = {
-  index: number
-}
-
-function BurgerConstructorItem(props: Props) {
-  const ref = useRef() as MutableRefObject<HTMLDivElement>;
-  const { moveItem, index, data: { image, name, price, _id }, headItem, tailItem } = props;
+const BurgerConstructorItem: FC<Props> = (
+  { moveItem,
+    index,
+    data: { image, name, price, _id },
+    headItem,
+    tailItem
+  }) =>
+{
+  const ref = useRef<HTMLDivElement>(null);
   const type = headItem ? "top" : tailItem ? "bottom" : undefined;
   const title = headItem ? `${name} (верх)` : tailItem ? `${name} (низ)` : name;
   const dragIcon = !(headItem || tailItem);
@@ -42,7 +44,7 @@ function BurgerConstructorItem(props: Props) {
         handlerId: monitor.getHandlerId(),
       }
     },
-    hover(item: DragItemProps, monitor) {
+    hover(item: { index: number }, monitor) {
       if (!ref.current) {
         return
       }
@@ -101,4 +103,4 @@ function BurgerConstructorItem(props: Props) {
   )
 }
 
-export default React.memo(BurgerConstructorItem);
+export default memo(BurgerConstructorItem);

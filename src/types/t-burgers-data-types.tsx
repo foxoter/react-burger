@@ -1,4 +1,4 @@
-type BurgersDataTypes = {
+type TBurgersDataTypes = {
   _id: string
   name: string
   type: string
@@ -14,4 +14,4 @@ type BurgersDataTypes = {
   uuid?: string
 }
 
-export default BurgersDataTypes;
+export default TBurgersDataTypes;

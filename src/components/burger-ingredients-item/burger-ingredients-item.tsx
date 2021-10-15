@@ -2,12 +2,12 @@ import React from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from "react-dnd";
 
-import BurgersDataTypes from '../../types/burgers-data-types';
+import TBurgersDataTypes from '../../types/t-burgers-data-types';
 import burgerIngredientStyles from './burger-ingredients-item.module.css';
 
 type Props = {
-  data: BurgersDataTypes
-  onShowDetails: (ingredient: BurgersDataTypes) => void
+  data: TBurgersDataTypes
+  onShowDetails: (ingredient: TBurgersDataTypes) => void
   count: number
 }
 

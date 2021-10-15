@@ -11,13 +11,13 @@ import IngredientPage from '../../pages/ingredient';
 import * as H from 'history';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import BurgersDataTypes from '../../types/burgers-data-types';
+import TBurgersDataTypes from '../../types/t-burgers-data-types';
 import { useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 
 type LocationState = {
   background?: H.Location
-  ingredient?: BurgersDataTypes
+  ingredient?: TBurgersDataTypes
 }
 
 function App() {
