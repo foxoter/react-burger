@@ -3,7 +3,6 @@ import appStyles from './app.module.css'
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import MainContainer from '../main-container/main-container';
-import { mainTitle } from '../../utils/menu-titles-data';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, NotFoundError } from '../../pages';
 import ProtectedRoute from '../protected-route/protected-route';
 import OrderHistory from '../../pages/order-history';
@@ -55,7 +54,7 @@ function App() {
             <OrderHistory />
           </ProtectedRoute>
           <Route path='/' exact>
-            <MainContainer title={mainTitle}/>
+            <MainContainer />
           </Route>
           <Route path='/ingredients/:ingredientId'>
             <IngredientPage />
