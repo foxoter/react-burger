@@ -8,12 +8,13 @@ import BurgerConstructorItem from '../burger-constructor-item/burger-constructor
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 
-import { ADD_INGREDIENT, DELETE_ORDER_ID, REWRITE_INGREDIENTS, placeOrder } from '../../services/actions/ingredients';
+import { addIngredientAction, deleteOrderIdAction, rewriteIngredientsAction, placeOrder } from '../../services/actions/ingredients';
 import { checkAuth } from '../../services/actions/user';
 import { useHistory } from 'react-router-dom';
 
 import burgerConstructorStyles from './burger-constructor.module.css';
 import AppStateTypes from '../../services/types/app-state-types';
+import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 
 const BurgerConstructor: FC = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -22,8 +23,8 @@ const BurgerConstructor: FC = () => {
   const { currentUser } = useSelector((state: AppStateTypes) => state.user);
   const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(ingredientData) {
-      dispatch({ type: ADD_INGREDIENT, payload: ingredientData });
+    drop(ingredientData: TBurgersDataTypes) {
+      dispatch(addIngredientAction(ingredientData));
     },
     collect: monitor => ({
       isHover: monitor.isOver(),
@@ -51,7 +52,7 @@ const BurgerConstructor: FC = () => {
         ],
       });
       const resultArr = storageArrCopy.filter(i => i.type === 'bun').concat(...newArr);
-      dispatch({ type: REWRITE_INGREDIENTS, payload: resultArr });
+      dispatch(rewriteIngredientsAction(resultArr));
     },
     [constructorItems, dispatch, otherItems]);
 
@@ -68,7 +69,7 @@ const BurgerConstructor: FC = () => {
 
   const closeOrder = () => {
     setIsDetailsOpen(false);
-    dispatch({ type: DELETE_ORDER_ID });
+    dispatch(deleteOrderIdAction());
   }
 
   const openOrder = () => {

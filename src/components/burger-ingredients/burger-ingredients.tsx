@@ -8,7 +8,7 @@ import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 import AppStateTypes from '../../services/types/app-state-types';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ADD_CURRENT_INGREDIENT } from '../../services/actions/ingredients';
+import { ADD_CURRENT_INGREDIENT } from '../../services/constants/ingredients';
 
 import { useHistory, useLocation } from 'react-router-dom';
 

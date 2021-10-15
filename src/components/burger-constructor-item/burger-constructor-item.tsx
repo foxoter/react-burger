@@ -7,7 +7,7 @@ import { XYCoord } from 'dnd-core'
 import burgerConstructorItemStyles from './burger-constructor-item.module.css';
 import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 
-import { DELETE_INGREDIENT } from '../../services/actions/ingredients';
+import { deleteIngredientAction } from '../../services/actions/ingredients';
 
 type Props = {
   index: number
@@ -34,7 +34,7 @@ const BurgerConstructorItem: FC<Props> = (
   const dispatch = useDispatch();
 
   const deleteIngredient = () => {
-    dispatch({ type: DELETE_INGREDIENT, payload: _id});
+    dispatch(deleteIngredientAction(_id));
   }
 
   const [{ handlerId }, dropRef] = useDrop({

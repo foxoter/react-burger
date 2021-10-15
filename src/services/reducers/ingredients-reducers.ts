@@ -11,7 +11,7 @@ import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   REWRITE_INGREDIENTS
-} from '../actions/ingredients';
+} from '../constants/ingredients';
 
 const burgerConstructorInitialState = {
   constructorItems: [],
