@@ -1,20 +1,19 @@
 import { memo, FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from 'react-redux';
 
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import OrderDetails from '../order-details/order-details';
-
-import burgerConstructorStyles from './burger-constructor.module.css';
-import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../modal/modal';
-
-import { useDispatch, useSelector } from 'react-redux';
-import AppStateTypes from '../../types/app-state-types';
 
 import { ADD_INGREDIENT, DELETE_ORDER_ID, REWRITE_INGREDIENTS, placeOrder } from '../../services/actions/ingredients';
 import { checkAuth } from '../../services/actions/user';
 import { useHistory } from 'react-router-dom';
+
+import burgerConstructorStyles from './burger-constructor.module.css';
+import AppStateTypes from '../../types/app-state-types';
 
 const BurgerConstructor: FC = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);

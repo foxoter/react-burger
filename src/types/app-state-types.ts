@@ -6,7 +6,6 @@ type AppStateTypes = {
     ingredientsRequest: boolean
     ingredientsFailed: boolean
     ingredientsList: TBurgersDataTypes[]
-
     constructorItems: TBurgersDataTypes[]
     currentIngredient: TBurgersDataTypes
   },
