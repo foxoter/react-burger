@@ -6,6 +6,7 @@ import {
 } from '../constants/order';
 import { OrderDataTypes } from '../types/order-data-types';
 import { sendOrderData } from '../../helpers/api';
+import { AppDispatch, AppThunk } from '../types';
 
 export interface IPlaceOrderRequestAction {
   readonly type: typeof PLACE_ORDER_REQUEST;
@@ -46,8 +47,8 @@ export const deleteOrderIdAction = (): IDeleteOrderIdAction => ({
   type: DELETE_ORDER_ID,
 });
 
-export function placeOrder(order: OrderDataTypes) {
-  return function (dispatch: any) {
+export const placeOrder: AppThunk = (order: OrderDataTypes) => {
+  return function (dispatch: AppDispatch) {
     dispatch(placeOrderRequestAction());
     sendOrderData(order)
       .then(res => {

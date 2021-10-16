@@ -9,6 +9,4 @@ import { store } from '../store';
 export type TAppActions = TBurgerActions | TIngredientsActions | TOrderActions | TUserActions;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export type AppThunk<ReturnType = void> = ActionCreator<
-  ThunkAction<ReturnType, Action, RootState, TAppActions>
-  >;
+export type AppThunk<ReturnType = void> = ActionCreator<ThunkAction<ReturnType, Action, RootState, TAppActions>>;
