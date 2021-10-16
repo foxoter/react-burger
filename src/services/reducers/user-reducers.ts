@@ -20,7 +20,7 @@ import {
   UPDATE_USER_FAILED,
   UPDATE_USER_SUCCESS,
 } from '../constants/user';
-import { TNewUserData } from '../types/user-data-types';
+import { TNewUserData } from '../types/auth-form-types';
 import { TUserActions } from '../actions/user';
 
 type TUserInitialState = {

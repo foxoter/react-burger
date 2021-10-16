@@ -2,7 +2,7 @@ import { memo, FC, useCallback, useEffect } from 'react';
 import AuthForm from '../components/auth-form/auth-form';
 import Loader from '../components/loader/loader';
 import { useDispatch, useSelector } from '../services/hooks';
-import { ResetPasswordTypes } from '../services/types/reset-password-types';
+import { TAuthFormData } from '../services/types/auth-form-types';
 import { checkAuth, handlePasswordUpdate } from '../services/actions/user';
 import { Redirect, useLocation } from 'react-router-dom';
 import { LocationStateTypes } from '../services/types/location-state-types';
@@ -16,7 +16,7 @@ const ResetPassword: FC = () => {
   } = useSelector(state => state.user);
   const { state } = useLocation<LocationStateTypes>();
 
-  const onSubmit = useCallback((data: ResetPasswordTypes) => {
+  const onSubmit = useCallback((data: TAuthFormData) => {
     dispatch(handlePasswordUpdate(data));
   }, [dispatch]);
 

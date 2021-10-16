@@ -3,7 +3,6 @@ import AuthForm from '../components/auth-form/auth-form';
 
 import { authUser, checkAuth } from '../services/actions/user';
 import { useDispatch, useSelector } from '../services/hooks';
-import { UserDataTypes } from '../services/types/user-data-types';
 import { Redirect, useLocation } from 'react-router-dom';
 import { LocationStateTypes } from '../services/types/location-state-types';
 import Loader from '../components/loader/loader';

@@ -1,5 +1,4 @@
-import { UserDataTypes, TNewUserData } from '../types/user-data-types';
-import { ResetPasswordTypes } from '../types/reset-password-types';
+import { TNewUserData, TAuthFormData } from '../types/auth-form-types';
 import {
   sendNewUserData,
   sendAuthData,
@@ -224,7 +223,7 @@ export type TUserActions =
   | IUpdateUserFailedAction
 
 
-export const handleResetPasswordRequest: AppThunk = (data: ResetPasswordTypes) => {
+export const handleResetPasswordRequest: AppThunk = (data: TAuthFormData) => {
   return function (dispatch: AppDispatch) {
     dispatch(resetPasswordRequestAction());
     resetPasswordRequest(data)
@@ -243,7 +242,7 @@ export const handleResetPasswordRequest: AppThunk = (data: ResetPasswordTypes) =
   }
 }
 
-export const handlePasswordUpdate: AppThunk = (data: ResetPasswordTypes) => {
+export const handlePasswordUpdate: AppThunk = (data: TAuthFormData) => {
   return function (dispatch: AppDispatch) {
     dispatch(updatePasswordRequestAction());
     confirmPasswordReset(data)
@@ -262,7 +261,7 @@ export const handlePasswordUpdate: AppThunk = (data: ResetPasswordTypes) => {
   }
 }
 
-export const registerUser: AppThunk = (data: UserDataTypes) => {
+export const registerUser: AppThunk = (data: TAuthFormData) => {
   return function (dispatch: AppDispatch) {
     dispatch(registerUserRequestAction());
     sendNewUserData(data)
@@ -279,7 +278,7 @@ export const registerUser: AppThunk = (data: UserDataTypes) => {
   }
 }
 
-export const authUser: AppThunk = (data: UserDataTypes) => {
+export const authUser: AppThunk = (data: TAuthFormData) => {
   return function (dispatch: AppDispatch) {
     dispatch(loginUserRequestAction());
     sendAuthData(data)
@@ -327,7 +326,7 @@ export const checkAuth: AppThunk = () => {
   }
 }
 
-export const updateUserInfo: AppThunk = (data: UserDataTypes) => {
+export const updateUserInfo: AppThunk = (data: TAuthFormData) => {
   return function (dispatch: AppDispatch | AppThunk) {
     dispatch(updateUserRequestAction());
     patchUserData(data)
