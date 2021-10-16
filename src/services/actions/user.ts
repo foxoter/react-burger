@@ -33,6 +33,7 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILED,
 } from '../constants/user';
+import { AppDispatch, AppThunk } from '../types';
 
 export interface IRegisterUserRequestAction {
   readonly type: typeof REGISTER_USER_REQUEST;
@@ -223,8 +224,8 @@ export type TUserActions =
   | IUpdateUserFailedAction
 
 
-export function handleResetPasswordRequest(data: ResetPasswordTypes) {
-  return function (dispatch: any) {
+export const handleResetPasswordRequest: AppThunk = (data: ResetPasswordTypes) => {
+  return function (dispatch: AppDispatch) {
     dispatch(resetPasswordRequestAction());
     resetPasswordRequest(data)
       .then(res => {
@@ -242,8 +243,8 @@ export function handleResetPasswordRequest(data: ResetPasswordTypes) {
   }
 }
 
-export function handlePasswordUpdate(data: ResetPasswordTypes) {
-  return function (dispatch: any) {
+export const handlePasswordUpdate: AppThunk = (data: ResetPasswordTypes) => {
+  return function (dispatch: AppDispatch) {
     dispatch(updatePasswordRequestAction());
     confirmPasswordReset(data)
       .then(res => {
@@ -261,8 +262,8 @@ export function handlePasswordUpdate(data: ResetPasswordTypes) {
   }
 }
 
-export function registerUser(data: UserDataTypes) {
-  return function (dispatch: any) {
+export const registerUser: AppThunk = (data: UserDataTypes) => {
+  return function (dispatch: AppDispatch) {
     dispatch(registerUserRequestAction());
     sendNewUserData(data)
       .then(res => {
@@ -278,8 +279,8 @@ export function registerUser(data: UserDataTypes) {
   }
 }
 
-export function authUser(data: UserDataTypes) {
-  return function (dispatch: any) {
+export const authUser: AppThunk = (data: UserDataTypes) => {
+  return function (dispatch: AppDispatch) {
     dispatch(loginUserRequestAction());
     sendAuthData(data)
       .then(res => {
@@ -295,8 +296,8 @@ export function authUser(data: UserDataTypes) {
   }
 }
 
-export function checkAuth() {
-  return function (dispatch: any) {
+export const checkAuth: AppThunk = () => {
+  return function (dispatch: AppDispatch | AppThunk) {
     dispatch(loginUserRequestAction());
     getUserData()
       .then(res => {
@@ -326,8 +327,8 @@ export function checkAuth() {
   }
 }
 
-export function updateUserInfo(data: UserDataTypes) {
-  return function (dispatch: any) {
+export const updateUserInfo: AppThunk = (data: UserDataTypes) => {
+  return function (dispatch: AppDispatch | AppThunk) {
     dispatch(updateUserRequestAction());
     patchUserData(data)
       .then(res => {
@@ -357,8 +358,8 @@ export function updateUserInfo(data: UserDataTypes) {
   }
 }
 
-export function logoutUser() {
-  return function (dispatch: any) {
+export const logoutUser: AppThunk = () => {
+  return function (dispatch: AppDispatch) {
     dispatch(logoutUserRequestAction());
     clearUserData()
       .then(res => {
