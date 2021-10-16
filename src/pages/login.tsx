@@ -7,13 +7,14 @@ import { UserDataTypes } from '../services/types/user-data-types';
 import { Redirect, useLocation } from 'react-router-dom';
 import { LocationStateTypes } from '../services/types/location-state-types';
 import Loader from '../components/loader/loader';
+import { TAuthFormData } from '../services/types/auth-form-types';
 
 const Login: FC = () => {
   const dispatch = useDispatch();
   const { currentUser, userLoginRequest } = useSelector(state => state.user);
   const { state } = useLocation<LocationStateTypes>();
 
-  const onLogin = (data: UserDataTypes) => {
+  const onLogin = (data: TAuthFormData) => {
     dispatch(authUser(data));
   }
 

@@ -7,11 +7,11 @@ import authFormStyles from './auth-form.module.css';
 
 type Props = {
   type: string
-  submitCallback?: any
+  submitCallback?: (data: TAuthFormData) => void
 }
 
 const AuthForm: FC<Props> = ({ type, submitCallback }) => {
-  let stateKeys;
+  let stateKeys: TAuthFormData = {name: '', email: ''};
   let buttonText;
   let title;
   switch (type) {
@@ -106,10 +106,10 @@ const AuthForm: FC<Props> = ({ type, submitCallback }) => {
     <section className={authFormStyles.container}>
       <h2 className="text text_type_main-medium mb-6">{title}</h2>
       <form onSubmit={submit} className={authFormStyles.form}>
-        {formData.name !== undefined && <Input value={formData.name} name={'name'} onChange={onChange} placeholder={'Имя'} />}
-        {formData.email !== undefined && <EmailInput value={formData.email} name={'email'} onChange={onChange}/>}
-        {formData.password !== undefined && <PasswordInput value={formData.password} name={'password'} onChange={onChange}/>}
-        {formData.token !== undefined && <Input value={formData.token} name={'token'} onChange={onChange} placeholder={'Код из письма'}/>}
+        {'name' in formData && formData.name !== undefined && <Input value={formData.name} name={'name'} onChange={onChange} placeholder={'Имя'} />}
+        {'email' in formData && formData.email !== undefined && <EmailInput value={formData.email} name={'email'} onChange={onChange}/>}
+        {'password' in formData && formData !== undefined && <PasswordInput value={formData.password} name={'password'} onChange={onChange}/>}
+        {'token' in formData && formData !== undefined && <Input value={formData.token} name={'token'} onChange={onChange} placeholder={'Код из письма'}/>}
         <Button type='primary' size="medium">{buttonText}</Button>
       </form>
       {bottomLinks}

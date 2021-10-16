@@ -4,7 +4,7 @@ import { Redirect, useLocation } from 'react-router-dom';
 
 import AuthForm from '../components/auth-form/auth-form';
 import { checkAuth, registerUser } from '../services/actions/user';
-import { UserDataTypes } from '../services/types/user-data-types';
+import { TAuthFormData } from '../services/types/auth-form-types';
 import { LocationStateTypes } from '../services/types/location-state-types';
 
 const Register: FC = () => {
@@ -12,7 +12,7 @@ const Register: FC = () => {
   const { currentUser, userLoginRequest } = useSelector(state => state.user);
   const { state } = useLocation<LocationStateTypes>();
 
-  const onRegister = (data: UserDataTypes) => {
+  const onRegister = (data: TAuthFormData) => {
     dispatch(registerUser(data));
   }
 

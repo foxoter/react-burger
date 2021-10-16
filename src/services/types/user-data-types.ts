@@ -1,18 +1,17 @@
-export type TNewUser = {
+export type TNewUserData = {
   email: string;
   name: string;
 }
 
-type UserRegisterTypes = {
+type TUserRegisterData = {
   email: string
   password: string
   name: string
 }
 
-type UserAuthTypes = {
+type TUserAuthData = {
   email: string
-  name?: string
   password: string
 }
 
-export type UserDataTypes = UserRegisterTypes | UserAuthTypes
+export type UserDataTypes = TUserRegisterData | TUserAuthData

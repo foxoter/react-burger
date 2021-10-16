@@ -20,11 +20,11 @@ import {
   UPDATE_USER_FAILED,
   UPDATE_USER_SUCCESS,
 } from '../constants/user';
-import { TNewUser } from '../types/user-data-types';
+import { TNewUserData } from '../types/user-data-types';
 import { TUserActions } from '../actions/user';
 
 type TUserInitialState = {
-  currentUser: TNewUser | null;
+  currentUser: TNewUserData | null;
   userRegisterRequest: boolean;
   userRegisterFailed: boolean;
   userLoginRequest: boolean;

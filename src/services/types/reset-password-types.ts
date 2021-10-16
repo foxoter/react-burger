@@ -1,10 +1,10 @@
-type resetPasswordRequestTypes = {
+type TResetPasswordRequestData = {
   email: string
 }
 
-type confirmPasswordResetTypes = {
+type TConfirmPasswordResetData = {
   password: string
   token: string
 }
 
-export type ResetPasswordTypes = resetPasswordRequestTypes | confirmPasswordResetTypes
+export type ResetPasswordTypes = TResetPasswordRequestData | TConfirmPasswordResetData

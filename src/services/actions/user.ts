@@ -1,4 +1,4 @@
-import { UserDataTypes, TNewUser } from '../types/user-data-types';
+import { UserDataTypes, TNewUserData } from '../types/user-data-types';
 import { ResetPasswordTypes } from '../types/reset-password-types';
 import {
   sendNewUserData,
@@ -45,10 +45,10 @@ export const registerUserRequestAction = (): IRegisterUserRequestAction => ({
 
 export interface IRegisterUserSuccessAction {
   readonly type: typeof REGISTER_USER_SUCCESS;
-  readonly user: TNewUser;
+  readonly user: TNewUserData;
 }
 
-export const registerUserSuccessAction = (user: TNewUser): IRegisterUserSuccessAction => ({
+export const registerUserSuccessAction = (user: TNewUserData): IRegisterUserSuccessAction => ({
   type: REGISTER_USER_SUCCESS,
   user,
 });
@@ -71,10 +71,10 @@ export const loginUserRequestAction = (): ILoginUserRequestAction => ({
 
 export interface ILoginUserSuccessAction {
   readonly type: typeof LOGIN_USER_SUCCESS;
-  readonly user: TNewUser;
+  readonly user: TNewUserData;
 }
 
-export const loginUserSuccessAction = (user: TNewUser): ILoginUserSuccessAction => ({
+export const loginUserSuccessAction = (user: TNewUserData): ILoginUserSuccessAction => ({
   type: LOGIN_USER_SUCCESS,
   user
 });
@@ -185,10 +185,10 @@ export const updateUserRequestAction = (): IUpdateUserRequestAction => ({
 
 export interface IUpdateUserSuccessAction {
   readonly type: typeof UPDATE_USER_SUCCESS;
-  readonly user: TNewUser
+  readonly user: TNewUserData
 }
 
-export const updateUserSuccessAction = (user: TNewUser): IUpdateUserSuccessAction => ({
+export const updateUserSuccessAction = (user: TNewUserData): IUpdateUserSuccessAction => ({
   type: UPDATE_USER_SUCCESS,
   user,
 });
