@@ -1,5 +1,5 @@
 import { getProductsData } from '../../helpers/api';
-
+import { AppDispatch, AppThunk } from '../types';
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
@@ -61,8 +61,8 @@ export const deleteCurrentIngredientAction = (): IDeleteCurrentIngredientAction 
 });
 
 
-export function getIngredients() {
-  return function(dispatch: any) {
+export const getIngredients: AppThunk = () => {
+  return function(dispatch: AppDispatch) {
     dispatch(getIngredientsRequestAction());
     getProductsData()
       .then(res => {
