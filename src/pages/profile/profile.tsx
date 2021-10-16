@@ -1,4 +1,4 @@
-import { memo, FC, ChangeEvent, useCallback, useState } from 'react';
+import { memo, FC, ChangeEvent, useCallback, useState, SyntheticEvent } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -23,12 +23,12 @@ const Profile: FC = () => {
     setFormData({...formData, [e.target.name]: e.target.value});
   }
 
-  const submit = (e: any) => {
+  const submit = (e: SyntheticEvent) => {
     e.preventDefault();
     dispatch(updateUserInfo(formData));
   }
 
-  const onCancel = useCallback((e: any) => {
+  const onCancel = useCallback((e: SyntheticEvent) => {
     e.preventDefault();
     if (currentUser) {
       setFormData({ name: currentUser.name, email: currentUser.email, password: '' });
