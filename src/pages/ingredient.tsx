@@ -1,13 +1,12 @@
-import React  from 'react';
+import { memo, FC } from 'react';
 import { useParams } from 'react-router-dom';
 import IngredientDetails from '../components/ingredient-details/ingredient-details';
-import { useSelector } from 'react-redux';
-import AppStateTypes from '../services/types/app-state-types';
+import { useSelector } from '../services/hooks';
 import Loader from '../components/loader/loader';
 import NotFoundError from './not-found-error';
 
-function IngredientPage() {
-  const { ingredientsList, ingredientsRequest, ingredientsFailed } = useSelector((state: AppStateTypes) => state.ingredients);
+const IngredientPage: FC = () => {
+  const { ingredientsList, ingredientsRequest, ingredientsFailed } = useSelector(state => state.ingredients);
   const { ingredientId } = useParams<{ ingredientId: string }>();
 
   let ingredient = null;
@@ -34,4 +33,4 @@ function IngredientPage() {
 
 }
 
-export default IngredientPage;
+export default memo(IngredientPage);

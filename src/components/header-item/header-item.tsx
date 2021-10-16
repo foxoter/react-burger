@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { useRouteMatch } from "react-router-dom";
 import { TIconProps } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/utils';
 
-
 import headerItemStyles from './header-item.module.css'
 
 type Props = {

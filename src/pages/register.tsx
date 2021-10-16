@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { memo, FC, useEffect } from 'react';
+import { useDispatch, useSelector } from '../services/hooks';
 import { Redirect, useLocation } from 'react-router-dom';
 
 import AuthForm from '../components/auth-form/auth-form';
 import { checkAuth, registerUser } from '../services/actions/user';
 import { UserDataTypes } from '../services/types/user-data-types';
-import AppStateTypes from '../services/types/app-state-types';
 import { LocationStateTypes } from '../services/types/location-state-types';
 
-function Register() {
+const Register: FC = () => {
   const dispatch = useDispatch();
-  const { currentUser, userLoginRequest } = useSelector((state: AppStateTypes) => state.user);
+  const { currentUser, userLoginRequest } = useSelector(state => state.user);
   const { state } = useLocation<LocationStateTypes>();
 
   const onRegister = (data: UserDataTypes) => {
@@ -34,4 +33,4 @@ function Register() {
   return <AuthForm type='register' submitCallback={onRegister} />
 }
 
-export default React.memo(Register);
+export default memo(Register);

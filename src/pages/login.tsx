@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
+import { memo, FC, useEffect } from 'react';
 import AuthForm from '../components/auth-form/auth-form';
 
 import { authUser, checkAuth } from '../services/actions/user';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../services/hooks';
 import { UserDataTypes } from '../services/types/user-data-types';
-import AppStateTypes from '../services/types/app-state-types';
 import { Redirect, useLocation } from 'react-router-dom';
 import { LocationStateTypes } from '../services/types/location-state-types';
 import Loader from '../components/loader/loader';
 
-function Login() {
+const Login: FC = () => {
   const dispatch = useDispatch();
-  const { currentUser, userLoginRequest } = useSelector((state: AppStateTypes) => state.user);
+  const { currentUser, userLoginRequest } = useSelector(state => state.user);
   const { state } = useLocation<LocationStateTypes>();
 
   const onLogin = (data: UserDataTypes) => {
@@ -35,4 +34,4 @@ function Login() {
   return <AuthForm type='login' submitCallback={onLogin} />
 }
 
-export default React.memo(Login);
+export default memo(Login);

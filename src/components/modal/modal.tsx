@@ -1,10 +1,10 @@
 import { memo, FC, useEffect, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
+import { useHistory } from 'react-router-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import modalStyles from './modal.module.css';
-import { useHistory } from 'react-router-dom';
 
 type Props = {
   children: ReactNode

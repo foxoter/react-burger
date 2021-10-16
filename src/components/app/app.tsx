@@ -11,7 +11,7 @@ import * as H from 'history';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import { getIngredients } from '../../services/actions/ingredients';
 
 type LocationState = {

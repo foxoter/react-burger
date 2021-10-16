@@ -2,7 +2,7 @@ import { memo, FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import OrderDetails from '../order-details/order-details';
@@ -14,14 +14,13 @@ import { checkAuth } from '../../services/actions/user';
 import { useHistory } from 'react-router-dom';
 
 import burgerConstructorStyles from './burger-constructor.module.css';
-import AppStateTypes from '../../services/types/app-state-types';
 import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 
 const BurgerConstructor: FC = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const { constructorItems } = useSelector((state: AppStateTypes) => state.burger);
-  const { currentOrderId } = useSelector((state: AppStateTypes) => state.order);
-  const { currentUser } = useSelector((state: AppStateTypes) => state.user);
+  const { constructorItems } = useSelector(state => state.burger);
+  const { currentOrderId } = useSelector(state => state.order);
+  const { currentUser } = useSelector(state => state.user);
   const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredient",
     drop(ingredientData: TBurgersDataTypes) {

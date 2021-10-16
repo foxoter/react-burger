@@ -5,12 +5,11 @@ import burgerIngredientsStyles from './burger-ingredients.module.css';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
 import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
-import AppStateTypes from '../../services/types/app-state-types';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { ADD_CURRENT_INGREDIENT } from '../../services/constants/ingredients';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import { useHistory, useLocation } from 'react-router-dom';
+import { addCurrentIngredientAction } from '../../services/actions/ingredients';
 
 const SUBTITLES: { [key: string]: string } = {
   bun: "Булки",
@@ -31,8 +30,8 @@ const BurgerIngredients: FC = () => {
     ingredientsRequest,
     ingredientsFailed,
     ingredientsList,
-  } = useSelector((state: AppStateTypes) => state.ingredients);
-  const { constructorItems } = useSelector((state: AppStateTypes) => state.burger);
+  } = useSelector(state => state.ingredients);
+  const { constructorItems } = useSelector(state => state.burger);
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -66,7 +65,7 @@ const BurgerIngredients: FC = () => {
   }
 
   const openDetails = (data: TBurgersDataTypes) => {
-    dispatch({ type: ADD_CURRENT_INGREDIENT, ingredient: data});
+    dispatch(addCurrentIngredientAction(data));
     history.push(`/ingredients/${data._id}`, { background: location, ingredient: data });
   }
 

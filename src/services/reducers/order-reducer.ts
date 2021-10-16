@@ -10,7 +10,7 @@ import {
 type TOrderInitialState = {
   currentOrderRequest: boolean;
   currentOrderFailed: boolean;
-  currentOrderId: number | null;
+  currentOrderId: string | null;
 }
 
 const orderInitialState: TOrderInitialState = {
