@@ -8,7 +8,7 @@ import modalStyles from './modal.module.css';
 
 type Props = {
   children: ReactNode
-  heading?: string
+  heading: string
   handleClose?: () => void
 }
 
@@ -33,7 +33,7 @@ const Modal: FC<Props> = ({ heading, handleClose, children }) => {
   const renderHeading = () => {
     return (
       <div className={modalStyles.header}>
-        <p className={`${modalStyles.heading} text text_type_main-medium`}>{heading || 'Детали ингредиента'}</p>
+        <p className={`${modalStyles.heading} text text_type_main-medium`}>{heading}</p>
         <CloseIcon type="primary" onClick={onClose} />
       </div>
     )

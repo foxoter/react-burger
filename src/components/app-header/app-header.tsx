@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { NavLink } from 'react-router-dom';
 
 import appHeaderStyles from './app-header.module.css';
 
@@ -25,7 +26,9 @@ const AppHeader: FC = () => {
       <nav className={appHeaderStyles.navigation}>
         <ul className={appHeaderStyles.list}>
           <li className={appHeaderStyles.logo}>
-            <Logo/>
+            <NavLink to='/'>
+              <Logo/>
+            </NavLink>
           </li>
           {renderMenuItems()}
         </ul>
