@@ -4,10 +4,11 @@ import Loader from '../components/loader/loader';
 import { useDispatch, useSelector } from '../services/hooks';
 import { TAuthFormData } from '../services/types/auth-form-types';
 import { checkAuth, handlePasswordUpdate } from '../services/actions/user';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect, useLocation, useHistory } from 'react-router-dom';
 import { LocationStateTypes } from '../services/types/location-state-types';
 
 const ResetPassword: FC = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const {
     updatePasswordSuccess,
@@ -30,7 +31,7 @@ const ResetPassword: FC = () => {
     )
   }
 
-  if (state?.referrer !== 'forgot-password') {
+  if (state?.referrer !== 'forgot-password' || history.action === 'POP') {
     return (
       <Redirect to={ state?.from || '/login' } />
     )
