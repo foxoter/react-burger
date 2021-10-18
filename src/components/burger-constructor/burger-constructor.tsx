@@ -1,30 +1,30 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from '../../services/hooks';
 
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item';
 import OrderDetails from '../order-details/order-details';
-
-import burgerConstructorStyles from './burger-constructor.module.css';
-import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../modal/modal';
 
-import { useDispatch, useSelector } from 'react-redux';
-import AppStateTypes from '../../types/app-state-types';
-
-import { ADD_INGREDIENT, DELETE_ORDER_ID, REWRITE_INGREDIENTS, placeOrder } from '../../services/actions/ingredients';
+import { addIngredientAction, rewriteIngredientsAction } from '../../services/actions/burger';
+import { deleteOrderIdAction, placeOrder } from '../../services/actions/order';
 import { checkAuth } from '../../services/actions/user';
 import { useHistory } from 'react-router-dom';
 
-function BurgerConstructor() {
+import burgerConstructorStyles from './burger-constructor.module.css';
+import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
+
+const BurgerConstructor: FC = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const { constructorItems } = useSelector((state: AppStateTypes) => state.burger);
-  const { currentOrderId } = useSelector((state: AppStateTypes) => state.order);
-  const { currentUser } = useSelector((state: AppStateTypes) => state.user);
+  const { constructorItems } = useSelector(state => state.burger);
+  const { currentOrderId } = useSelector(state => state.order);
+  const { currentUser } = useSelector(state => state.user);
   const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(ingredientData) {
-      dispatch({ type: ADD_INGREDIENT, payload: ingredientData });
+    drop(ingredientData: TBurgersDataTypes) {
+      dispatch(addIngredientAction(ingredientData));
     },
     collect: monitor => ({
       isHover: monitor.isOver(),
@@ -52,7 +52,7 @@ function BurgerConstructor() {
         ],
       });
       const resultArr = storageArrCopy.filter(i => i.type === 'bun').concat(...newArr);
-      dispatch({ type: REWRITE_INGREDIENTS, payload: resultArr });
+      dispatch(rewriteIngredientsAction(resultArr));
     },
     [constructorItems, dispatch, otherItems]);
 
@@ -69,7 +69,7 @@ function BurgerConstructor() {
 
   const closeOrder = () => {
     setIsDetailsOpen(false);
-    dispatch({ type: DELETE_ORDER_ID });
+    dispatch(deleteOrderIdAction());
   }
 
   const openOrder = () => {
@@ -90,7 +90,7 @@ function BurgerConstructor() {
       ref={dropTarget}
     >
       {isDetailsOpen && currentOrderId &&
-        <Modal handleClose={closeOrder}>
+        <Modal handleClose={closeOrder} heading='Ваш заказ'>
           <OrderDetails orderId={currentOrderId}/>
         </Modal>
       }
@@ -116,4 +116,4 @@ function BurgerConstructor() {
   );
 }
 
-export default React.memo(BurgerConstructor);
+export default memo(BurgerConstructor);

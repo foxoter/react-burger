@@ -5,4 +5,3 @@ export const menuItems = [
     { title: 'Лента заказов', Icon: ListIcon, path: '/feed' },
     { title: 'Личный кабинет', Icon: ProfileIcon, path: '/profile' },
 ];
-export const mainTitle = 'Соберите бургер';

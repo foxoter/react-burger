@@ -1,19 +1,22 @@
-import React from 'react';
+import { FC, memo } from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from "react-dnd";
 
-import BurgersDataTypes from '../../types/burgers-data-types';
+import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 import burgerIngredientStyles from './burger-ingredients-item.module.css';
 
 type Props = {
-  data: BurgersDataTypes
-  onShowDetails: (ingredient: BurgersDataTypes) => void
+  data: TBurgersDataTypes
+  onShowDetails: (ingredient: TBurgersDataTypes) => void
   count: number
 }
 
-function BurgerIngredientsItem(props: Props) {
-  const { count, data, data: { image, name, price }, onShowDetails } = props;
-
+const BurgerIngredientsItem: FC<Props> = ({
+    count,
+    data,
+    data: { image, name, price },
+    onShowDetails
+  }) => {
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: {...data},
@@ -43,4 +46,4 @@ function BurgerIngredientsItem(props: Props) {
   );
 }
 
-export default React.memo(BurgerIngredientsItem);
+export default memo(BurgerIngredientsItem);

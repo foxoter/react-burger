@@ -1,17 +1,15 @@
-import React from 'react';
+import { memo, FC } from 'react';
 
 import orderDetailsStyles from './oder-details.module.css';
 import checkIconPath from '../../images/check.svg';
 
 type Props = {
-  orderId: number | string
+  orderId: string;
 }
 
-function OrderDetails(props: Props) {
-  const { orderId } = props
-
+const OrderDetails: FC<Props> = ({ orderId }) => {
   return (
-    <div>
+    <>
       <h1 className={`${orderDetailsStyles.order} text text_type_digits-large`}>{orderId}</h1>
       <p className={`${orderDetailsStyles.subtitle} text text_type_main-medium mb-15`}>идентификатор заказа</p>
       <img src={checkIconPath} alt="check-icon" className={orderDetailsStyles.check} />
@@ -21,8 +19,8 @@ function OrderDetails(props: Props) {
       >
         Дождитесь готовности на орбитальной станции
       </p>
-    </div>
+    </>
   )
 }
 
-export default React.memo(OrderDetails);
+export default memo(OrderDetails);

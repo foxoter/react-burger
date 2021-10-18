@@ -1,28 +1,27 @@
-import React, { useCallback, useEffect } from 'react';
+import { memo, FC, useCallback, useEffect } from 'react';
 import AuthForm from '../components/auth-form/auth-form';
 import { Redirect, useLocation } from 'react-router-dom'
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../services/hooks';
 import { checkAuth, handleResetPasswordRequest } from '../services/actions/user';
-import AppStateTypes from '../types/app-state-types';
-import { ResetPasswordTypes } from '../types/reset-password-types';
-import { LocationStateTypes } from '../types/location-state-types';
+import { TAuthFormData } from '../services/types/auth-form-types';
+import { LocationStateTypes } from '../services/types/location-state-types';
 import Loader from '../components/loader/loader';
 
-function ForgotPassword() {
+const ForgotPassword: FC = () => {
   const dispatch = useDispatch();
   const {
     currentUser,
     resetPasswordSuccess,
     userLoginRequest
-  } = useSelector((state: AppStateTypes) => state.user);
+  } = useSelector(state => state.user);
   const { state } = useLocation<LocationStateTypes>();
 
   useEffect(() => {
     dispatch(checkAuth());
   }, [dispatch]);
 
-  const onSubmit = useCallback((data: ResetPasswordTypes) => {
+  const onSubmit = useCallback((data: TAuthFormData) => {
     dispatch(handleResetPasswordRequest(data));
   }, [dispatch]);
 
@@ -43,4 +42,4 @@ function ForgotPassword() {
     )
 }
 
-export default ForgotPassword;
+export default memo(ForgotPassword);

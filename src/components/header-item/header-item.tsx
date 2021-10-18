@@ -1,18 +1,17 @@
-import React from 'react';
+import { memo, FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useRouteMatch } from "react-router-dom";
-
+import { TIconProps } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/utils';
 
 import headerItemStyles from './header-item.module.css'
 
 type Props = {
-  title: string
-  Icon: any
-  path: string
+  title: string;
+  Icon: ({ type }: TIconProps) => JSX.Element;
+  path: string;
 }
 
-function HeaderItem(props: Props) {
-  const { title, Icon, path } = props;
+const HeaderItem: FC<Props> = ({ title, Icon, path }) => {
   const match = useRouteMatch(path);
 
   const iconType = match?.isExact ? 'primary' : 'secondary';
@@ -39,4 +38,4 @@ function HeaderItem(props: Props) {
   );
 }
 
-export default React.memo(HeaderItem);
+export default memo(HeaderItem);

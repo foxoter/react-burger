@@ -3,7 +3,6 @@ import appStyles from './app.module.css'
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import MainContainer from '../main-container/main-container';
-import { mainTitle } from '../../utils/menu-titles-data';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, NotFoundError } from '../../pages';
 import ProtectedRoute from '../protected-route/protected-route';
 import OrderHistory from '../../pages/order-history';
@@ -11,13 +10,13 @@ import IngredientPage from '../../pages/ingredient';
 import * as H from 'history';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import BurgersDataTypes from '../../types/burgers-data-types';
-import { useDispatch } from 'react-redux';
+import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
+import { useDispatch } from '../../services/hooks';
 import { getIngredients } from '../../services/actions/ingredients';
 
 type LocationState = {
   background?: H.Location
-  ingredient?: BurgersDataTypes
+  ingredient?: TBurgersDataTypes
 }
 
 function App() {
@@ -29,7 +28,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={appStyles.app} id="app">
@@ -55,7 +54,7 @@ function App() {
             <OrderHistory />
           </ProtectedRoute>
           <Route path='/' exact>
-            <MainContainer title={mainTitle}/>
+            <MainContainer />
           </Route>
           <Route path='/ingredients/:ingredientId'>
             <IngredientPage />
@@ -68,7 +67,7 @@ function App() {
           <Route
             path='/ingredients/:ingredientId'
             children={
-              <Modal>
+              <Modal heading='Детали ингредиента'>
                 <IngredientDetails ingredient={ingredient}/>
               </Modal>
             }

@@ -17,10 +17,32 @@ import {
   RESET_PASSWORD_CLEAR,
   UPDATE_PASSWORD_CLEAR,
   UPDATE_USER_REQUEST,
-  UPDATE_USER_FAILED, UPDATE_USER_SUCCESS,
-} from '../actions/user';
+  UPDATE_USER_FAILED,
+  UPDATE_USER_SUCCESS,
+} from '../constants/user';
+import { TNewUserData } from '../types/auth-form-types';
+import { TUserActions } from '../actions/user';
 
-const userInitialState = {
+type TUserInitialState = {
+  currentUser: TNewUserData | null;
+  userRegisterRequest: boolean;
+  userRegisterFailed: boolean;
+  userLoginRequest: boolean;
+  userLoginFailed: boolean;
+  userLogoutRequest: boolean;
+  userLogoutFailed: boolean;
+  resetPasswordRequest: boolean;
+  resetPasswordSuccess: boolean;
+  resetPasswordFailed: boolean;
+  updatePasswordRequest: boolean;
+  updatePasswordSuccess: boolean;
+  updatePasswordFailed: boolean;
+  updateProfileRequest: boolean;
+  updateProfileSuccess: boolean;
+  updateProfileFailed: boolean;
+}
+
+const userInitialState: TUserInitialState = {
   currentUser: null,
   userRegisterRequest: false,
   userRegisterFailed: false,
@@ -39,7 +61,7 @@ const userInitialState = {
   updateProfileFailed: false,
 }
 
-export const userReducer = (state = userInitialState, action: any) => {
+export const userReducer = (state = userInitialState, action: TUserActions) => {
   switch (action.type) {
     case RESET_PASSWORD_REQUEST: {
       return {

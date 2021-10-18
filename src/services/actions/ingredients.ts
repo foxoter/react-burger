@@ -1,50 +1,76 @@
-import { getProductsData, sendOrderData } from '../../helpers/api';
-import { OrderDataTypes } from '../../types/order-data-types';
+import { getProductsData } from '../../helpers/api';
+import { AppDispatch, AppThunk } from '../types';
+import {
+  GET_INGREDIENTS_REQUEST,
+  GET_INGREDIENTS_SUCCESS,
+  GET_INGREDIENTS_FAILED,
+  ADD_CURRENT_INGREDIENT,
+  DELETE_CURRENT_INGREDIENT,
+} from '../constants/ingredients';
+import TBurgersDataTypes from '../types/t-burgers-data-types';
 
-export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
-export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
-export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
+export interface IGetIngredientsRequestAction {
+  readonly type: typeof GET_INGREDIENTS_REQUEST;
+}
 
-export const ADD_CURRENT_INGREDIENT = 'ADD_CURRENT_INGREDIENT';
-export const DELETE_CURRENT_INGREDIENT = 'DELETE_CURRENT_INGREDIENT';
+export interface IGetIngredientsSuccessAction {
+  readonly type: typeof GET_INGREDIENTS_SUCCESS;
+  readonly data: TBurgersDataTypes[];
+}
 
-export const PLACE_ORDER_REQUEST = 'PLACE_ORDER_REQUEST';
-export const PLACE_ORDER_SUCCESS = 'PLACE_ORDER_SUCCESS';
-export const PLACE_ORDER_FAILED = 'PLACE_ORDER_FAILED';
-export const DELETE_ORDER_ID = 'DELETE_ORDER_ID';
+export interface IGetIngredientsFailedAction {
+  readonly type: typeof GET_INGREDIENTS_FAILED;
+}
 
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
-export const REWRITE_INGREDIENTS = 'REWRITE_INGREDIENTS';
+export interface IAddCurrentIngredientAction {
+  readonly type: typeof ADD_CURRENT_INGREDIENT;
+  readonly ingredient: TBurgersDataTypes;
+}
 
-export function getIngredients() {
-  return function(dispatch: any) {
-    dispatch({ type: GET_INGREDIENTS_REQUEST });
+export interface IDeleteCurrentIngredientAction {
+  readonly type: typeof DELETE_CURRENT_INGREDIENT;
+}
+
+export type TIngredientsActions =
+  IGetIngredientsRequestAction
+  | IGetIngredientsSuccessAction
+  | IGetIngredientsFailedAction
+  | IAddCurrentIngredientAction
+  | IDeleteCurrentIngredientAction
+
+export const getIngredientsRequestAction = (): IGetIngredientsRequestAction => ({
+  type: GET_INGREDIENTS_REQUEST
+});
+
+export const getIngredientsSuccessAction = (data: TBurgersDataTypes[]): IGetIngredientsSuccessAction => ({
+  type: GET_INGREDIENTS_SUCCESS,
+  data,
+});
+
+export const getIngredientsFailedAction = (): IGetIngredientsFailedAction => ({
+  type: GET_INGREDIENTS_FAILED
+});
+
+export const addCurrentIngredientAction = (ingredient: TBurgersDataTypes): IAddCurrentIngredientAction => ({
+  type: ADD_CURRENT_INGREDIENT,
+  ingredient,
+});
+
+export const deleteCurrentIngredientAction = (): IDeleteCurrentIngredientAction => ({
+  type: DELETE_CURRENT_INGREDIENT
+});
+
+
+export const getIngredients: AppThunk = () => {
+  return function(dispatch: AppDispatch) {
+    dispatch(getIngredientsRequestAction());
     getProductsData()
       .then(res => {
-        dispatch({
-          type: GET_INGREDIENTS_SUCCESS,
-          data: res.data,
-        })
+        dispatch(getIngredientsSuccessAction(res.data))
       })
       .catch(() => {
-        dispatch({ type: GET_INGREDIENTS_FAILED });
+        dispatch(getIngredientsFailedAction());
       })
   }
 }
 
-export function placeOrder(order: OrderDataTypes) {
-  return function (dispatch: any) {
-    dispatch({ type: PLACE_ORDER_REQUEST });
-    sendOrderData(order)
-      .then(res => {
-        dispatch({
-          type: PLACE_ORDER_SUCCESS,
-          id: res.order.number,
-        })
-      })
-      .catch(() => {
-        dispatch({ type: PLACE_ORDER_FAILED });
-      })
-  }
-}

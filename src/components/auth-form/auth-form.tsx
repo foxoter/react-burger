@@ -1,25 +1,17 @@
-import React, { useState, ChangeEvent, useMemo } from 'react';
+import React, { useState, ChangeEvent, useMemo, FC, SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import { TAuthFormData } from '../../services/types/auth-form-types';
 import authFormStyles from './auth-form.module.css';
 
 type Props = {
   type: string
-  submitCallback?: any
+  submitCallback?: (data: TAuthFormData) => void
 }
 
-type FormData = {
-  name?: string
-  email?: string
-  password?: string
-  token?: string
-}
-
-function AuthForm(props: Props) {
-  const { type, submitCallback } = props;
-
-  let stateKeys;
+const AuthForm: FC<Props> = ({ type, submitCallback }) => {
+  let stateKeys: TAuthFormData = {name: '', email: ''};
   let buttonText;
   let title;
   switch (type) {
@@ -44,13 +36,13 @@ function AuthForm(props: Props) {
       buttonText = 'Сохранить'
       break
   }
-  const [formData, setFormData] = useState<FormData>({...stateKeys});
+  const [formData, setFormData] = useState<TAuthFormData>({...stateKeys});
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({...formData, [e.target.name]: e.target.value});
   }
 
-  const submit = (e: any) => {
+  const submit = (e: SyntheticEvent) => {
     e.preventDefault();
     if (submitCallback) {
       submitCallback(formData);
@@ -114,10 +106,10 @@ function AuthForm(props: Props) {
     <section className={authFormStyles.container}>
       <h2 className="text text_type_main-medium mb-6">{title}</h2>
       <form onSubmit={submit} className={authFormStyles.form}>
-        {formData.name !== undefined && <Input value={formData.name} name={'name'} onChange={onChange} placeholder={'Имя'} />}
-        {formData.email !== undefined && <EmailInput value={formData.email} name={'email'} onChange={onChange}/>}
-        {formData.password !== undefined && <PasswordInput value={formData.password} name={'password'} onChange={onChange}/>}
-        {formData.token !== undefined && <Input value={formData.token} name={'token'} onChange={onChange} placeholder={'Код из письма'}/>}
+        {'name' in formData && formData.name !== undefined && <Input value={formData.name} name={'name'} onChange={onChange} placeholder={'Имя'} />}
+        {'email' in formData && formData.email !== undefined && <EmailInput value={formData.email} name={'email'} onChange={onChange}/>}
+        {'password' in formData && formData !== undefined && <PasswordInput value={formData.password} name={'password'} onChange={onChange}/>}
+        {'token' in formData && formData !== undefined && <Input value={formData.token} name={'token'} onChange={onChange} placeholder={'Код из письма'}/>}
         <Button type='primary' size="medium">{buttonText}</Button>
       </form>
       {bottomLinks}

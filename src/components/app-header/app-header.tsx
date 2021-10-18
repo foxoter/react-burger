@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { NavLink } from 'react-router-dom';
 
 import appHeaderStyles from './app-header.module.css';
 
 import HeaderItem from '../header-item/header-item';
-import { menuItems } from "../../utils/menu-titles-data";
+import { menuItems } from "../../services/constants/menu-titles-data";
 
-function AppHeader(): JSX.Element {
+const AppHeader: FC = () => {
   const renderMenuItems = () => {
     return menuItems.map((item, idx) => {
       return (
@@ -25,7 +26,9 @@ function AppHeader(): JSX.Element {
       <nav className={appHeaderStyles.navigation}>
         <ul className={appHeaderStyles.list}>
           <li className={appHeaderStyles.logo}>
-            <Logo/>
+            <NavLink to='/'>
+              <Logo/>
+            </NavLink>
           </li>
           {renderMenuItems()}
         </ul>

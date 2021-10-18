@@ -1,0 +1,3 @@
+export const ADD_INGREDIENT = 'ADD_INGREDIENT'as const;
+export const DELETE_INGREDIENT = 'DELETE_INGREDIENT'as const;
+export const REWRITE_INGREDIENTS = 'REWRITE_INGREDIENTS'as const;

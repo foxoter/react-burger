@@ -1,24 +1,21 @@
-import React, { useEffect } from 'react';
+import { memo, FC, ReactNode, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import AppStateTypes from '../../types/app-state-types';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { checkAuth } from '../../services/actions/user';
 
 type Props = {
-  children: React.ReactNode
+  children: ReactNode
   path: string
   exact?: boolean
 }
 
-function ProtectedRoute(props: Props) {
-  const { children, ...rest} = props;
-  const { currentUser } = useSelector((state: AppStateTypes) => state.user);
+const ProtectedRoute: FC<Props> = ({ children, ...rest }) => {
+  const { currentUser } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(checkAuth());
   }, [dispatch]);
-
 
   return (
     <Route
@@ -32,4 +29,4 @@ function ProtectedRoute(props: Props) {
   )
 }
 
-export default ProtectedRoute;
+export default memo(ProtectedRoute);

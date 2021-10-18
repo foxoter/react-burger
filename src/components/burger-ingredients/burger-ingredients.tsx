@@ -1,38 +1,37 @@
-import React, { useState, useRef, MutableRefObject } from 'react';
+import { memo, useState, useRef, FC } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import burgerIngredientsStyles from './burger-ingredients.module.css';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
 
-import BurgersDataTypes from '../../types/burgers-data-types';
-import AppStateTypes from '../../types/app-state-types';
+import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { ADD_CURRENT_INGREDIENT } from '../../services/actions/ingredients';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import { useHistory, useLocation } from 'react-router-dom';
+import { addCurrentIngredientAction } from '../../services/actions/ingredients';
 
 const SUBTITLES: { [key: string]: string } = {
-  "bun": "Булки",
-  "main": "Начинки",
-  "sauce": "Соусы"
+  bun: "Булки",
+  main: "Начинки",
+  sauce: "Соусы"
 }
 
 type RefsObjectType = {
   [key: string]: HTMLDivElement
 }
 
-function BurgerIngredients() {
+const BurgerIngredients: FC = () => {
   const [currentTab, setCurrentTab] = useState('Булки');
-  const scrollContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
-  const elemRefs = useRef({}) as MutableRefObject<RefsObjectType>;
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const elemRefs = useRef<RefsObjectType>({});
 
   const {
     ingredientsRequest,
     ingredientsFailed,
     ingredientsList,
-  } = useSelector((state: AppStateTypes) => state.ingredients);
-  const { constructorItems } = useSelector((state: AppStateTypes) => state.burger);
+  } = useSelector(state => state.ingredients);
+  const { constructorItems } = useSelector(state => state.burger);
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -65,8 +64,8 @@ function BurgerIngredients() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  const openDetails = (data: BurgersDataTypes) => {
-    dispatch({ type: ADD_CURRENT_INGREDIENT, ingredient: data});
+  const openDetails = (data: TBurgersDataTypes) => {
+    dispatch(addCurrentIngredientAction(data));
     history.push(`/ingredients/${data._id}`, { background: location, ingredient: data });
   }
 
@@ -101,19 +100,21 @@ function BurgerIngredients() {
   }
 
   const handleScroll = () => {
-    const containerPosition = scrollContainerRef.current.getBoundingClientRect().top;
-    let minDiff = Number.POSITIVE_INFINITY;
-    let highlightedTab = '';
-    Object.keys(elemRefs.current).forEach(key => {
-      const ref = elemRefs.current[key];
-      const tabPosition = ref.getBoundingClientRect().top;
-      const diff = Math.abs(tabPosition - containerPosition);
-      if (diff < minDiff) {
-        minDiff = diff;
-        highlightedTab = key;
-      }
-    });
-    setCurrentTab(highlightedTab);
+    if (scrollContainerRef && scrollContainerRef.current) {
+      const containerPosition = scrollContainerRef.current.getBoundingClientRect().top;
+      let minDiff = Number.POSITIVE_INFINITY;
+      let highlightedTab = '';
+      Object.keys(elemRefs.current).forEach(key => {
+        const ref = elemRefs.current[key];
+        const tabPosition = ref.getBoundingClientRect().top;
+        const diff = Math.abs(tabPosition - containerPosition);
+        if (diff < minDiff) {
+          minDiff = diff;
+          highlightedTab = key;
+        }
+      });
+      setCurrentTab(highlightedTab);
+    }
   }
 
   return (
@@ -137,4 +138,4 @@ function BurgerIngredients() {
   );
 }
 
-export default React.memo(BurgerIngredients);
+export default memo(BurgerIngredients);

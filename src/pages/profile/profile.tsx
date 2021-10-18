@@ -1,16 +1,15 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import { memo, FC, ChangeEvent, useCallback, useState, SyntheticEvent } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import profileStyles from './profile.module.css';
-import profileMenuTitles from '../../utils/profile-menu-titles';
-import { useDispatch, useSelector } from 'react-redux';
+import profileMenuTitles from '../../services/constants/profile-menu-titles';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { logoutUser, updateUserInfo } from '../../services/actions/user';
-import AppStateTypes from '../../types/app-state-types';
 
-function Profile() {
-  const { currentUser } = useSelector((state: AppStateTypes) => state.user);
+const Profile: FC = () => {
+  const { currentUser } = useSelector(state => state.user);
 
   const [formData, setFormData] = useState({
     name: currentUser?.name || '',
@@ -24,16 +23,15 @@ function Profile() {
     setFormData({...formData, [e.target.name]: e.target.value});
   }
 
-  const submit = (e: any) => {
+  const submit = (e: SyntheticEvent) => {
     e.preventDefault();
     dispatch(updateUserInfo(formData));
   }
 
-  const onCancel = useCallback((e: any) => {
+  const onCancel = useCallback((e: SyntheticEvent) => {
     e.preventDefault();
     if (currentUser) {
-      // @ts-ignore
-      setFormData({ name: currentUser?.name, email: currentUser?.email, password: '' });
+      setFormData({ name: currentUser.name, email: currentUser.email, password: '' });
     }
   }, [currentUser]);
 
@@ -92,4 +90,4 @@ function Profile() {
   )
 }
 
-export default React.memo(Profile);
+export default memo(Profile);

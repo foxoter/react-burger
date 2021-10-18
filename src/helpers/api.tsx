@@ -1,7 +1,6 @@
-import { API_URL } from '../constants/apiConfig';
-import { OrderDataTypes } from '../types/order-data-types';
-import { ResetPasswordTypes } from '../types/reset-password-types';
-import { UserDataTypes } from '../types/user-data-types';
+import { API_URL } from '../services/constants/apiConfig';
+import { OrderDataTypes } from '../services/types/order-data-types';
+import { TAuthFormData } from '../services/types/auth-form-types';
 import { getCookie, getRefreshToken } from './tokens-helper';
 
 const getProductsData = async () => {
@@ -20,7 +19,7 @@ const sendOrderData = async (order: OrderDataTypes) => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
-const resetPasswordRequest = async (data: ResetPasswordTypes) => {
+const resetPasswordRequest = async (data: TAuthFormData) => {
   const response = await fetch(`${API_URL}/password-reset`, {
     method: "POST",
     headers: {
@@ -31,7 +30,7 @@ const resetPasswordRequest = async (data: ResetPasswordTypes) => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
-const confirmPasswordReset = async (data: ResetPasswordTypes) => {
+const confirmPasswordReset = async (data: TAuthFormData) => {
   const response = await fetch(`${API_URL}/password-reset/reset`, {
     method: "POST",
     headers: {
@@ -42,7 +41,7 @@ const confirmPasswordReset = async (data: ResetPasswordTypes) => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
-const sendNewUserData = async (data: UserDataTypes) => {
+const sendNewUserData = async (data: TAuthFormData) => {
   const response = await fetch(`${API_URL}/auth/register`, {
     method: "POST",
     headers: {
@@ -53,7 +52,7 @@ const sendNewUserData = async (data: UserDataTypes) => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
-const sendAuthData = async (data: UserDataTypes) => {
+const sendAuthData = async (data: TAuthFormData) => {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
     headers: {
@@ -73,7 +72,7 @@ const getUserData = async () => {
   return response.ok ? await response.json() : await Promise.reject(response);
 }
 
-const patchUserData = async (data: UserDataTypes) => {
+const patchUserData = async (data: TAuthFormData) => {
   const response = await fetch(`${API_URL}/auth/user`, {
     method: "PATCH",
     body: JSON.stringify(data),
