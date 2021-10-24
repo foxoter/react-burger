@@ -5,7 +5,6 @@ import AppHeader from '../app-header/app-header';
 import MainContainer from '../main-container/main-container';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, NotFoundError } from '../../pages';
 import ProtectedRoute from '../protected-route/protected-route';
-import OrderHistory from '../../pages/order-history';
 import IngredientPage from '../../pages/ingredient';
 import * as H from 'history';
 import Modal from '../modal/modal';
@@ -16,7 +15,6 @@ import { getIngredients } from '../../services/actions/ingredients';
 import Feed from '../../pages/feed';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import { DndProvider } from 'react-dnd';
 
 type LocationState = {
   background?: H.Location
@@ -51,11 +49,8 @@ function App() {
           <Route path='/reset-password'>
             <ResetPassword />
           </Route>
-          <ProtectedRoute path='/profile' exact>
+          <ProtectedRoute path='/profile'>
             <Profile />
-          </ProtectedRoute>
-          <ProtectedRoute path='/profile/orders'>
-            <OrderHistory />
           </ProtectedRoute>
           <Route path='/' exact>
             <MainContainer title='Соберите Бургер'>
