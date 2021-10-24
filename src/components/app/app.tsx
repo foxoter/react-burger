@@ -13,6 +13,10 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 import { useDispatch } from '../../services/hooks';
 import { getIngredients } from '../../services/actions/ingredients';
+import Feed from '../../pages/feed';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import { DndProvider } from 'react-dnd';
 
 type LocationState = {
   background?: H.Location
@@ -54,7 +58,15 @@ function App() {
             <OrderHistory />
           </ProtectedRoute>
           <Route path='/' exact>
-            <MainContainer />
+            <MainContainer title='Соберите Бургер'>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </MainContainer>
+          </Route>
+          <Route path='/feed' exact>
+            <MainContainer title='Лента заказов'>
+              <Feed />
+            </MainContainer>
           </Route>
           <Route path='/ingredients/:ingredientId'>
             <IngredientPage />
