@@ -1,0 +1,19 @@
+.container {
+  background: #1C1C21;
+  border-radius: 40px;
+}
+
+.credentials, .ingredients {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.price > span {
+  margin-right: 10px;
+}
