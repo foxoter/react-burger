@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import appStyles from './app.module.css'
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
-import MainContainer from '../main-container/main-container';
 import { Login, Register, ForgotPassword, ResetPassword, Profile, NotFoundError } from '../../pages';
 import ProtectedRoute from '../protected-route/protected-route';
 import IngredientPage from '../../pages/ingredient';
@@ -13,8 +12,7 @@ import TBurgersDataTypes from '../../services/types/t-burgers-data-types';
 import { useDispatch } from '../../services/hooks';
 import { getIngredients } from '../../services/actions/ingredients';
 import Feed from '../../pages/feed';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
+import Constructor from '../../pages/constructor';
 
 type LocationState = {
   background?: H.Location
@@ -53,15 +51,10 @@ function App() {
             <Profile />
           </ProtectedRoute>
           <Route path='/' exact>
-            <MainContainer title='Соберите Бургер'>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </MainContainer>
+            <Constructor />
           </Route>
           <Route path='/feed' exact>
-            <MainContainer title='Лента заказов'>
-              <Feed />
-            </MainContainer>
+            <Feed />
           </Route>
           <Route path='/ingredients/:ingredientId'>
             <IngredientPage />

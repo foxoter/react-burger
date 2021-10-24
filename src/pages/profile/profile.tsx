@@ -1,6 +1,5 @@
 import { memo, FC, ChangeEvent, useCallback, useState, SyntheticEvent } from 'react';
 import { NavLink, Route, Switch, useRouteMatch } from 'react-router-dom';
-
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import profileStyles from './profile.module.css';
@@ -11,7 +10,6 @@ import OrderHistory from '../order-history';
 
 const Profile: FC = () => {
   let { path, url } = useRouteMatch();
-  console.log('path', path, 'url', url);
   const { currentUser } = useSelector(state => state.user);
 
   const [formData, setFormData] = useState({
