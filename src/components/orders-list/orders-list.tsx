@@ -3,6 +3,7 @@ import { useSelector } from '../../services/hooks';
 import OrdersListItem from '../orders-list-item/orders-list-item';
 import { TOrderData, TOrderRenderData } from '../../services/types/t-order-data';
 import { mockData2 } from './tempData';
+import styles from './orders-list.module.css';
 
 
 const OrdersList: FC = () => {
@@ -28,7 +29,7 @@ const OrdersList: FC = () => {
   });
 
   return (
-    <div>
+    <div className={styles.sections}>
       {ingredientsList.length > 0 &&
         ordersData.map((order: TOrderRenderData) => (
           <OrdersListItem data={order} key={order._id} />
