@@ -3,6 +3,10 @@
   border-radius: 40px;
 }
 
+.container:not(:last-child) {
+  margin-bottom: 16px;
+}
+
 .credentials, .ingredients {
   display: flex;
   justify-content: space-between;
@@ -16,4 +20,26 @@
 
 .price > span {
   margin-right: 10px;
+}
+
+.images {
+  display: flex;
+  position: relative;
+}
+
+.image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid #4C4CFF;
+  background-color: #131316;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 146%;
+}
+
+.image_excess {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
