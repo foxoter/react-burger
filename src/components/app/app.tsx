@@ -14,6 +14,7 @@ import { getIngredients } from '../../services/actions/ingredients';
 import Feed from '../../pages/feed';
 import Constructor from '../../pages/constructor';
 import { TOrderRenderData } from '../../services/types/t-order-data';
+import OrderPage from '../../pages/order';
 
 type LocationState = {
   background?: H.Location
@@ -61,6 +62,9 @@ function App() {
           </Route>
           <Route path='/ingredients/:ingredientId'>
             <IngredientPage />
+          </Route>
+          <Route path='/feed/:orderId'>
+            <OrderPage />
           </Route>
           <Route path='*'>
             <NotFoundError />
