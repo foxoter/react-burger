@@ -3,13 +3,16 @@ import { FC, memo } from 'react';
 import styles from './orders-list-item.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TOrderRenderData } from '../../services/types/t-order-data';
+import { useHistory, useLocation } from 'react-router-dom';
 
 type Props = {
   data: TOrderRenderData
 }
 
 const OrdersListItem: FC<Props> = ({ data }) => {
-  const { images, name, createdAt, number, price } = data;
+  const { images, name, createdAt, number, price, _id } = data;
+  const history = useHistory();
+  const location = useLocation();
   const renderIngredientsImages = () => {
     let position = -50;
     let zIndex = 10;
@@ -54,8 +57,12 @@ const OrdersListItem: FC<Props> = ({ data }) => {
     })
   }
 
+  const onClick = (): void => {
+    history.push(`/feed/${_id}`, { background: location, order: data });
+  }
+
   return (
-    <div className={`${styles.container} p-6`}>
+    <div className={`${styles.container} p-6`} onClick={onClick}>
       <div className={`${styles.credentials} mb-6`}>
         <span className='text text_type_digits-default'>#{number}</span>
         <span className='text text_type_main-default text_color_inactive'>{createdAt}</span>

@@ -13,10 +13,12 @@ import { useDispatch } from '../../services/hooks';
 import { getIngredients } from '../../services/actions/ingredients';
 import Feed from '../../pages/feed';
 import Constructor from '../../pages/constructor';
+import { TOrderRenderData } from '../../services/types/t-order-data';
 
 type LocationState = {
   background?: H.Location
   ingredient?: TBurgersDataTypes
+  order?: TOrderRenderData
 }
 
 function App() {
@@ -25,6 +27,7 @@ function App() {
   const dispatch = useDispatch();
   let background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background;
   const ingredient = location.state && location.state.ingredient;
+  const order = location.state && location.state.order;
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -64,14 +67,24 @@ function App() {
           </Route>
         </Switch>
         {background &&
-          <Route
-            path='/ingredients/:ingredientId'
-            children={
-              <Modal heading='Детали ингредиента'>
-                <IngredientDetails ingredient={ingredient}/>
-              </Modal>
-            }
-          />
+          <Switch>
+            <Route
+              path='/ingredients/:ingredientId'
+              children={
+                <Modal heading='Детали ингредиента'>
+                  <IngredientDetails ingredient={ingredient}/>
+                </Modal>
+              }
+            />
+            <Route
+              path='/feed/:orderId'
+              children={
+                <Modal heading={`#${order?.number}`} headingType='digits'>
+                  <div>{order?.price}</div>
+                </Modal>
+              }
+            />
+          </Switch>
         }
       </main>
     </div>

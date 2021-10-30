@@ -9,10 +9,11 @@ import modalStyles from './modal.module.css';
 type Props = {
   children: ReactNode
   heading: string
+  headingType?: 'digits' | string
   handleClose?: () => void
 }
 
-const Modal: FC<Props> = ({ heading, handleClose, children }) => {
+const Modal: FC<Props> = ({ headingType, heading, handleClose, children }) => {
   const modalsRoot = document.getElementById('app');
   const history = useHistory();
   const onClose = handleClose ? handleClose : history.goBack;
@@ -31,9 +32,10 @@ const Modal: FC<Props> = ({ heading, handleClose, children }) => {
   },[]);
 
   const renderHeading = () => {
+    const uiKitClass = headingType === 'digits' ? 'text_type_digits-default' : 'text_type_main-medium'
     return (
       <div className={modalStyles.header}>
-        <p className={`${modalStyles.heading} text text_type_main-medium`}>{heading}</p>
+        <p className={`${modalStyles.heading} text ${uiKitClass}`}>{heading}</p>
         <CloseIcon type="primary" onClick={onClose} />
       </div>
     )

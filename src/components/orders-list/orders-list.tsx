@@ -9,9 +9,9 @@ import styles from './orders-list.module.css';
 const OrdersList: FC = () => {
   const { ingredientsList } = useSelector(state => state.ingredients);
 
-  // @ts-ignore
-  const ordersData: TOrderRenderData[] = mockData2.map((item: TOrderData) => {
-    const newOrder: TOrderData | TOrderRenderData = item;
+  const ordersData: TOrderRenderData[] = mockData2.map((item: TOrderData): TOrderRenderData => {
+    // @ts-ignore
+    const newItem: TOrderRenderData = item;
     let images: string[] = [];
     let price = 0;
     item.ingredients.forEach((ingredientId: string) => {
@@ -21,11 +21,9 @@ const OrdersList: FC = () => {
         price += ingredient.price;
       }
     });
-    // @ts-ignore
-    newOrder.images = images;
-    // @ts-ignore
-    newOrder.price = price;
-    return item;
+    newItem.images = images;
+    newItem.price = price;
+    return newItem;
   });
 
   return (
