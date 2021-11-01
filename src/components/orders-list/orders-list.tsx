@@ -9,27 +9,31 @@ import styles from './orders-list.module.css';
 const OrdersList: FC = () => {
   const { ingredientsList } = useSelector(state => state.ingredients);
 
-  const ordersData: TOrderRenderData[] = mockData2.map((item: TOrderData): TOrderRenderData => {
-    // @ts-ignore
-    const newItem: TOrderRenderData = item;
-    let images: string[] = [];
-    let price = 0;
-    item.ingredients.forEach((ingredientId: string) => {
-      const ingredient = ingredientsList.find(i => i._id === ingredientId);
-      if (ingredient) {
-        images.push(ingredient.image_large);
-        price += ingredient.price;
-      }
-    });
-    newItem.images = images;
-    newItem.price = price;
-    return newItem;
-  });
+  const completeOrderData = (ordersData: TOrderData[]): TOrderRenderData[] => {
+    return  ordersData.map(item => {
+      const data = {
+        images: [],
+        price: 0,
+        fullIngredients: []
+      };
+      const newItem: TOrderRenderData = { ...item, ...data };
+      newItem.fullIngredients = [];
+      item.ingredients.forEach((ingredientId: string) => {
+        const ingredient = ingredientsList.find(i => i._id === ingredientId);
+        if (ingredient) {
+          newItem.fullIngredients.push(ingredient);
+          newItem.images.push(ingredient.image_large);
+          newItem.price += ingredient.price;
+        }
+      });
+      return newItem;
+    })
+  }
 
   return (
     <div className={styles.sections}>
       {ingredientsList.length > 0 &&
-        ordersData.map((order: TOrderRenderData) => (
+        completeOrderData(mockData2).map((order: TOrderRenderData) => (
           <OrdersListItem data={order} key={order._id} />
           ))
       }

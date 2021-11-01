@@ -1,3 +1,5 @@
+import TBurgersDataTypes from './t-burgers-data-types';
+
 export type TOrderData = {
   status: string
   name: string
@@ -11,4 +13,5 @@ export type TOrderData = {
 export type TOrderRenderData = TOrderData & {
   images: string[]
   price: number
+  fullIngredients: TBurgersDataTypes[]
 }
