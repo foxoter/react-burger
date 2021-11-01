@@ -15,6 +15,7 @@ import Feed from '../../pages/feed';
 import Constructor from '../../pages/constructor';
 import { TOrderRenderData } from '../../services/types/t-order-data';
 import OrderPage from '../../pages/order';
+import OrderDetailsItem from '../order-details-item/order-details-item';
 
 type LocationState = {
   background?: H.Location
@@ -84,7 +85,7 @@ function App() {
               path='/feed/:orderId'
               children={
                 <Modal heading={`#${order?.number}`} headingType='digits'>
-                  <div>{order?.price}</div>
+                  <OrderDetailsItem data={order} />
                 </Modal>
               }
             />
