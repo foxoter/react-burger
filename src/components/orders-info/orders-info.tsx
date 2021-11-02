@@ -3,8 +3,6 @@ import { FC, memo } from 'react';
 import styles from './orders-info.module.css';
 import MainContainer from '../main-container/main-container';
 
-
-
 type Props = {
   ordersReady: Array<string> | []
   ordersInProgress: Array<string> | []

@@ -84,7 +84,7 @@ function App() {
             <Route
               path='/feed/:orderId'
               children={
-                <Modal heading={`#${order?.number}`} headingType='digits'>
+                <Modal heading={`#${order?.number}`} headingType='digits' slim>
                   <OrderDetailsItem data={order} />
                 </Modal>
               }

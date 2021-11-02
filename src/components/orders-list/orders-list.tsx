@@ -34,7 +34,7 @@ const OrdersList: FC = () => {
     <div className={styles.sections}>
       {ingredientsList.length > 0 &&
         completeOrderData(mockData2).map((order: TOrderRenderData) => (
-          <OrdersListItem data={order} key={order._id} />
+            <OrdersListItem data={order} key={order._id} />
           ))
       }
     </div>

@@ -11,9 +11,10 @@ type Props = {
   heading: string
   headingType?: 'digits' | string
   handleClose?: () => void
+  slim?: boolean
 }
 
-const Modal: FC<Props> = ({ headingType, heading, handleClose, children }) => {
+const Modal: FC<Props> = ({ slim, headingType, heading, handleClose, children }) => {
   const modalsRoot = document.getElementById('app');
   const history = useHistory();
   const onClose = handleClose ? handleClose : history.goBack;
@@ -43,7 +44,10 @@ const Modal: FC<Props> = ({ headingType, heading, handleClose, children }) => {
 
   return modalsRoot ? ReactDOM.createPortal((
     <>
-      <div className={`${modalStyles.container} p-10`}>
+      <div
+        className={`${modalStyles.container} p-10`}
+        style={{ width: `${ slim ? '640px' : '720px' }`}}
+      >
         {renderHeading()}
         {children}
       </div>

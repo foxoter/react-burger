@@ -21,39 +21,38 @@ const OrdersListItem: FC<Props> = ({ data }) => {
       position += 50;
       zIndex -= 1;
       const key = String(index + position + zIndex)
-        if (index === 0) {
-          return (
-            <div
-              className={styles.image}
-              style={{ backgroundImage: `url(${item})`, zIndex: zIndex }}
-              key={key}
-            />
-          )
-        } else if (index < 5) {
-          return (
-            <div
-              className={styles.image}
-              style={{ backgroundImage: `url(${item})`, position: 'absolute', left: `${position}px`, zIndex: zIndex }}
-              key={key}
-            />
-          )
-        }
-        else if (index === 5) {
-          return (
-            <div
-              className={`${styles.image} ${styles.image_excess}`}
-              style={{
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), url(${item})`,
-                position: 'absolute',
-                left: `${position}px`,
-                zIndex: zIndex
-              }}
-              key={key}
-            >
-              <p className='text text_type_digits-default'>+{excessCount}</p>
-            </div>
-          )
-        }
+      if (index === 0) {
+        return (
+          <div
+            className={styles.image}
+            style={{ backgroundImage: `url(${item})`, zIndex: zIndex }}
+            key={key}
+          />
+        )
+      } else if (index < 5) {
+        return (
+          <div
+            className={styles.image}
+            style={{ backgroundImage: `url(${item})`, position: 'absolute', left: `${position}px`, zIndex: zIndex }}
+            key={key}
+          />
+        )
+      } else if (index === 5) {
+        return (
+          <div
+            className={`${styles.image} ${styles.image_excess}`}
+            style={{
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), url(${item})`,
+              position: 'absolute',
+              left: `${position}px`,
+              zIndex: zIndex
+            }}
+            key={key}
+          >
+            <p className='text text_type_digits-default'>+{excessCount}</p>
+          </div>
+        )
+      }
     })
   }
 
