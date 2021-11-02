@@ -6,15 +6,25 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 
 type Props = {
   data: TOrderRenderData | undefined
+  withoutModal?: boolean
 }
 
-const OrderDetailsItem: FC<Props> = ({ data }) => {
+const OrderDetailsItem: FC<Props> = ({ withoutModal, data }) => {
   if (!data) {
     return null;
   }
-  const { name, status, fullIngredients, price, createdAt } = data;
+  const { name, status, fullIngredients, price, createdAt, number } = data;
+
   return (
     <div className={styles.container}>
+      {withoutModal &&
+        <p
+          className='text text_type_digits-default'
+          style={{ textAlign: 'center' }}
+        >
+          #{number}
+        </p>
+      }
       <h3 className='mt-5 mb-5 text text_type_main-medium'>{name}</h3>
       <p className={`${styles.ready} text text_type_main-default mb-10`}>{status === 'done' ? 'Выполнен' : 'Готовится'}</p>
       <p className='mt-5 mb-5 text text_type_main-medium'>Состав:</p>
