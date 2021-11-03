@@ -53,6 +53,7 @@ const OrdersListItem: FC<Props> = ({ data }) => {
           </div>
         )
       }
+      return null
     })
   }
 

@@ -1,3 +1,26 @@
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.list {
+  max-height: 370px;
+  overflow-y: auto;
+}
+
+.list::-webkit-scrollbar {
+  width: 12px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #2F2F37;
+}
+
 .ready {
   color: #00CCCC;
 }

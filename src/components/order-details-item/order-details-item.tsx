@@ -16,7 +16,7 @@ const OrderDetailsItem: FC<Props> = ({ withoutModal, data }) => {
   const { name, status, fullIngredients, price, createdAt, number } = data;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={ withoutModal ? { marginBottom: '40px' } : {}}>
       {withoutModal &&
         <p
           className='text text_type_digits-default'
@@ -28,7 +28,7 @@ const OrderDetailsItem: FC<Props> = ({ withoutModal, data }) => {
       <h3 className='mt-5 mb-5 text text_type_main-medium'>{name}</h3>
       <p className={`${styles.ready} text text_type_main-default mb-10`}>{status === 'done' ? 'Выполнен' : 'Готовится'}</p>
       <p className='mt-5 mb-5 text text_type_main-medium'>Состав:</p>
-      <div className='mb-10'>
+      <div className={`${styles.list} mb-10`}>
         {fullIngredients.map((ingredient, idx) => {
           return (
             <div className={styles.ingredient} key={ingredient._id + idx}>
