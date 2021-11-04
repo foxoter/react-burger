@@ -3,13 +3,14 @@ import { FC, memo } from 'react';
 import styles from './orders-list-item.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TOrderRenderData } from '../../services/types/t-order-data';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 
 type Props = {
   data: TOrderRenderData
 }
 
 const OrdersListItem: FC<Props> = ({ data }) => {
+  const { path } = useRouteMatch();
   const { images, name, createdAt, number, price, _id } = data;
   const history = useHistory();
   const location = useLocation();
@@ -58,7 +59,7 @@ const OrdersListItem: FC<Props> = ({ data }) => {
   }
 
   const onClick = (): void => {
-    history.push(`/feed/${_id}`, { background: location, order: data });
+    history.push(`${path}/${_id}`, { background: location, order: data });
   }
 
   return (

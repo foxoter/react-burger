@@ -88,7 +88,6 @@ const Profile: FC = () => {
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </div>
-
       <Switch>
         <Route exact path={path}>
           {currentUser && profileForm}

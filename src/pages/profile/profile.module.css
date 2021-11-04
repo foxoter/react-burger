@@ -4,8 +4,9 @@
 }
 
 .menu {
-  width: 320px;
+  flex-basis: 320px;
   margin-right: 60px;
+  flex-shrink: 0;
 }
 
 .navigation {
