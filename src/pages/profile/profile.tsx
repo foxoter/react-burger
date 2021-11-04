@@ -1,4 +1,4 @@
-import { memo, FC, ChangeEvent, useCallback, useState, SyntheticEvent } from 'react';
+import React, { memo, FC, ChangeEvent, useCallback, useState, SyntheticEvent } from 'react';
 import { NavLink, Route, Switch, useRouteMatch } from 'react-router-dom';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -91,6 +91,9 @@ const Profile: FC = () => {
       <Switch>
         <Route exact path={path}>
           {currentUser && profileForm}
+        </Route>
+        <Route exact path={`${path}/123`}>
+          <div>123</div>
         </Route>
         <Route exact path={`${path}/orders`}>
           <OrderHistory />

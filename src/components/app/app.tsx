@@ -27,7 +27,10 @@ function App() {
   const location = useLocation<LocationState>();
   const history = useHistory();
   const dispatch = useDispatch();
-  let background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background;
+  let background =
+    (history.action === 'PUSH' || history.action === 'REPLACE')
+    && location.state
+    && location.state.background;
   const ingredient = location.state && location.state.ingredient;
   const order = location.state && location.state.order;
 
@@ -51,6 +54,9 @@ function App() {
           </Route>
           <Route path='/reset-password'>
             <ResetPassword />
+          </Route>
+          <Route exact path='/profile/orders/:orderId'>
+            <OrderPage />
           </Route>
           <ProtectedRoute path='/profile'>
             <Profile />
@@ -83,6 +89,14 @@ function App() {
             />
             <Route
               path='/feed/:orderId'
+              children={
+                <Modal heading={`#${order?.number}`} headingType='digits' slim>
+                  <OrderDetailsItem data={order} />
+                </Modal>
+              }
+            />
+            <Route
+              path='/profile/orders/:orderId'
               children={
                 <Modal heading={`#${order?.number}`} headingType='digits' slim>
                   <OrderDetailsItem data={order} />
