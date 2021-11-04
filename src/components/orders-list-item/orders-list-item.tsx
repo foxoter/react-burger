@@ -7,11 +7,12 @@ import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 
 type Props = {
   data: TOrderRenderData
+  authorized?: boolean
 }
 
-const OrdersListItem: FC<Props> = ({ data }) => {
+const OrdersListItem: FC<Props> = ({ authorized, data }) => {
   const { path } = useRouteMatch();
-  const { images, name, createdAt, number, price, _id } = data;
+  const { images, name, createdAt, number, price, _id, status } = data;
   const history = useHistory();
   const location = useLocation();
   const renderIngredientsImages = () => {
@@ -62,6 +63,22 @@ const OrdersListItem: FC<Props> = ({ data }) => {
     history.push(`${path}/${_id}`, { background: location, order: data });
   }
 
+  let statusStyles;
+  switch (status) {
+    case 'created':
+      statusStyles = { color: 'white', message: 'Создан' }
+      break
+    case 'pending':
+      statusStyles = { color: 'white', message: 'Готовится' }
+      break
+    case 'done':
+      statusStyles = { color: '#00CCCC', message: 'Выполнен' }
+      break
+    default:
+      statusStyles = { message: 'Создан' }
+      break
+  }
+
   return (
     <div className={`${styles.container} p-6`} onClick={onClick}>
       <div className={`${styles.credentials} mb-6`}>
@@ -69,6 +86,14 @@ const OrdersListItem: FC<Props> = ({ data }) => {
         <span className='text text_type_main-default text_color_inactive'>{createdAt}</span>
       </div>
       <p className='text text_type_main-medium mb-6'>{name}</p>
+      {authorized &&
+        <p
+          style={{ color: statusStyles.color }}
+          className='text text_type_main-default mb-6'
+        >
+          {statusStyles.message}
+        </p>
+      }
       <div className={styles.ingredients}>
         <div className={styles.images}>
           {renderIngredientsImages()}

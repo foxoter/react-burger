@@ -15,6 +15,22 @@ const OrderDetailsItem: FC<Props> = ({ withoutModal, data }) => {
   }
   const { name, status, fullIngredients, price, createdAt, number } = data;
 
+  let statusStyles;
+  switch (status) {
+    case 'created':
+      statusStyles = { color: 'white', message: 'Создан' }
+      break
+    case 'pending':
+      statusStyles = { color: 'white', message: 'Готовится' }
+      break
+    case 'done':
+      statusStyles = { message: 'Выполнен' }
+      break
+    default:
+      statusStyles = { message: 'Создан' }
+      break
+  }
+
   return (
     <div className={styles.container} style={ withoutModal ? { marginBottom: '40px' } : {}}>
       {withoutModal &&
@@ -26,7 +42,7 @@ const OrderDetailsItem: FC<Props> = ({ withoutModal, data }) => {
         </p>
       }
       <h3 className='mt-5 mb-5 text text_type_main-medium'>{name}</h3>
-      <p className={`${styles.ready} text text_type_main-default mb-10`}>{status === 'done' ? 'Выполнен' : 'Готовится'}</p>
+      <p className={`${styles.ready} text text_type_main-default mb-10`} style={{ color: statusStyles.color }}>{statusStyles.message}</p>
       <p className='mt-5 mb-5 text text_type_main-medium'>Состав:</p>
       <div className={`${styles.list} mb-10`}>
         {fullIngredients.map((ingredient, idx) => {
