@@ -9,7 +9,7 @@ export const mockData2: TOrderData[] = [
             "60d3b41abdacab0026a733c7",
             "60d3b41abdacab0026a733c7"
         ],
-        status: "done",
+        status: "created",
         name: "Флюоресцентный био-марсианский астероидный бургер",
         createdAt: "2021-10-29T16:51:31.148Z",
         updatedAt: "2021-10-29T16:51:31.256Z",
@@ -35,7 +35,7 @@ export const mockData2: TOrderData[] = [
             "60d3b41abdacab0026a733c6",
             "60d3b41abdacab0026a733c6"
         ],
-        status: "done",
+        status: "pending",
         name: "Био-марсианский антарианский краторный бургер",
         createdAt: "2021-10-29T15:40:53.022Z",
         updatedAt: "2021-10-29T15:40:53.151Z",

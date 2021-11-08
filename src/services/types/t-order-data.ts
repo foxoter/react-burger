@@ -1,6 +1,13 @@
 import TBurgersDataTypes from './t-burgers-data-types';
 
-export interface TOrderData {
+export type TOrdersInfo = {
+  success: boolean
+  orders: TOrderData[]
+  total: number
+  totalToday: number
+}
+
+export type TOrderData = {
   status: string
   name: string
   createdAt: string
