@@ -6,14 +6,6 @@ import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../services/constants
 import MainContainer from '../components/main-container/main-container';
 import OrdersList from '../components/orders-list/orders-list';
 import OrdersInfo from '../components/orders-info/orders-info';
-import Loader from '../components/loader/loader';
-
-const mockData = {
-  ordersReady: ['034533', '034532', '034531', '034530', '034524', '034527'],
-  ordersInProgress: ['034555', '034543', '034529'],
-  totalToday: '138',
-  total: '28752'
-}
 
 const Feed: FC = () => {
   const dispatch = useDispatch();
@@ -33,7 +25,7 @@ const Feed: FC = () => {
     <>
       {ordersInfo &&
         <MainContainer title='Лента заказов'>
-            <OrdersList />
+            <OrdersList data={ordersInfo} />
             <OrdersInfo data={ordersInfo} />
         </MainContainer>
       }
