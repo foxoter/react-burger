@@ -9,4 +9,8 @@
 .list {
   list-style-type: none;
   padding-left: 0;
+  display: grid;
+  grid-template-rows: repeat(10, auto);
+  grid-auto-flow: column;
+  grid-column-gap: 8px;
 }
