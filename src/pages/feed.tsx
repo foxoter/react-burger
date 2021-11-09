@@ -1,11 +1,12 @@
 import { FC, memo, useEffect } from 'react';
 
-import { useDispatch } from '../services/hooks';
+import { useDispatch, useSelector } from '../services/hooks';
 import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../services/constants/ws-actions';
 
 import MainContainer from '../components/main-container/main-container';
 import OrdersList from '../components/orders-list/orders-list';
 import OrdersInfo from '../components/orders-info/orders-info';
+import Loader from '../components/loader/loader';
 
 const mockData = {
   ordersReady: ['034533', '034532', '034531', '034530', '034524', '034527'],
@@ -16,6 +17,8 @@ const mockData = {
 
 const Feed: FC = () => {
   const dispatch = useDispatch();
+  const { ordersInfo } = useSelector(state => state.wsFeed);
+
   useEffect(
     () => {
       dispatch({ type: WS_CONNECTION_START });
@@ -25,16 +28,16 @@ const Feed: FC = () => {
     },
     [dispatch]
   );
+
   return (
-    <MainContainer title='Лента заказов'>
-      <OrdersList />
-      <OrdersInfo
-        ordersReady={mockData.ordersReady}
-        ordersInProgress={mockData.ordersInProgress}
-        doneToday={mockData.totalToday}
-        doneEver={mockData.total}
-      />
-    </MainContainer>
+    <>
+      {ordersInfo &&
+        <MainContainer title='Лента заказов'>
+            <OrdersList />
+            <OrdersInfo data={ordersInfo} />
+        </MainContainer>
+      }
+    </>
   )
 }
 

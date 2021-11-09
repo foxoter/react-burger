@@ -1,13 +1,11 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import {
-  WS_CONNECTION_START,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE,
-  WS_SEND_MESSAGE,
 } from '../constants/ws-actions';
-import { TOrderData, TOrdersInfo } from '../types/t-order-data';
+import { TOrdersInfo } from '../types/t-order-data';
 import { TWsActions } from '../actions/ws-actions';
 
 type TWsFeedInitialState = {

@@ -5,9 +5,9 @@ export const socketMiddleWare = (wsUrl: string, wsActions: any): Middleware => {
   return (store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
     return (next: (i: AnyAction) => void) => (action: AnyAction) => {
-      const { dispatch, getState } = store;
-      const { type, payload } = action;
-      const { wsInit, wsSendMessage, onOpen, onError, onMessage, onClose } = wsActions;
+      const { dispatch } = store;
+      const { type } = action;
+      const { wsInit, onOpen, onError, onMessage, onClose } = wsActions;
 
       if (type === wsInit) {
         socket = new WebSocket(wsUrl);
@@ -31,7 +31,7 @@ export const socketMiddleWare = (wsUrl: string, wsActions: any): Middleware => {
         };
         // if (type === wsSendMessage) {
         //   const message = payload;
-        //   message.token = user.token;
+        //   // message.token = user.token;
         //   socket.send(JSON.stringify(message));
         // }
       }

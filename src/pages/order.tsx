@@ -9,7 +9,7 @@ import OrderDetailsItem from '../components/order-details-item/order-details-ite
 
 const OrderPage: FC = () => {
   const { orderId } = useParams<{ orderId: string }>();
-  const { ingredientsList, ingredientsRequest, ingredientsFailed } = useSelector(state => state.ingredients);
+  const { ingredientsList } = useSelector(state => state.ingredients);
   const order = mockData2.find(item => item._id === orderId);
   const orderData = order ? getOrderData(order, ingredientsList) : order;
 
