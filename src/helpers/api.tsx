@@ -12,7 +12,8 @@ const sendOrderData = async (order: OrderDataTypes) => {
   const response = await fetch(`${API_URL}/orders`, {
     method: "POST",
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: 'Bearer ' + getCookie('token'),
     },
     body: JSON.stringify(order)
   });
