@@ -21,4 +21,5 @@ export type TOrderRenderData = TOrderData & {
   images: string[]
   price: number
   fullIngredients: TBurgersDataTypes[]
+  parsedTime: string
 }

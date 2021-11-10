@@ -1,16 +1,18 @@
 import type { Middleware, MiddlewareAPI, AnyAction } from 'redux';
 import { AppDispatch, RootState } from './types';
+import { getCookie } from '../helpers/tokens-helper';
 
-export const socketMiddleWare = (wsUrl: string, wsActions: any): Middleware => {
+export const socketMiddleWare = (wsUrl: string, wsActions: any, authorized?: boolean): Middleware => {
   return (store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
     return (next: (i: AnyAction) => void) => (action: AnyAction) => {
       const { dispatch } = store;
       const { type } = action;
       const { wsInit, onOpen, onError, onMessage, onClose } = wsActions;
+      const token = authorized ? getCookie('token') : null;
 
       if (type === wsInit) {
-        socket = new WebSocket(wsUrl);
+        socket = token ? new WebSocket(`${wsUrl}?token=${token}`) : new WebSocket(wsUrl);
       }
 
       if (socket) {

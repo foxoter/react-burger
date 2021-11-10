@@ -13,7 +13,7 @@ const OrderDetailsItem: FC<Props> = ({ withoutModal, data }) => {
   if (!data) {
     return null;
   }
-  const { name, status, fullIngredients, price, createdAt, number } = data;
+  const { name, status, fullIngredients, price, parsedTime, number } = data;
 
   let statusStyles;
   switch (status) {
@@ -61,7 +61,7 @@ const OrderDetailsItem: FC<Props> = ({ withoutModal, data }) => {
         })}
       </div>
       <div className={styles.ingredient}>
-        <span className='text text_type_main-default text_color_inactive'>{createdAt}</span>
+        <span className='text text_type_main-default text_color_inactive'>{parsedTime}</span>
         <div className={styles.price}>
           <span className='text text_type_digits-default'>{price}</span>
           <CurrencyIcon type='primary' />

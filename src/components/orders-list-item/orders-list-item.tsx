@@ -12,7 +12,7 @@ type Props = {
 
 const OrdersListItem: FC<Props> = ({ authorized, data }) => {
   const { path } = useRouteMatch();
-  const { images, name, createdAt, number, price, _id, status } = data;
+  const { images, name, parsedTime, number, price, _id, status } = data;
   const history = useHistory();
   const location = useLocation();
   const renderIngredientsImages = () => {
@@ -83,7 +83,7 @@ const OrdersListItem: FC<Props> = ({ authorized, data }) => {
     <div className={`${styles.container} p-6`} onClick={onClick}>
       <div className={`${styles.credentials} mb-6`}>
         <span className='text text_type_digits-default'>#{number}</span>
-        <span className='text text_type_main-default text_color_inactive'>{createdAt}</span>
+        <span className='text text_type_main-default text_color_inactive'>{parsedTime}</span>
       </div>
       <p className='text text_type_main-medium mb-6'>{name}</p>
       {authorized &&

@@ -2,7 +2,6 @@ import { FC, memo } from 'react';
 import { useSelector } from '../../services/hooks';
 import OrdersListItem from '../orders-list-item/orders-list-item';
 import { TOrderRenderData, TOrdersInfo } from '../../services/types/t-order-data';
-import { mockData2 } from './tempData';
 import { completeOrdersData } from '../../helpers/orders-helper';
 import styles from './orders-list.module.css';
 
