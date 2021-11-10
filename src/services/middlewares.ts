@@ -2,8 +2,11 @@ import type { Middleware, MiddlewareAPI } from 'redux';
 import { getCookie } from '../helpers/tokens-helper';
 import { TAppActions } from './types';
 import { TWsActionTypes } from './actions/ws-actions';
+import { TWsAuthActionTypes } from './actions/ws-auth-actions';
 
-export const socketMiddleWare = (wsUrl: string, wsActions: TWsActionTypes, authorized?: boolean): Middleware => (store: MiddlewareAPI) => {
+type TWsActions = TWsActionTypes | TWsAuthActionTypes;
+
+export const socketMiddleWare = (wsUrl: string, wsActions: TWsActions, authorized?: boolean): Middleware => (store: MiddlewareAPI) => {
     let socket: WebSocket | null = null;
     return (next: (i: TAppActions) => void) => (action) => {
       const { dispatch } = store;

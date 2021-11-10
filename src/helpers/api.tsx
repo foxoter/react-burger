@@ -1,4 +1,4 @@
-import { API_URL } from '../services/constants/apiConfig';
+import { API_URL } from '../services/constants/api-config';
 import { OrderDataTypes } from '../services/types/order-data-types';
 import { TAuthFormData } from '../services/types/auth-form-types';
 import { getCookie, getRefreshToken } from './tokens-helper';

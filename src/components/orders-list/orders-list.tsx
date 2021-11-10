@@ -13,7 +13,7 @@ type Props = {
 
 const OrdersList: FC<Props> = ({ authorized, data}) => {
   const { ingredientsList } = useSelector(state => state.ingredients);
-  const { orders } = data;
+  const orders = authorized ? [...data.orders].reverse() : data.orders;
 
   return (
     <div className={styles.sections}>

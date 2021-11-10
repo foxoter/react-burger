@@ -1,53 +1,53 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import {
-  WS_CONNECTION_ERROR,
-  WS_CONNECTION_SUCCESS,
-  WS_CONNECTION_CLOSED,
-  WS_GET_MESSAGE,
-  WS_CONNECTION_STOP,
-} from '../constants/ws-actions';
+  WS_CONNECTION_STOP_AUTH,
+  WS_CONNECTION_SUCCESS_AUTH,
+  WS_CONNECTION_CLOSED_AUTH,
+  WS_CONNECTION_ERROR_AUTH,
+  WS_GET_MESSAGE_AUTH,
+} from '../constants/ws-auth-actions';
 import { TOrdersInfo } from '../types/t-order-data';
-import { TWsActions } from '../actions/ws-actions';
+import { TWsAuthActions } from '../actions/ws-auth-actions';
 
-type TWsFeedInitialState = {
+type TWsAuthFeedInitialState = {
   wsConnected: boolean
   error?: PayloadAction | null
   ordersInfo: TOrdersInfo | null
 }
 
-const initialState: TWsFeedInitialState = {
+const initialState: TWsAuthFeedInitialState = {
   wsConnected: false,
   error: null,
   ordersInfo: null
 }
 
-export const wsReducer = (state = initialState, action: TWsActions) => {
+export const wsAuthReducer = (state = initialState, action: TWsAuthActions) => {
   switch (action.type) {
-    case WS_CONNECTION_STOP:
+    case WS_CONNECTION_STOP_AUTH:
       return {
         ...state,
         error: undefined,
         wsConnected: false,
       }
-    case WS_CONNECTION_SUCCESS:
+    case WS_CONNECTION_SUCCESS_AUTH:
       return {
         ...state,
         error: undefined,
         wsConnected: true
       };
-    case WS_CONNECTION_ERROR:
+    case WS_CONNECTION_ERROR_AUTH:
       return {
         ...state,
         error: action.payload,
         wsConnected: false
       };
-    case WS_CONNECTION_CLOSED:
+    case WS_CONNECTION_CLOSED_AUTH:
       return {
         ...state,
         error: undefined,
         wsConnected: false
       };
-    case WS_GET_MESSAGE:
+    case WS_GET_MESSAGE_AUTH:
       return {
         ...state,
         ordersInfo: action.payload,
@@ -56,3 +56,4 @@ export const wsReducer = (state = initialState, action: TWsActions) => {
       return state;
   }
 }
+
