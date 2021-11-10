@@ -1,11 +1,18 @@
-import type { Middleware, MiddlewareAPI, AnyAction } from 'redux';
-import { AppDispatch, RootState } from './types';
+import type { Middleware, MiddlewareAPI } from 'redux';
 import { getCookie } from '../helpers/tokens-helper';
+import { TAppActions } from './types';
 
-export const socketMiddleWare = (wsUrl: string, wsActions: any, authorized?: boolean): Middleware => {
-  return (store: MiddlewareAPI<AppDispatch, RootState>) => {
+type TWsAction = {
+  wsInit: string
+  onOpen: string
+  onError: string
+  onMessage: string
+  onClose: string
+}
+
+export const socketMiddleWare = (wsUrl: string, wsActions: TWsAction, authorized?: boolean): Middleware => (store: MiddlewareAPI) => {
     let socket: WebSocket | null = null;
-    return (next: (i: AnyAction) => void) => (action: AnyAction) => {
+    return (next: (i: TAppActions) => void) => (action: TAppActions) => {
       const { dispatch } = store;
       const { type } = action;
       const { wsInit, onOpen, onError, onMessage, onClose } = wsActions;
@@ -39,5 +46,5 @@ export const socketMiddleWare = (wsUrl: string, wsActions: any, authorized?: boo
       }
       next(action);
     }
-  }
+
 }

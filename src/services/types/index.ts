@@ -5,9 +5,10 @@ import { TIngredientsActions } from '../actions/ingredients';
 import { TOrderActions } from '../actions/order';
 import { TUserActions } from '../actions/user';
 import { store } from '../store';
+import { TWsActions } from '../actions/ws-actions';
 
 
-export type TAppActions = TBurgerActions | TIngredientsActions | TOrderActions | TUserActions;
+export type TAppActions = TBurgerActions | TIngredientsActions | TOrderActions | TUserActions | TWsActions;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ActionCreator<ThunkAction<ReturnType, Action, RootState, TAppActions>>;
 export type AppDispatch = typeof store.dispatch;
