@@ -29,7 +29,7 @@ function getDateString(diff: number): string {
 
 export function parseTime(timestamp: string): string {
   const dateObj = new Date(Date.parse(timestamp));
-  const hours = dateObj.getHours();
+  const hours = dateObj.getHours() < 10 ? '0' + dateObj.getHours() : dateObj.getHours();
   const minutes = dateObj.getMinutes() < 10 ? '0' + dateObj.getMinutes() : dateObj.getMinutes();
   const timezoneDiff = dateObj.getTimezoneOffset();
   const timezone =
