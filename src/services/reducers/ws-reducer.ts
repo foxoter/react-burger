@@ -3,7 +3,7 @@ import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_CLOSED,
-  WS_GET_MESSAGE,
+  WS_GET_MESSAGE, WS_CONNECTION_STOP,
 } from '../constants/ws-actions';
 import { TOrdersInfo } from '../types/t-order-data';
 import { TWsActions } from '../actions/ws-actions';
@@ -22,6 +22,12 @@ const initialState: TWsFeedInitialState = {
 
 export const wsReducer = (state = initialState, action: TWsActions) => {
   switch (action.type) {
+    case WS_CONNECTION_STOP:
+      return {
+        ...state,
+        error: undefined,
+        wsConnected: false,
+      }
     case WS_CONNECTION_SUCCESS:
       return {
         ...state,

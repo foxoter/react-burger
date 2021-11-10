@@ -1,21 +1,14 @@
 import type { Middleware, MiddlewareAPI } from 'redux';
 import { getCookie } from '../helpers/tokens-helper';
 import { TAppActions } from './types';
+import { TWsActionTypes } from './actions/ws-actions';
 
-type TWsAction = {
-  wsInit: string
-  onOpen: string
-  onError: string
-  onMessage: string
-  onClose: string
-}
-
-export const socketMiddleWare = (wsUrl: string, wsActions: TWsAction, authorized?: boolean): Middleware => (store: MiddlewareAPI) => {
+export const socketMiddleWare = (wsUrl: string, wsActions: TWsActionTypes, authorized?: boolean): Middleware => (store: MiddlewareAPI) => {
     let socket: WebSocket | null = null;
-    return (next: (i: TAppActions) => void) => (action: TAppActions) => {
+    return (next: (i: TAppActions) => void) => (action) => {
       const { dispatch } = store;
-      const { type } = action;
-      const { wsInit, onOpen, onError, onMessage, onClose } = wsActions;
+      const { type, payload } = action;
+      const { wsInit, onOpen, onError, onMessage, onClose, wsSendMessage, wsStop } = wsActions;
       const token = authorized ? getCookie('token') : null;
 
       if (type === wsInit) {
@@ -38,11 +31,13 @@ export const socketMiddleWare = (wsUrl: string, wsActions: TWsAction, authorized
         socket.onclose = () => {
           dispatch({ type: onClose });
         };
-        // if (type === wsSendMessage) {
-        //   const message = payload;
-        //   // message.token = user.token;
-        //   socket.send(JSON.stringify(message));
-        // }
+        if (socket && type === wsSendMessage) {
+          const { message } = payload;
+          socket.send(JSON.stringify(message));
+        }
+        if (socket && type === wsStop) {
+          socket.close(1000, 'socket closed');
+        }
       }
       next(action);
     }

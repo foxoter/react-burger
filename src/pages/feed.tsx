@@ -1,7 +1,7 @@
 import { FC, memo, useEffect } from 'react';
 
 import { useDispatch, useSelector } from '../services/hooks';
-import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../services/constants/ws-actions';
+import { WS_CONNECTION_START, WS_CONNECTION_STOP } from '../services/constants/ws-actions';
 
 import MainContainer from '../components/main-container/main-container';
 import OrdersList from '../components/orders-list/orders-list';
@@ -15,7 +15,7 @@ const Feed: FC = () => {
     () => {
       dispatch({ type: WS_CONNECTION_START });
       return () => {
-        dispatch({ type: WS_CONNECTION_CLOSED })
+        dispatch({ type: WS_CONNECTION_STOP })
       }
     },
     [dispatch]

@@ -1,6 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import {
   WS_CONNECTION_START,
+  WS_CONNECTION_STOP,
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_SUCCESS,
@@ -10,17 +11,19 @@ import {
 import { TOrdersInfo } from '../types/t-order-data';
 import TBurgersDataTypes from '../types/t-burgers-data-types';
 
-// export type TWsActionTypes = {
-//   wsInit: typeof WS_CONNECTION_START,
-//   onOpen: typeof WS_CONNECTION_SUCCESS,
-//   onClose: typeof WS_CONNECTION_CLOSED,
-//   onError: typeof WS_CONNECTION_ERROR,
-//   onMessage: typeof WS_GET_MESSAGE,
-//   wsSendMessage: typeof WS_SEND_MESSAGE,
-// }
+export type TWsActionTypes = {
+  wsInit: typeof WS_CONNECTION_START,
+  wsStop: typeof WS_CONNECTION_STOP,
+  onOpen: typeof WS_CONNECTION_SUCCESS,
+  onClose: typeof WS_CONNECTION_CLOSED,
+  onError: typeof WS_CONNECTION_ERROR,
+  onMessage: typeof WS_GET_MESSAGE,
+  wsSendMessage: typeof WS_SEND_MESSAGE,
+}
 
 export const wsActions = {
   wsInit: WS_CONNECTION_START,
+  wsStop: WS_CONNECTION_STOP,
   onOpen: WS_CONNECTION_SUCCESS,
   onClose: WS_CONNECTION_CLOSED,
   onError: WS_CONNECTION_ERROR,
@@ -30,6 +33,10 @@ export const wsActions = {
 
 export interface IWsConnectionStartAction {
   readonly type: typeof WS_CONNECTION_START;
+}
+
+export interface IWsConnectionStopAction {
+  readonly type: typeof WS_CONNECTION_STOP;
 }
 
 export interface IWsConnectionSuccessAction {
@@ -57,6 +64,7 @@ export interface IWsSendMessageAction {
 
 export type TWsActions =
   IWsConnectionStartAction
+  | IWsConnectionStopAction
   | IWsConnectionSuccessAction
   | IWsConnectionErrorAction
   | IWsConnectionClosedAction
