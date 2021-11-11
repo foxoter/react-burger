@@ -1,0 +1,17 @@
+.sections {
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.sections::-webkit-scrollbar {
+  width: 12px;
+}
+
+.sections::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.sections::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #2F2F37;
+}

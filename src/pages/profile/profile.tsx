@@ -1,14 +1,15 @@
-import { memo, FC, ChangeEvent, useCallback, useState, SyntheticEvent } from 'react';
-import { NavLink } from 'react-router-dom';
-
+import React, { memo, FC, ChangeEvent, useCallback, useState, SyntheticEvent } from 'react';
+import { NavLink, Route, Switch, useRouteMatch } from 'react-router-dom';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import profileStyles from './profile.module.css';
 import profileMenuTitles from '../../services/constants/profile-menu-titles';
 import { useDispatch, useSelector } from '../../services/hooks';
 import { logoutUser, updateUserInfo } from '../../services/actions/user';
+import OrderHistory from '../order-history';
 
 const Profile: FC = () => {
+  let { path, url } = useRouteMatch();
   const { currentUser } = useSelector(state => state.user);
 
   const [formData, setFormData] = useState({
@@ -39,6 +40,20 @@ const Profile: FC = () => {
     dispatch(logoutUser());
   }
 
+  const profileForm = (
+    <div className={profileStyles.form_container}>
+      <form className={profileStyles.form} onSubmit={submit}>
+        <Input value={formData.name} onChange={onChange} placeholder={'Имя'} name={'name'}/>
+        <Input value={formData.email} onChange={onChange} placeholder={'Логин'} name={'email'}/>
+        <PasswordInput value={formData.password} onChange={onChange} name={'password'}/>
+        <Button type='primary' size="medium">Сохранить</Button>
+        <div onClick={onCancel}>
+          <Button type='secondary' size="medium">Отмена</Button>
+        </div>
+      </form>
+    </div>
+  )
+
   return (
     <section className={profileStyles.container}>
       <div className={profileStyles.menu}>
@@ -47,9 +62,10 @@ const Profile: FC = () => {
             {profileMenuTitles.map((item, index) => {
               return (
                 <li className={profileStyles.list_item} key={index}>
-                  {item.path ? (
+                  {item.type === 'navlink' ? (
                     <NavLink
-                      to={item.path}
+                      exact
+                      to={`${url}${item.path}`}
                       className={`${profileStyles.link} text text_type_main-medium text_color_inactive`}
                       activeClassName={profileStyles.link_active}
                     >
@@ -63,7 +79,6 @@ const Profile: FC = () => {
                       {item.title}
                     </button>
                   )}
-
                 </li>
               )
             })}
@@ -73,19 +88,17 @@ const Profile: FC = () => {
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </div>
-      {currentUser &&
-        <div className={profileStyles.form_container}>
-          <form className={profileStyles.form} onSubmit={submit}>
-            <Input value={formData.name} onChange={onChange} placeholder={'Имя'} name={'name'}/>
-            <Input value={formData.email} onChange={onChange} placeholder={'Логин'} name={'email'}/>
-            <PasswordInput value={formData.password} onChange={onChange} name={'password'}/>
-            <Button type='primary' size="medium">Сохранить</Button>
-            <div onClick={onCancel}>
-              <Button type='secondary' size="medium">Отмена</Button>
-            </div>
-          </form>
-        </div>
-      }
+      <Switch>
+        <Route exact path={path}>
+          {currentUser && profileForm}
+        </Route>
+        <Route exact path={`${path}/123`}>
+          <div>123</div>
+        </Route>
+        <Route exact path={`${path}/orders`}>
+          <OrderHistory />
+        </Route>
+      </Switch>
     </section>
   )
 }

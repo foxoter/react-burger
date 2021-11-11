@@ -22,7 +22,7 @@ export const constructorReducer = (state = burgerConstructorInitialState, action
         const filteredItems = state.constructorItems.filter(({ type }) => type !== 'bun');
         return {
           ...state,
-          constructorItems: [...filteredItems, action.payload],
+          constructorItems: [...filteredItems, action.payload, action.payload],
         }
       }
       return {

@@ -1,7 +1,7 @@
 const profileMenuTitles = [
-    { path: '/profile', title: 'Профиль' },
-    { path: '/profile/orders', title: 'История заказов' },
-    { title: 'Выход' },
+    { path: '', title: 'Профиль', type: 'navlink' },
+    { path: '/orders', title: 'История заказов', type: 'navlink' },
+    { title: 'Выход', type: 'button' },
 ]
 
 export default profileMenuTitles;

@@ -1,0 +1,66 @@
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.list {
+  max-height: 370px;
+  overflow-y: auto;
+}
+
+.list::-webkit-scrollbar {
+  width: 12px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #2F2F37;
+}
+
+.ready {
+  color: #00CCCC;
+}
+
+.ingredient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ingredient:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.ingredient_title {
+  display: flex;
+  align-items: center;
+}
+
+.ingredient_name {
+  margin: 0 0 0 16px;
+}
+
+.image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid #4C4CFF;
+  background-color: #131316;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 146%;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.price > span {
+  margin-right: 10px;
+}

@@ -62,8 +62,7 @@ const BurgerConstructor: FC = () => {
 
   const orderTotalValue = useMemo(() => {
     if (constructorItems.length) {
-      return constructorItems.reduce((sum, current) => sum
-        += (current.type === 'bun' ? current.price * 2 : current.price), 0);
+      return constructorItems.reduce((sum, current) => sum += current.price, 0);
     }
   }, [constructorItems]);
 
