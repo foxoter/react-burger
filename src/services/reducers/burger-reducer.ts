@@ -31,7 +31,7 @@ export const constructorReducer = (state = burgerConstructorInitialState, action
       }
     }
     case DELETE_INGREDIENT: {
-      const newItems = state.constructorItems;
+      const newItems = [...state.constructorItems];
       newItems.splice(newItems.findIndex(({ _id }) => _id === action.payload), 1);
       return {
         ...state,

@@ -21,6 +21,22 @@ const mockIngredient = {
   uuid: "60d3b41abdacab0026a733cd0.09945591567361456",
 }
 
+const mockIngredient2 = {
+  _id: '60d3b41abdacab0026a733d2',
+  name: 'Кристаллы марсианских альфа-сахаридов',
+  type: 'main',
+  proteins: 234,
+  fat: 432,
+  carbohydrates: 111,
+  calories: 189,
+  price: 762,
+  image: 'https://code.s3.yandex.net/react/code/core.png',
+  image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png',
+  image_large: 'https://code.s3.yandex.net/react/code/core-large.png',
+  __v: 0,
+  uuid: '60d3b41abdacab0026a733d20.5097014300560314'
+}
+
 const mockBunIngredient = {
   _id: "60d3b41abdacab0026a733c7",
   name: "Флюоресцентная булка R2-D3",
@@ -66,8 +82,23 @@ describe('burger constructor reducer', () => {
       })).toEqual({ constructorItems: [mockIngredient, mockIngredient] });
   });
 
-  // it('should handle DELETE_INGREDIENT', () => {
-  //
-  // })
+  it('should handle DELETE_INGREDIENT', () => {
+    expect(constructorReducer(
+      { constructorItems: [mockIngredient, mockBunIngredient] },
+      { type: DELETE_INGREDIENT, payload: '60d3b41abdacab0026a733cd' }))
+      .toEqual({ constructorItems: [mockBunIngredient] });
+
+    expect(constructorReducer(
+      { constructorItems: [mockIngredient, mockIngredient] },
+      { type: DELETE_INGREDIENT, payload: '60d3b41abdacab0026a733cd' }))
+      .toEqual({ constructorItems: [mockIngredient] });
+  });
+
+  it('should handle REWRITE_INGREDIENTS', () => {
+    expect(constructorReducer(
+      { constructorItems: [mockBunIngredient, mockIngredient2, mockIngredient] },
+      { type: REWRITE_INGREDIENTS, payload: [mockBunIngredient, mockIngredient, mockIngredient2] }))
+      .toEqual({ constructorItems: [mockBunIngredient, mockIngredient, mockIngredient2] });
+  });
 });
 
