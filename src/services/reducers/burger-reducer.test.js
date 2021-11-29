@@ -3,7 +3,7 @@ import {
   DELETE_INGREDIENT,
   REWRITE_INGREDIENTS,
 } from '../constants/burger';
-import {constructorReducer} from "./burger-reducer";
+import { constructorReducer } from "./burger-reducer";
 
 const mockIngredient = {
   _id: "60d3b41abdacab0026a733cd",
