@@ -59,7 +59,7 @@ const wsConnectionStopState = {
 
 const wsConnectionErrorState = {
   wsConnected: false,
-  error: 'Error',
+  error: { message: "Error" },
   ordersInfo: null
 }
 
@@ -85,7 +85,7 @@ describe('websocket connection reducer', () => {
   });
 
   it('should handle WS_CONNECTION_ERROR', () => {
-    expect(wsReducer(wsConnectionSuccessState, { type: WS_CONNECTION_ERROR, payload: 'Error' }))
+    expect(wsReducer(wsConnectionSuccessState, { type: WS_CONNECTION_ERROR, payload: { message: "Error" } }))
       .toEqual(wsConnectionErrorState);
   });
 
