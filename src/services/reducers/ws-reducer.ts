@@ -1,4 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_SUCCESS,

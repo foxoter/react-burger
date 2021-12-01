@@ -7,7 +7,7 @@ import {
 } from '../constants/ws-actions';
 import { wsReducer } from "./ws-reducer";
 
-const mockOrdersInfoObject = {
+export const mockOrdersInfoObject = {
   success: true,
   orders: [
     {

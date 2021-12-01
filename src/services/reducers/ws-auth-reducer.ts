@@ -1,4 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import {
   WS_CONNECTION_STOP_AUTH,
   WS_CONNECTION_SUCCESS_AUTH,
@@ -11,7 +10,7 @@ import { TWsAuthActions } from '../actions/ws-auth-actions';
 
 type TWsAuthFeedInitialState = {
   wsConnected: boolean
-  error?: PayloadAction | null
+  error?: { message: string } | null
   ordersInfo: TOrdersInfo | null
 }
 
