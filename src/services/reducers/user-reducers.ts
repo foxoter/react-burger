@@ -149,7 +149,7 @@ export const userReducer = (state = userInitialState, action: TUserActions) => {
     case LOGIN_USER_REQUEST: {
       return {
         ...state,
-        userLoginFailedFailed: false,
+        userLoginFailed: false,
         userLoginRequest: true,
       }
     }
