@@ -5,18 +5,19 @@ describe('drag-n-drop works correctly', () => {
   });
 
   it('should load constructor page by default', () => {
-    cy.contains('Соберите Бургер');
+    cy.get('h2').contains('Соберите Бургер');
   });
 
-  it('should drag-n-drop bun ingredient', () => {
+  it('should handle drag-n-drop ingredient type === bun', () => {
     cy.get('[class^=burger-ingredients-item_container__]').first().as('bun-element');
     cy.get('[class^=burger-constructor_container__]').as('drop-container');
+    cy.get('@drop-container').find('[class^=burger-constructor-item]').should('not.exist', );
     cy.get('@bun-element').trigger('dragstart');
     cy.get('@drop-container').trigger('dragenter').trigger('drop');
     cy.get('@drop-container').find('[class^=burger-constructor-item]').should('have.length', 2);
   });
 
-  it('should drag-n-drop other ingredient', () => {
+  it('should handle drag-n-drop ingredient type !== bun', () => {
     cy.get('[class^=burger-ingredients-item_container__]').last().as('ingredient-element');
     cy.get('[class^=burger-constructor_container__]').as('drop-container');
     cy.get('@ingredient-element').trigger('dragstart');

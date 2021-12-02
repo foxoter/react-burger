@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { ingredientsReducer } from './ingredients-reducers';
+import { ingredientsReducer } from './ingredients-reducer';
 import { orderReducer } from './order-reducer';
 import { constructorReducer } from './burger-reducer';
 

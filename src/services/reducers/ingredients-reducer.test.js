@@ -5,7 +5,7 @@ import {
   ADD_CURRENT_INGREDIENT,
   DELETE_CURRENT_INGREDIENT,
 } from "../constants/ingredients";
-import { ingredientsReducer } from "./ingredients-reducers";
+import { ingredientsReducer } from "./ingredients-reducer";
 
 const mockIngredient = {
   _id: "60d3b41abdacab0026a733cd",

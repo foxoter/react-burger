@@ -1,4 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_STOP,

@@ -44,7 +44,8 @@ export const ingredientsReducer = (state = ingredientsState, action: TIngredient
       return {
         ...state,
         ingredientsRequest: false,
-        ingredientsFailed: true
+        ingredientsFailed: true,
+        ingredientsList: [],
       }
     }
     case ADD_CURRENT_INGREDIENT: {
