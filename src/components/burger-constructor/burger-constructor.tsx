@@ -96,7 +96,7 @@ const BurgerConstructor: FC = () => {
       {bun &&
         <BurgerConstructorItem data={bun} headItem index={999} moveItem={moveCard} />
       }
-      {otherItems &&
+      {otherItems.length > 0 &&
         <div className={burgerConstructorStyles.items}>{otherElements}</div>
       }
       {bun &&
