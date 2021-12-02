@@ -44,7 +44,7 @@ export interface IWsAuthConnectionSuccessAction {
 
 export interface IWsAuthConnectionErrorAction {
   readonly type: typeof WS_CONNECTION_ERROR_AUTH;
-  readonly payload: PayloadAction;
+  readonly payload: { message: string };
 }
 
 export interface IWsAuthConnectionClosedAction {

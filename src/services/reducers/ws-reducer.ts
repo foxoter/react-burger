@@ -1,4 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_SUCCESS,
@@ -11,7 +10,7 @@ import { TWsActions } from '../actions/ws-actions';
 
 type TWsFeedInitialState = {
   wsConnected: boolean
-  error?: PayloadAction | null
+  error?: { message: string } | null
   ordersInfo: TOrdersInfo | null
 }
 
