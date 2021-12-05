@@ -21,3 +21,6 @@ Features to date:
 * Run `npm i` to set the dependencies
 * Run `npm start` to launch the app in dev mode.
 * Open [http://localhost:3000/](http://localhost:3000/)
+
+## Deploy link
+Open [this link](https://foxoter.github.io/react-burger/) to try the app online.
