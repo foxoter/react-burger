@@ -4,7 +4,7 @@ Burger store application built to practice React and the React's ecosystem techn
 
 Features to date:
 * Registration,
-* Authentification,
+* Authorisation,
 * Password reset flow,
 * Burger order assembling and placement.
 
@@ -14,7 +14,9 @@ Features to date:
 * React,
 * Redux,
 * React DnD,
-* React Router
+* React Router,
+* Jest,
+* Cypress.
 
 ## Installation
 * Clone the repo
