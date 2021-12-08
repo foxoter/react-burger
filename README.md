@@ -15,6 +15,7 @@ Features to date:
 * Redux,
 * React DnD,
 * React Router,
+* WebSocket,
 * Jest,
 * Cypress.
 
